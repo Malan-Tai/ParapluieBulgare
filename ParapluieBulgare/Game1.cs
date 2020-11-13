@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ParapluieBulgare.Code;
 
 namespace ParapluieBulgare
 {
@@ -11,7 +12,14 @@ namespace ParapluieBulgare
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
+        KeyboardState prevKeyState;
+
+        Texture2D white;
+
+        Player player;
+        NPC npc;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -29,6 +37,9 @@ namespace ParapluieBulgare
             // TODO: Add your initialization logic here
 
             base.Initialize();
+
+            player = new Player(white);
+            npc = new NPC(white);
         }
 
         /// <summary>
@@ -41,6 +52,7 @@ namespace ParapluieBulgare
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            white = Content.Load<Texture2D>("white");
         }
 
         /// <summary>
@@ -59,11 +71,16 @@ namespace ParapluieBulgare
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            KeyboardState state = Keyboard.GetState();
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here
+            player.Update(state, prevKeyState);
+            npc.Update();
 
+            prevKeyState = state;
             base.Update(gameTime);
         }
 
@@ -76,6 +93,12 @@ namespace ParapluieBulgare
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            player.Draw(spriteBatch);
+            npc.Draw(spriteBatch);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
