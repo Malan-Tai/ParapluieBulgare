@@ -12,13 +12,11 @@ namespace ParapluieBulgare.Code
 {
     class NPC : Character
     {
-        SoundEffect soundBulgared;
-        public NPC(Animation idle, Animation walk, SoundEffect soundBulgared, int x = 500) : base(idle, walk)
+        public static SoundEffect soundBulgared;
+        public NPC(Animation idle, Animation walk, int x = 500) : base(idle, walk)
         {
             this.x = x;
-
             this.y = 200;
-            this.soundBulgared = soundBulgared;
         }
         public void Die(List<NPC> npcs)
         {

@@ -95,6 +95,8 @@ namespace ParapluieBulgare
             currentFloor = floors[0];
 
             timer = new Timer(600);
+
+            NPC.soundBulgared = soundBulgared;
         }
 
         /// <summary>
@@ -152,9 +154,9 @@ namespace ParapluieBulgare
                 case 0:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), soundBulgared, 80),
-                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), soundBulgared, 200),
-                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), soundBulgared, 500)
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 80),
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 200),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 500)
                     };
 
                     NPC npc = npcs[2];

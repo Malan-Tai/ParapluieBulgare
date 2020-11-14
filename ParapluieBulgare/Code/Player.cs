@@ -95,7 +95,7 @@ namespace ParapluieBulgare.Code
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, int cameraX)
+        public override void Draw(SpriteBatch spriteBatch, int cameraX)
         {
             currentAnimation.Draw(spriteBatch, new Rectangle(x - cameraX, y, width, width), Flip);
             base.Draw(spriteBatch, cameraX);
