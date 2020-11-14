@@ -1,5 +1,5 @@
 ﻿using System;
-//using System.Windows.Forms;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -22,9 +22,22 @@ namespace ParapluieBulgare
 
         KeyboardState prevKeyState;
 
+        List<string> allTextures = new List<string>
+        {
+            "white",
+            "bulleDeTexte",
+            "MC_Walk_SpriteSheet",
+            "costard_fem_idle",
+            "costard_idle",
+            "costard_idle_2",
+            "cuistot_idle",
+            "cuistot_idle_2",
+            "Directeur_idle",
+            "Journaliste_IDLE",
+            "rando_fem_idle"
+        };
+        Dictionary<string, Texture2D> textureDict;
         Texture2D white;
-
-        Texture2D dialogBoxTexture;
 
         SpriteFont font;
 
@@ -38,6 +51,8 @@ namespace ParapluieBulgare
 
         public Game1()
         {
+            textureDict = new Dictionary<string, Texture2D>();
+
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
@@ -56,19 +71,20 @@ namespace ParapluieBulgare
         {
             base.Initialize();
 
-            player = new Player(white);
-
             Character.font = font;
-            Character.dialogBoxTexture = dialogBoxTexture;
-            
+            Character.dialogBoxTexture = textureDict["bulleDeTexte"];
+
+            DialogManager.InitContent(font, textureDict["bulleDeTexte"]);
+
+            player = new Player(GetAnimation("MC_Walk_SpriteSheet"), GetAnimation("MC_Walk_SpriteSheet"), white);
             floors = new Floor[]
             {
-                new Floor(player, 0, white),
-                new Floor(player, 1, white),
-                new Floor(player, 2, white),
-                new Floor(player, 3, white),
-                new Floor(player, 4, white),
-                new Floor(player, 5, white)
+                new Floor(player, 0, white, GetFloorNPCs(0)),
+                new Floor(player, 1, white, GetFloorNPCs(1)),
+                new Floor(player, 2, white, GetFloorNPCs(2)),
+                new Floor(player, 3, white, GetFloorNPCs(3)),
+                new Floor(player, 4, white, GetFloorNPCs(4)),
+                new Floor(player, 5, white, GetFloorNPCs(5))
             };
             currentFloor = floors[0];
         }
@@ -81,11 +97,63 @@ namespace ParapluieBulgare
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            white = Content.Load<Texture2D>("white");
-
             font = Content.Load<SpriteFont>("font");
 
-            dialogBoxTexture = Content.Load<Texture2D>("bulleDeTexte");
+            foreach (string text in allTextures)
+            {
+                textureDict.Add(text, Content.Load<Texture2D>(text));
+            }
+            white = textureDict["white"];
+        }
+
+        private Animation GetAnimation(string spritesheet)
+        {
+            switch (spritesheet)
+            {
+                case "MC_Walk_SpriteSheet":
+                    return new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10);
+                case "costard_fem_idle":
+                    return new Animation(textureDict["costard_fem_idle"], 32, 32, 2, 60);
+                case "costard_idle":
+                    return new Animation(textureDict["costard_idle"], 32, 32, 2, 60);
+                case "costard_idle_2":
+                    return new Animation(textureDict["costard_idle_2"], 32, 32, 2, 60);
+                case "cuistot_idle":
+                    return new Animation(textureDict["cuistot_idle"], 32, 32, 2, 60);
+                case "cuistot_idle_2":
+                    return new Animation(textureDict["cuistot_idle_2"], 32, 32, 2, 60);
+                case "Directeur_idle":
+                    return new Animation(textureDict["Directeur_idle"], 32, 32, 7, 60);
+                case "Journaliste_IDLE":
+                    return new Animation(textureDict["Journaliste_IDLE"], 32, 32, 2, 60);
+                case "rando_fem_idle":
+                    return new Animation(textureDict["rando_fem_idle"], 32, 32, 2, 60);
+                default:
+                    return null;
+            }
+        }
+
+        private List<NPC> GetFloorNPCs(int floor)
+        {
+            List<NPC> npcs = new List<NPC>();
+
+            switch (floor)
+            {
+                case 0:
+                    npcs = new List<NPC>
+                    {
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 80),
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 55),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 500)
+                    };
+                    break;
+                case 1:
+                    break;
+                default:
+                    break;
+            }
+
+            return npcs;
         }
 
         /// <summary>
@@ -161,7 +229,7 @@ namespace ParapluieBulgare
         {
             GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
 
             currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
             if (elevator) elevatorGUI.Draw(spriteBatch, graphics.PreferredBackBufferWidth);

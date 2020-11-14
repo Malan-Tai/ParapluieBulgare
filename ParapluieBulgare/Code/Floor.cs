@@ -20,17 +20,13 @@ namespace ParapluieBulgare.Code
         private List<Rectangle> elevators;
         private List<Rectangle> stairs;
 
-        public Floor(Player p, int n, Texture2D t)
+        public Floor(Player p, int n, Texture2D t, List<NPC> npcList)
         {
             player = p;
             texture = t;
             Number = n;
-
-            npcs = new List<NPC>
-            {
-                new NPC(t)
-            };
           
+            npcs = npcList;
 
             stairs = new List<Rectangle>
             {

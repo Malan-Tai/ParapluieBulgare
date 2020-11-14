@@ -15,10 +15,9 @@ namespace ParapluieBulgare.Code
         public static Texture2D dialogBoxTexture;
 
         protected Character interactingWith = null;
-        
-
 
         //position
+        private int prevX;
         protected int x;
         protected int y;
         public Point Coords
@@ -41,17 +40,44 @@ namespace ParapluieBulgare.Code
         protected int width = 100;
 
         //texture
-        protected Texture2D texture;
+        protected Animation idleAnimation;
+        protected Animation walkAnimation;
+        protected Animation currentAnimation;
+        protected bool flip;
 
         //dialog
         protected string currentText;
         protected bool dialogOpened = false;
+        
+        public Character(Animation idle, Animation walk)
+        {
+            idleAnimation = idle;
+            walkAnimation = walk;
+            currentAnimation = idle;
+        }
 
         public void StartInteraction(Character other)
         {
             interactingWith = other;
         }
 
+        public virtual void Update()
+        {
+            if (x != prevX)
+            {
+                currentAnimation = walkAnimation;
+                if (x < prevX) flip = false;
+                else flip = true;
+            }
+            else
+            {
+                currentAnimation = idleAnimation;
+            }
+
+            currentAnimation.Update();
+            prevX = x;
+        }
+        
         public void Say(string text)
         {
             dialogOpened = true;
