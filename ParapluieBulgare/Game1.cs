@@ -85,14 +85,14 @@ namespace ParapluieBulgare
             player = new Player(GetAnimation("MC_Walk_SpriteSheet"), GetAnimation("MC_Walk_SpriteSheet"), white);
             floors = new Floor[]
             {
+                new Floor(player, -1, textureDict["background"], GetFloorNPCs(-1)),
                 new Floor(player, 0, textureDict["background"], GetFloorNPCs(0)),
                 new Floor(player, 1, textureDict["background"], GetFloorNPCs(1)),
                 new Floor(player, 2, textureDict["background"], GetFloorNPCs(2)),
                 new Floor(player, 3, textureDict["background"], GetFloorNPCs(3)),
-                new Floor(player, 4, textureDict["background"], GetFloorNPCs(4)),
-               // new Floor(player, 5, textureDict["background"], GetFloorNPCs(5))
+                new Floor(player, 4, textureDict["background"], GetFloorNPCs(4))
             };
-            currentFloor = floors[0];
+            currentFloor = floors[1];
 
             timer = new Timer(600);
         }
@@ -206,18 +206,18 @@ namespace ParapluieBulgare
                 if (switchFloor == "stairs up")
                 {
                     int n = currentFloor.Number;
-                    if (n <= floors.Length - 2)
+                    if (n < floors[floors.Length-1].Number - 1)
                     {
-                        currentFloor = floors[n + 1];
+                        currentFloor = floors[n + 2];
                     }
                     Console.Out.WriteLine("floor up : " + (n + 1));
                 }
                 else if (switchFloor == "stairs down")
                 {
                     int n = currentFloor.Number;
-                    if (n >= 1)
+                    if (n > 0)
                     {
-                        currentFloor = floors[n - 1];
+                        currentFloor = floors[n];
                     }
                     Console.Out.WriteLine("floor down : " + (n - 1));
                 }
@@ -257,8 +257,8 @@ namespace ParapluieBulgare
             if (elevator) elevatorGUI.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
 
             string time = timer.getTime();
-            Vector2 position = new Vector2(0, 0);
-            spriteBatch.DrawString(font, time, position, Color.White);
+            Vector2 position = new Vector2(400, 10);
+            spriteBatch.DrawString(font, time, position, Color.Black);
 
             spriteBatch.End();
 
