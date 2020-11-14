@@ -35,7 +35,8 @@ namespace ParapluieBulgare
             "cuistot_idle_2",
             "Directeur_idle",
             "Journaliste_IDLE",
-            "rando_fem_idle"
+            "rando_fem_idle",
+            "background"
         };
         Dictionary<string, Texture2D> textureDict;
         Texture2D white;
@@ -82,12 +83,12 @@ namespace ParapluieBulgare
             player = new Player(GetAnimation("MC_Walk_SpriteSheet"), GetAnimation("MC_Walk_SpriteSheet"), white);
             floors = new Floor[]
             {
-                new Floor(player, 0, white, GetFloorNPCs(0)),
-                new Floor(player, 1, white, GetFloorNPCs(1)),
-                new Floor(player, 2, white, GetFloorNPCs(2)),
-                new Floor(player, 3, white, GetFloorNPCs(3)),
-                new Floor(player, 4, white, GetFloorNPCs(4)),
-                new Floor(player, 5, white, GetFloorNPCs(5))
+                new Floor(player, 0, textureDict["background"], GetFloorNPCs(0)),
+                new Floor(player, 1, textureDict["background"], GetFloorNPCs(1)),
+                new Floor(player, 2, textureDict["background"], GetFloorNPCs(2)),
+                new Floor(player, 3, textureDict["background"], GetFloorNPCs(3)),
+                new Floor(player, 4, textureDict["background"], GetFloorNPCs(4)),
+               // new Floor(player, 5, textureDict["background"], GetFloorNPCs(5))
             };
             currentFloor = floors[0];
         }
