@@ -33,6 +33,8 @@ namespace ParapluieBulgare
         Floor[] floors;
         Floor currentFloor;
 
+        Timer timer;
+
         bool elevator = false;
         ElevatorGUI elevatorGUI = null;
 
@@ -68,6 +70,8 @@ namespace ParapluieBulgare
                 new Floor(player, 5, white)
             };
             currentFloor = floors[0];
+
+            timer = new Timer(600);
         }
 
         /// <summary>
@@ -101,8 +105,13 @@ namespace ParapluieBulgare
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            KeyboardState state = Keyboard.GetState();
+            timer.update(gameTime.ElapsedGameTime.TotalSeconds);
 
+            if (timer.isOver())
+                Exit();
+
+            KeyboardState state = Keyboard.GetState();
+            
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -163,9 +172,15 @@ namespace ParapluieBulgare
             currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
             if (elevator) elevatorGUI.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
 
+            string time = timer.getTime();
+            Vector2 position = new Vector2(0, 0);
+            spriteBatch.DrawString(font, time, position, Color.White);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
+
+            
         }
     }
 }
