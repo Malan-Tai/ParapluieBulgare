@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ParapluieBulgare.Code;
@@ -48,6 +49,8 @@ namespace ParapluieBulgare
 
         bool elevator = false;
         ElevatorGUI elevatorGUI = null;
+
+        SoundEffect soundBulgared;
 
         public Game1()
         {
@@ -104,6 +107,8 @@ namespace ParapluieBulgare
                 textureDict.Add(text, Content.Load<Texture2D>(text));
             }
             white = textureDict["white"];
+
+            soundBulgared = Content.Load<SoundEffect>("Bulgared");
         }
 
         private Animation GetAnimation(string spritesheet)
@@ -142,9 +147,9 @@ namespace ParapluieBulgare
                 case 0:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 80),
-                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 55),
-                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 500)
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), soundBulgared, 80),
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), soundBulgared, 200),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), soundBulgared, 500)
                     };
                     break;
                 case 1:

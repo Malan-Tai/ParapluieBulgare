@@ -4,17 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ParapluieBulgare.Code
 {
     class NPC : Character
     {
-        public NPC(Animation idle, Animation walk, int x = 500) : base(idle, walk)
+        SoundEffect soundBulgared;
+        public NPC(Animation idle, Animation walk, SoundEffect soundBulgared, int x = 500) : base(idle, walk)
         {
             this.x = x;
             this.y = 100;
+            this.soundBulgared = soundBulgared;
         }
+        public void Die(List<NPC> npcs)
+        {
+            Console.WriteLine("Argh! Je suis mort !");
+            soundBulgared.CreateInstance().Play();
+            npcs.Remove(this);
+        }
+
 
         public override void Update()
         {

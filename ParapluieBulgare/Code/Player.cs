@@ -46,6 +46,10 @@ namespace ParapluieBulgare.Code
             {
                 journal.Toggle();
             }
+            if (keyState.IsKeyDown(Keys.A) && !prevKeyState.IsKeyDown(Keys.A))
+            {
+                Kill(npcs);
+            }
 
             base.Update();
 
@@ -69,6 +73,18 @@ namespace ParapluieBulgare.Code
                     interactingWith = npc;
                     npc.StartInteraction(this);
 
+                    break;
+                }
+            }
+        }
+
+        public void Kill(List<NPC> npcs)
+        {
+            foreach (NPC npc in npcs)
+            {
+                if (BoxCollider.Intersects(npc.BoxCollider))
+                {
+                    npc.Die(npcs);
                     break;
                 }
             }

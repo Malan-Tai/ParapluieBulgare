@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Bulgared.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Bulgared.wav
+
 #begin bulleDeTexte.png
 /importer:TextureImporter
 /processor:TextureProcessor
