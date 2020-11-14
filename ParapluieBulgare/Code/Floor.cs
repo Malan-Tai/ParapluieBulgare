@@ -79,14 +79,14 @@ namespace ParapluieBulgare.Code
 
             spriteBatch.Draw(texture, new Rectangle(-cameraX, 0, 5000, 300), sourceRectangle, Color.White);
 
-            foreach (Rectangle rect in elevators)
-            {
-                spriteBatch.Draw(texture, new Rectangle(rect.X - cameraX, rect.Y, rect.Width, rect.Height), Color.Yellow);
-            }
-            foreach (Rectangle rect in stairs)
-            {
-                spriteBatch.Draw(texture, new Rectangle(rect.X - cameraX, rect.Y, rect.Width, rect.Height), Color.DarkBlue);
-            }
+            //foreach (Rectangle rect in elevators)
+            //{
+            //    spriteBatch.Draw(texture, new Rectangle(rect.X - cameraX, rect.Y, rect.Width, rect.Height), Color.Yellow);
+            //}
+            //foreach (Rectangle rect in stairs)
+            //{
+            //    spriteBatch.Draw(texture, new Rectangle(rect.X - cameraX, rect.Y, rect.Width, rect.Height), Color.DarkBlue);
+            //}
 
             foreach (NPC npc in npcs)
             {
