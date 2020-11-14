@@ -10,7 +10,7 @@ namespace ParapluieBulgare.Code
     {
         public Furniture(Texture2D t)
         {
-            texture = t;
+            //texture = t;
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-//using System.Windows.Forms;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -22,9 +22,14 @@ namespace ParapluieBulgare
 
         KeyboardState prevKeyState;
 
+        List<string> allTextures = new List<string>
+        {
+            "white",
+            "bulleDeTexte",
+            "MC_Walk_SpriteSheet"
+        };
+        Dictionary<string, Texture2D> textureDict;
         Texture2D white;
-
-        Texture2D dialogBoxTexture;
 
         SpriteFont font;
 
@@ -38,6 +43,8 @@ namespace ParapluieBulgare
 
         public Game1()
         {
+            textureDict = new Dictionary<string, Texture2D>();
+
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
@@ -56,16 +63,16 @@ namespace ParapluieBulgare
         {
             base.Initialize();
 
-            player = new Player(white);
-            player.InitDialogContent(font, dialogBoxTexture);
+            player = new Player(new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10), white);
+            player.InitDialogContent(font, textureDict["bulleDeTexte"]);
             floors = new Floor[]
             {
-                new Floor(player, 0, white),
-                new Floor(player, 1, white),
-                new Floor(player, 2, white),
-                new Floor(player, 3, white),
-                new Floor(player, 4, white),
-                new Floor(player, 5, white)
+                new Floor(player, 0, white, new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10)),
+                new Floor(player, 1, white, new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10)),
+                new Floor(player, 2, white, new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10)),
+                new Floor(player, 3, white, new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10)),
+                new Floor(player, 4, white, new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10)),
+                new Floor(player, 5, white, new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10))
             };
             currentFloor = floors[0];
         }
@@ -78,11 +85,13 @@ namespace ParapluieBulgare
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            white = Content.Load<Texture2D>("white");
-
             font = Content.Load<SpriteFont>("font");
 
-            dialogBoxTexture = Content.Load<Texture2D>("bulleDeTexte");
+            foreach (string text in allTextures)
+            {
+                textureDict.Add(text, Content.Load<Texture2D>(text));
+            }
+            white = textureDict["white"];
         }
 
         /// <summary>
@@ -158,7 +167,7 @@ namespace ParapluieBulgare
         {
             GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
 
             currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
             if (elevator) elevatorGUI.Draw(spriteBatch, graphics.PreferredBackBufferWidth);

@@ -20,7 +20,7 @@ namespace ParapluieBulgare.Code
         private List<Rectangle> elevators;
         private List<Rectangle> stairs;
 
-        public Floor(Player p, int n, Texture2D t)
+        public Floor(Player p, int n, Texture2D t, Animation NPCanim)
         {
             player = p;
             texture = t;
@@ -28,7 +28,7 @@ namespace ParapluieBulgare.Code
 
             npcs = new List<NPC>
             {
-                new NPC(t)
+                new NPC(NPCanim)
             };
 
             stairs = new List<Rectangle>

@@ -19,7 +19,7 @@ namespace ParapluieBulgare.Code
         protected int width = 100;
 
         //texture
-        protected Texture2D texture;
+        protected Animation animation;
 
         //dialog
         protected SpriteFont font;
