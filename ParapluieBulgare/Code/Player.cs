@@ -40,7 +40,6 @@ namespace ParapluieBulgare.Code
                 {
                     x -= 10;
                 }
-
                 if (keyState.IsKeyDown(Keys.E) && !prevKeyState.IsKeyDown(Keys.E))
                 {
                     Interaction(npcs);
@@ -48,6 +47,10 @@ namespace ParapluieBulgare.Code
                 if (keyState.IsKeyDown(Keys.J) && !prevKeyState.IsKeyDown(Keys.J))
                 {
                     journal.Toggle();
+                }
+                if (keyState.IsKeyDown(Keys.A) && !prevKeyState.IsKeyDown(Keys.A))
+                {
+                    Kill(npcs);
                 }
 
                 if (keyState.IsKeyDown(Keys.Down) && !prevKeyState.IsKeyDown(Keys.Down))
@@ -79,7 +82,20 @@ namespace ParapluieBulgare.Code
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch, int cameraX)
+
+        public void Kill(List<NPC> npcs)
+        {
+            foreach (NPC npc in npcs)
+            {
+                if (BoxCollider.Intersects(npc.BoxCollider))
+                {
+                    npc.Die(npcs);
+                    break;
+                }
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch, int cameraX)
         {
             currentAnimation.Draw(spriteBatch, new Rectangle(x - cameraX, y, width, width), Flip);
             base.Draw(spriteBatch, cameraX);

@@ -7,10 +7,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+
+
 namespace ParapluieBulgare.Code
 {
     class Floor
     {
+        static readonly int nbFloors = 5;  
+
         private Texture2D texture;
         public int Number { get; set; }
 
@@ -66,7 +70,14 @@ namespace ParapluieBulgare.Code
         {
             int cameraX = player.CameraX(windowWidth);
 
-            spriteBatch.Draw(texture, new Rectangle(-cameraX, 0, 5000, 300), Color.LightBlue);
+            Rectangle sourceRectangle = new Rectangle();
+            sourceRectangle.Width = texture.Width;
+            sourceRectangle.Height = texture.Height / nbFloors;
+            sourceRectangle.X = 0;
+            sourceRectangle.Y = Number * sourceRectangle.Height;
+
+
+            spriteBatch.Draw(texture, new Rectangle(-cameraX, 0, 5000, 300), sourceRectangle, Color.White);
 
             foreach (Rectangle rect in elevators)
             {

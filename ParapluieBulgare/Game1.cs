@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ParapluieBulgare.Code;
@@ -34,7 +35,8 @@ namespace ParapluieBulgare
             "cuistot_idle_2",
             "Directeur_idle",
             "Journaliste_IDLE",
-            "rando_fem_idle"
+            "rando_fem_idle",
+            "background"
         };
         Dictionary<string, Texture2D> textureDict;
         Texture2D white;
@@ -50,6 +52,8 @@ namespace ParapluieBulgare
 
         bool elevator = false;
         ElevatorGUI elevatorGUI = null;
+
+        SoundEffect soundBulgared;
 
         public Game1()
         {
@@ -81,12 +85,12 @@ namespace ParapluieBulgare
             player = new Player(GetAnimation("MC_Walk_SpriteSheet"), GetAnimation("MC_Walk_SpriteSheet"), white);
             floors = new Floor[]
             {
-                new Floor(player, 0, white, GetFloorNPCs(0)),
-                new Floor(player, 1, white, GetFloorNPCs(1)),
-                new Floor(player, 2, white, GetFloorNPCs(2)),
-                new Floor(player, 3, white, GetFloorNPCs(3)),
-                new Floor(player, 4, white, GetFloorNPCs(4)),
-                new Floor(player, 5, white, GetFloorNPCs(5))
+                new Floor(player, 0, textureDict["background"], GetFloorNPCs(0)),
+                new Floor(player, 1, textureDict["background"], GetFloorNPCs(1)),
+                new Floor(player, 2, textureDict["background"], GetFloorNPCs(2)),
+                new Floor(player, 3, textureDict["background"], GetFloorNPCs(3)),
+                new Floor(player, 4, textureDict["background"], GetFloorNPCs(4)),
+               // new Floor(player, 5, textureDict["background"], GetFloorNPCs(5))
             };
             currentFloor = floors[0];
 
@@ -108,6 +112,8 @@ namespace ParapluieBulgare
                 textureDict.Add(text, Content.Load<Texture2D>(text));
             }
             white = textureDict["white"];
+
+            soundBulgared = Content.Load<SoundEffect>("Bulgared");
         }
 
         private Animation GetAnimation(string spritesheet)
@@ -146,9 +152,9 @@ namespace ParapluieBulgare
                 case 0:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 80),
-                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 55),
-                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 500)
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), soundBulgared, 80),
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), soundBulgared, 200),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), soundBulgared, 500)
                     };
 
                     NPC npc = npcs[2];
