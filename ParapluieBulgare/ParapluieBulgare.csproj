@@ -42,6 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Code\Floor.cs" />
     <Compile Include="Code\NPC.cs" />
     <Compile Include="Code\Player.cs" />
     <Compile Include="Game1.cs" />

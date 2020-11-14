@@ -18,7 +18,9 @@ namespace ParapluieBulgare
         Texture2D white;
 
         Player player;
-        NPC npc;
+        Floor currentFloor;
+
+        int cameraX;
 
         public Game1()
         {
@@ -39,7 +41,6 @@ namespace ParapluieBulgare
             base.Initialize();
 
             player = new Player(white);
-            npc = new NPC(white);
         }
 
         /// <summary>
@@ -78,7 +79,7 @@ namespace ParapluieBulgare
 
             // TODO: Add your update logic here
             player.Update(state, prevKeyState);
-            npc.Update();
+            cameraX = player.CameraX(graphics.PreferredBackBufferWidth);
 
             prevKeyState = state;
             base.Update(gameTime);
@@ -95,8 +96,7 @@ namespace ParapluieBulgare
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
-            player.Draw(spriteBatch);
-            npc.Draw(spriteBatch);
+            player.Draw(spriteBatch, cameraX);
 
             spriteBatch.End();
 

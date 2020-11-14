@@ -12,12 +12,18 @@ namespace ParapluieBulgare.Code
     class Player
     {
         private int x;
+        private int width = 100;
         private Texture2D texture;
         
         public Player(Texture2D t)
         {
             x = 0;
             texture = t;
+        }
+
+        public int CameraX(int windowWidth)
+        {
+            return x - (windowWidth - width) / 2;
         }
 
         public void Update(KeyboardState keyState, KeyboardState prevKeyState)
@@ -32,9 +38,9 @@ namespace ParapluieBulgare.Code
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, int cameraX)
         {
-            spriteBatch.Draw(texture, new Rectangle(x, 50, 100, 100), Color.White);
+            spriteBatch.Draw(texture, new Rectangle(x - cameraX, 50, width, width), Color.White);
         }
     }
 }

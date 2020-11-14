@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace ParapluieBulgare.Code
 {
     class NPC
     {
         private int x;
+        private int width = 100;
         private Texture2D texture;
 
         public NPC(Texture2D t)
@@ -25,9 +25,9 @@ namespace ParapluieBulgare.Code
             x -= 1;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, int cameraX)
         {
-            spriteBatch.Draw(texture, new Rectangle(x, 50, 100, 100), Color.Black);
+            spriteBatch.Draw(texture, new Rectangle(x - cameraX, 50, width, width), Color.Black);
         }
     }
 }
