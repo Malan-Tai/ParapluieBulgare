@@ -66,7 +66,7 @@ namespace ParapluieBulgare.Code
             return "";
         }
 
-        public void Draw(SpriteBatch spriteBatch, int windowWidth)
+        public int Draw(SpriteBatch spriteBatch, int windowWidth)
         {
             int cameraX = player.CameraX(windowWidth);
 
@@ -93,6 +93,8 @@ namespace ParapluieBulgare.Code
                 npc.Draw(spriteBatch, cameraX);
             }
             player.Draw(spriteBatch, cameraX);
+
+            return cameraX;
         }
         
     }
