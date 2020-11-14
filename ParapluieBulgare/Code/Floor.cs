@@ -13,7 +13,7 @@ namespace ParapluieBulgare.Code
 {
     class Floor
     {
-        static readonly int nbFloors = 5;  
+        static readonly int nbFloors = 6;  
 
         private Texture2D texture;
         public int Number { get; set; }
@@ -74,7 +74,7 @@ namespace ParapluieBulgare.Code
             sourceRectangle.Width = texture.Width;
             sourceRectangle.Height = texture.Height / nbFloors;
             sourceRectangle.X = 0;
-            sourceRectangle.Y = Number * sourceRectangle.Height;
+            sourceRectangle.Y = (nbFloors - Number - 2) * sourceRectangle.Height;
 
 
             spriteBatch.Draw(texture, new Rectangle(-cameraX, 0, 5000, 300), sourceRectangle, Color.White);

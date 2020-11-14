@@ -237,7 +237,7 @@ namespace ParapluieBulgare
                     currentFloor = floors[switchFloor];
                     elevator = false;
                     elevatorGUI = null;
-                    Console.Out.WriteLine("elevator : " + switchFloor);
+                    Console.Out.WriteLine("elevator : " + (switchFloor - 1));
                 }
             }
 
