@@ -15,30 +15,31 @@ namespace ParapluieBulgare.Code
         static Texture2D dialogBoxTexture;
         public static void InitContent(SpriteFont font, Texture2D dialogBoxTex)
         {
+            //DialogBox.dialogBoxTexture = dialogBoxTex;
+            //DialogBox.font = font;
             DialogManager.dialogBoxTexture = dialogBoxTex;
             DialogManager.font = font;
         }
 
         public static void DrawDialog(SpriteBatch spriteBatch, Rectangle boxRect, string text)
         {
+            //Rectangle textRect = new Rectangle();
+            //textRect.X = boxRect.X + (int)(boxRect.Width * 0.05);
+            //textRect.Y = boxRect.Y + (int)(boxRect.Height * 0.05);
+            //textRect.Width = (int)(boxRect.Width * 0.9);
+            //boxRect.Height = (int)(boxRect.Height * 0.9);
 
-            Rectangle textRect = new Rectangle();
-            textRect.X = boxRect.X + (int)(boxRect.Width * 0.05);
-            textRect.Y = boxRect.Y + (int)(boxRect.Height * 0.05);
-            textRect.Width = (int)(boxRect.Width * 0.9);
-            boxRect.Height = (int)(boxRect.Height * 0.9);
 
+            //int lineHeight = (int)(font.MeasureString(text).Y);
+            //List<string> lines = TextWrap.Wrap(text, textRect.Width, font);
 
-            int lineHeight = (int)DialogManager.font.MeasureString(text).Y;
-            List<string> lines = TextWrap.Wrap(text, textRect.Width, DialogManager.font);
-
-            spriteBatch.Draw(DialogManager.dialogBoxTexture, boxRect, Color.White);
-            for (int i = 0; i < lines.Count(); i++)
-            {
-                spriteBatch.DrawString(DialogManager.font, lines[i],
-                    new Vector2(textRect.X, textRect.Y + i * lineHeight),
-                    Color.Black, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
-            }
+            //spriteBatch.Draw(dialogBoxTexture, boxRect, Color.White);
+            //for (int i = 0; i < lines.Count(); i++)
+            //{
+            //    spriteBatch.DrawString(DialogManager.font, lines[i],
+            //        new Vector2(textRect.X, textRect.Y + i * lineHeight),
+            //        Color.Black, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
+            //}
         }
     }
 }

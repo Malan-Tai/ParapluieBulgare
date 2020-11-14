@@ -11,6 +11,13 @@ namespace ParapluieBulgare.Code
 {
     class Character
     {
+        public static SpriteFont font;
+        public static Texture2D dialogBoxTexture;
+
+        protected Character interactingWith = null;
+        
+
+
         //position
         protected int x;
         protected int y;
@@ -39,15 +46,19 @@ namespace ParapluieBulgare.Code
         //dialog
         protected string currentText;
         protected bool dialogOpened = false;
-        
 
-        public void say(string text)
+        public void StartInteraction(Character other)
+        {
+            interactingWith = other;
+        }
+
+        public void Say(string text)
         {
             dialogOpened = true;
             currentText = text;
         }
 
-        public void closeDialog()
+        public void CloseDialog()
         {
             dialogOpened = false;
             currentText = "...";

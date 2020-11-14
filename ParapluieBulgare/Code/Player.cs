@@ -11,11 +11,10 @@ namespace ParapluieBulgare.Code
 {
     class Player : Character
     {
-
         public Player(Texture2D t)
         {
             x = 0;
-            y = 100;
+            y = 400;
             texture = t;
         }
 
@@ -35,6 +34,11 @@ namespace ParapluieBulgare.Code
                 x -= 10;
             }
 
+            if (keyState.IsKeyDown(Keys.E) && !prevKeyState.IsKeyDown(Keys.E))
+            {
+                Interaction(npcs);
+            }
+
             if (keyState.IsKeyDown(Keys.Down) && !prevKeyState.IsKeyDown(Keys.Down))
             {
                 return "down";
@@ -42,11 +46,6 @@ namespace ParapluieBulgare.Code
             if (keyState.IsKeyDown(Keys.Up) && !prevKeyState.IsKeyDown(Keys.Up))
             {
                 return "up";
-            }
-            if (keyState.IsKeyDown(Keys.Space) &&  !prevKeyState.IsKeyDown(Keys.Space))
-            {
-                Console.WriteLine("interaction !\n");
-                Interaction(npcs);
             }
             return "";
         }
@@ -57,9 +56,10 @@ namespace ParapluieBulgare.Code
             {
                 if (BoxCollider.Intersects(npc.BoxCollider))
                 {
-                    //Console.WriteLine("un npc dis bonjour !\n");
-                    npc.say("Bonjour ! Je suis un NPC qui n'a pas grand chose a dire ...");
-                    say("hello");
+                    interactingWith = npc;
+                    npc.StartInteraction(this);
+
+
                     break;
                 }
             }

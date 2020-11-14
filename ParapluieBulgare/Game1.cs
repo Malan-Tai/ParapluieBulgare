@@ -57,7 +57,10 @@ namespace ParapluieBulgare
             base.Initialize();
 
             player = new Player(white);
-            DialogManager.InitContent(font, dialogBoxTexture);
+
+            Character.font = font;
+            Character.dialogBoxTexture = dialogBoxTexture;
+            
             floors = new Floor[]
             {
                 new Floor(player, 0, white),
