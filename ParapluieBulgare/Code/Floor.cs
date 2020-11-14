@@ -12,37 +12,79 @@ namespace ParapluieBulgare.Code
     class Floor
     {
         private Texture2D texture;
-        private int number;
+        public int Number { get; set; }
 
         private List<NPC> npcs;
+        private Player player;
 
-        public Floor(int n, Texture2D t)
+        private List<Rectangle> elevators;
+        private List<Rectangle> stairs;
+
+        public Floor(Player p, int n, Texture2D t)
         {
+            player = p;
             texture = t;
-            number = n;
+            Number = n;
 
             npcs = new List<NPC>
             {
                 new NPC(t)
             };
+
+            stairs = new List<Rectangle>
+            {
+                new Rectangle(0, 20, 150, 150),
+                new Rectangle(4850, 20, 150, 150)
+            };
+            elevators = new List<Rectangle> { new Rectangle(2425, 20, 150, 150) };
         }
 
-        public void Update()
+        public string Update(KeyboardState keyState, KeyboardState prevKeyState)
         {
             foreach (NPC npc in npcs)
             {
                 npc.Update();
             }
+            string key = player.Update(keyState, prevKeyState);
+
+            if (key != "")
+            {
+                foreach (Rectangle rect in stairs)
+                {
+                    if (rect.Contains(player.Coords))
+                    {
+                        if (key == "up") return "stairs up";
+                        if (key == "down") return "stairs down";
+                    }
+                }
+                foreach (Rectangle rect in elevators)
+                {
+                    if (rect.Contains(player.Coords)) return "elevator";
+                }
+            }
+            return "";
         }
 
-        public void Draw(SpriteBatch spriteBatch, int cameraX)
+        public void Draw(SpriteBatch spriteBatch, int windowWidth)
         {
-            spriteBatch.Draw(texture, new Rectangle(-cameraX, 0, 1000, 500), Color.LightBlue);
+            int cameraX = player.CameraX(windowWidth);
+
+            spriteBatch.Draw(texture, new Rectangle(-cameraX, 0, 5000, 300), Color.LightBlue);
+
+            foreach (Rectangle rect in elevators)
+            {
+                spriteBatch.Draw(texture, new Rectangle(rect.X - cameraX, rect.Y, rect.Width, rect.Height), Color.Yellow);
+            }
+            foreach (Rectangle rect in stairs)
+            {
+                spriteBatch.Draw(texture, new Rectangle(rect.X - cameraX, rect.Y, rect.Width, rect.Height), Color.DarkBlue);
+            }
 
             foreach (NPC npc in npcs)
             {
                 npc.Draw(spriteBatch, cameraX);
             }
+            player.Draw(spriteBatch, cameraX);
         }
         
     }
