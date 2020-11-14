@@ -13,10 +13,8 @@ namespace ParapluieBulgare
     /// </summary>
     public class Game1 : Game
     {
-        //public static System.Drawing.Rectangle res = Screen.PrimaryScreen.Bounds;
-
-        //public static int WIDTH = res.Width;
-        //public static int HEIGHT = res.Height;
+        public static int WIDTH = 1280;
+        public static int HEIGHT = 720;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -77,11 +75,11 @@ namespace ParapluieBulgare
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = WIDTH;
+            graphics.PreferredBackBufferHeight = HEIGHT;
             graphics.ApplyChanges();
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = WIDTH;
+            graphics.PreferredBackBufferHeight = HEIGHT;
             graphics.ApplyChanges();
         }
 
@@ -98,7 +96,7 @@ namespace ParapluieBulgare
             Character.font = font;
             DialogBox.font = font;
             DialogBox.dialogBoxTexture = textureDict["bulleDeTexte"];
-            DialogBox.boxRect = new Rectangle(0, 0, 400, (int)(0.261 * 400));
+            DialogBox.boxRect = new Rectangle(0, 0, WIDTH - (HEIGHT / 3), HEIGHT / 3 + 30); //(int)(0.261 * (WIDTH - (HEIGHT / 3))));
 
             player = new Player(GetAnimation("MC_Walk_SpriteSheet"), GetAnimation("MC_Walk_SpriteSheet"), facebook["face01"], white);
             floors = new Floor[]

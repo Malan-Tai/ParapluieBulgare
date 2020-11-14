@@ -16,7 +16,7 @@ namespace ParapluieBulgare.Code
         public Player(Animation idle, Animation walk, Texture2D face, Texture2D texture) : base(idle, walk, face)
         {
             x = 0;
-            y = 200;
+            y = 2 * Game1.HEIGHT / 3 - width - 20;
 
             journal = new JournalGUI(texture);
             journal.AddHint(new Hint("La cible est un chercheur."));

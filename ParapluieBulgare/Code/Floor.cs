@@ -76,8 +76,10 @@ namespace ParapluieBulgare.Code
             sourceRectangle.X = 0;
             sourceRectangle.Y = (nbFloors - Number - 2) * sourceRectangle.Height;
 
-
-            spriteBatch.Draw(texture, new Rectangle(-cameraX, 0, 5000, 300), sourceRectangle, Color.White);
+            int ratio = 2 * Game1.HEIGHT / (3 * sourceRectangle.Height);
+            int h = sourceRectangle.Height * ratio;
+            int w = sourceRectangle.Width * ratio;
+            spriteBatch.Draw(texture, new Rectangle(-cameraX, 0, w, h), sourceRectangle, Color.White);
 
             //foreach (Rectangle rect in elevators)
             //{

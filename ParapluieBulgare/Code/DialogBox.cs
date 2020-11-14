@@ -26,20 +26,17 @@ namespace ParapluieBulgare.Code
 
         public void Draw(SpriteBatch spriteBatch, int cameraX)
         {
-            Rectangle textRect = new Rectangle();
-            Point coords = talker.Coords;
+            int offset = 0;
+            if (talker.Flip) offset = Game1.HEIGHT / 3;
+            
+            SpriteEffects effects = SpriteEffects.FlipHorizontally;
+            if (talker.Flip) effects = SpriteEffects.None;
+            spriteBatch.Draw(dialogBoxTexture, new Rectangle(offset, 2 * Game1.HEIGHT / 3 - 30, boxRect.Width, boxRect.Height), null, Color.White, 0, new Vector2(), effects, 0);
 
-            textRect.X = coords.X - cameraX + (int)(boxRect.Width * 0.05);
-            textRect.Y = coords.Y + (int)(boxRect.Height * 0.05);
-            textRect.Width = (int)(boxRect.Width * 0.9);
-            textRect.Height = (int)(boxRect.Height * 0.9);
+            Rectangle textRect = new Rectangle(offset + 50, 2 * Game1.HEIGHT / 3 + 20, boxRect.Width - 100, boxRect.Height - 100);
 
             int lineHeight = (int)font.MeasureString(text).Y;
             List<string> lines = TextWrap.Wrap(text, textRect.Width, font);
-
-            SpriteEffects effects = SpriteEffects.FlipHorizontally;
-            if (talker.Flip) effects = SpriteEffects.None;
-            spriteBatch.Draw(dialogBoxTexture, new Rectangle(coords.X - cameraX, coords.Y, boxRect.Width, boxRect.Height), null, Color.White, 0, new Vector2(), effects, 0);
             for (int i = 0; i < lines.Count; i++)
             {
                 spriteBatch.DrawString(font, lines[i],
