@@ -14,14 +14,19 @@ namespace ParapluieBulgare.Code
 
         private string text;
         public bool End { get; set; }
+        public Hint Hint { get; set; } = null;
 
         private Character talker;
 
-        public DialogBox(string t, Character sayer, bool end = false)
+        public DialogBox(string t, Character sayer, bool end = false, HintsEnum hint = HintsEnum.HintsCount)
         {
             text = t;
             talker = sayer;
             End = end;
+            if (hint != HintsEnum.HintsCount)
+            {
+                Hint = new Hint(hint);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch, int cameraX)

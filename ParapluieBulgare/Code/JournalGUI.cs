@@ -19,6 +19,17 @@ namespace ParapluieBulgare.Code
             hints = new List<Hint>();
         }
 
+        public bool CheckHints(List<HintsEnum> condition)
+        {
+            int found = 0;
+            foreach (Hint hint in hints)
+            {
+                if (condition.Contains(hint.HintType)) found++;
+            }
+
+            return found == condition.Count;
+        }
+
         public void AddHint(Hint hint)
         {
             hints.Add(hint);

@@ -94,7 +94,7 @@ namespace ParapluieBulgare.Code
             {
                 npc.Draw(spriteBatch, cameraX);
             }
-            player.Draw(spriteBatch, cameraX);
+            //player.Draw(spriteBatch, cameraX);
 
             return cameraX;
         }

@@ -35,7 +35,8 @@ namespace ParapluieBulgare
             "Journaliste_IDLE",
             "rando_fem_idle",
             "background",
-            "vigile_walk_3"
+            "vigile_walk_3",
+            "Ascenseur"
         };
         Dictionary<string, Texture2D> textureDict;
         Texture2D white;
@@ -177,8 +178,11 @@ namespace ParapluieBulgare
                     NPC npc = npcs[2];
                     DialogBox b1 = new DialogBox("coucou", npc);
                     DialogBox b2 = new DialogBox("wesh frr", player);
-                    DialogBox b3 = new DialogBox("vazy kass toa", npc);
-                    DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3 });
+                    DialogBox b3 = new DialogBox("vazy kass toa", npc, false, HintsEnum.BadgeLabo);
+
+                    DialogBox b4 = new DialogBox("Alors poto le labo ?", npc);
+
+                    DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3 }, new List<HintsEnum> { HintsEnum.BadgeLabo }, new List<DialogBox> { b4 });
                     npc.SetDialogTree(tree);
                     break;
                 case 1:
@@ -280,6 +284,7 @@ namespace ParapluieBulgare
             {
                 guard.Draw(spriteBatch, cameraX, currentFloor.Number);
             }
+            player.Draw(spriteBatch, cameraX);
 
             if (elevator) elevatorGUI.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
 

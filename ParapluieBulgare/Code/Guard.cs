@@ -29,7 +29,7 @@ namespace ParapluieBulgare.Code
         public void Update(KeyboardState keyState, KeyboardState prevKeyState, Player player, int playerFloor)
         {
             Point playerCoords = player.Coords;
-            if (Game1.ThreatLevel >= 1)
+            if (Game1.ThreatLevel >= 2)
             {
                 if (playerFloor == currentFloor)
                 {

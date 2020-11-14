@@ -65,7 +65,11 @@ namespace ParapluieBulgare.Code
         public void StartInteraction(Character other)
         {
             interactingWith = other;
-            if (tree != null) box = tree.Next();
+            if (tree != null)
+            {
+                tree.StartConversation(other as Player);
+                box = tree.Next();
+            }
             else StopInteraction();
         }
 
@@ -99,6 +103,12 @@ namespace ParapluieBulgare.Code
                 if (keyState.IsKeyDown(Keys.E) && !prevKeyState.IsKeyDown(Keys.E))
                 {
                     box = tree.Next();
+                }
+                if (box.Hint != null && !box.Hint.AddedToJournal)
+                {
+                    Player player = interactingWith as Player;
+                    player.AddHint(box.Hint);
+                    box.Hint.AddedToJournal = true;
                 }
                 if (box.End)
                 {
