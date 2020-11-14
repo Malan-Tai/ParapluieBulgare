@@ -11,9 +11,9 @@ namespace ParapluieBulgare.Code
     class NPC : Character
     {
 
-        public NPC(Animation idle, Animation walk) : base(idle, walk)
+        public NPC(Animation idle, Animation walk, int x = 500) : base(idle, walk)
         {
-            x = 500;
+            this.x = x;
         }
 
         public override void Update()

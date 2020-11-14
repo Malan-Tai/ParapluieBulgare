@@ -26,8 +26,16 @@ namespace ParapluieBulgare
         {
             "white",
             "bulleDeTexte",
-            "MC_Walk_SpriteSheet"
-        };
+            "MC_Walk_SpriteSheet",
+            "costard_fem_idle",
+            "costard_idle",
+            "costard_idle_2",
+            "cuistot_idle",
+            "cuistot_idle_2",
+            "Directeur_idle",
+            "Journaliste_IDLE",
+            "rando_fem_idle"
+    };
         Dictionary<string, Texture2D> textureDict;
         Texture2D white;
 
@@ -68,11 +76,11 @@ namespace ParapluieBulgare
             floors = new Floor[]
             {
                 new Floor(player, 0, white, GetFloorNPCs(0)),
-                new Floor(player, 1, white, GetFloorNPCs(0)),
-                new Floor(player, 2, white, GetFloorNPCs(0)),
-                new Floor(player, 3, white, GetFloorNPCs(0)),
-                new Floor(player, 4, white, GetFloorNPCs(0)),
-                new Floor(player, 5, white, GetFloorNPCs(0))
+                new Floor(player, 1, white, GetFloorNPCs(1)),
+                new Floor(player, 2, white, GetFloorNPCs(2)),
+                new Floor(player, 3, white, GetFloorNPCs(3)),
+                new Floor(player, 4, white, GetFloorNPCs(4)),
+                new Floor(player, 5, white, GetFloorNPCs(5))
             };
             currentFloor = floors[0];
         }
@@ -100,6 +108,22 @@ namespace ParapluieBulgare
             {
                 case "MC_Walk_SpriteSheet":
                     return new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10);
+                case "costard_fem_idle":
+                    return new Animation(textureDict["costard_fem_idle"], 32, 32, 2, 60);
+                case "costard_idle":
+                    return new Animation(textureDict["costard_idle"], 32, 32, 2, 60);
+                case "costard_idle_2":
+                    return new Animation(textureDict["costard_idle_2"], 32, 32, 2, 60);
+                case "cuistot_idle":
+                    return new Animation(textureDict["cuistot_idle"], 32, 32, 2, 60);
+                case "cuistot_idle_2":
+                    return new Animation(textureDict["cuistot_idle_2"], 32, 32, 2, 60);
+                case "Directeur_idle":
+                    return new Animation(textureDict["Directeur_idle"], 32, 32, 7, 60);
+                case "Journaliste_IDLE":
+                    return new Animation(textureDict["Journaliste_IDLE"], 32, 32, 2, 60);
+                case "rando_fem_idle":
+                    return new Animation(textureDict["rando_fem_idle"], 32, 32, 2, 60);
                 default:
                     return null;
             }
@@ -108,6 +132,22 @@ namespace ParapluieBulgare
         private List<NPC> GetFloorNPCs(int floor)
         {
             List<NPC> npcs = new List<NPC>();
+
+            switch (floor)
+            {
+                case 0:
+                    npcs = new List<NPC>
+                    {
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 80),
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 55),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 500)
+                    };
+                    break;
+                case 1:
+                    break;
+                default:
+                    break;
+            }
 
             return npcs;
         }
