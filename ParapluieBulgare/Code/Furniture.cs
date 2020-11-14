@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ParapluieBulgare.Code
 {
-    class Furniture : Character
+    class Furniture// : Character
     {
         public Furniture(Texture2D t)
         {

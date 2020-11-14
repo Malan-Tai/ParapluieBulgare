@@ -11,22 +11,20 @@ namespace ParapluieBulgare.Code
     class NPC : Character
     {
 
-        public NPC(Animation anim)
+        public NPC(Animation idle, Animation walk) : base(idle, walk)
         {
             x = 500;
-            animation = anim;
         }
 
-        public void Update()
+        public override void Update()
         {
             x -= 1;
-            animation.Update();
+            base.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch, int cameraX)
         {
-            //spriteBatch.Draw(texture, new Rectangle(x - cameraX, 50, width, width), Color.Black);
-            animation.Draw(spriteBatch, new Rectangle(x - cameraX, 50, width, width));
+            currentAnimation.Draw(spriteBatch, new Rectangle(x - cameraX, 50, width, width), flip);
         }
     }
 }

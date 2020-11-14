@@ -21,11 +21,10 @@ namespace ParapluieBulgare.Code
             }
         }
 
-        public Player(Animation anim, Texture2D t)
+        public Player(Animation idle, Animation walk, Texture2D t) : base(idle, walk)
         {
             x = 0;
             y = 100;
-            animation = anim;
 
             journal = new JournalGUI(t);
             journal.AddHint(new Hint("La cible est un chercheur."));
@@ -53,7 +52,7 @@ namespace ParapluieBulgare.Code
                 journal.Toggle();
             }
 
-            animation.Update();
+            base.Update();
 
             if (keyState.IsKeyDown(Keys.Down) && !prevKeyState.IsKeyDown(Keys.Down))
             {
@@ -68,8 +67,7 @@ namespace ParapluieBulgare.Code
 
         public void Draw(SpriteBatch spriteBatch, int cameraX)
         {
-            //spriteBatch.Draw(texture, new Rectangle(x - cameraX, y, width, width), Color.White);
-            animation.Draw(spriteBatch, new Rectangle(x - cameraX, y, width, width), false);
+            currentAnimation.Draw(spriteBatch, new Rectangle(x - cameraX, y, width, width), flip);
             DrawDialog(spriteBatch, cameraX);
             journal.Draw(spriteBatch, font);
         }

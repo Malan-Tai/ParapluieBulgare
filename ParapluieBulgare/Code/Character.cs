@@ -12,6 +12,7 @@ namespace ParapluieBulgare.Code
     class Character
     {
         //position
+        private int prevX;
         protected int x;
         protected int y;
 
@@ -19,7 +20,10 @@ namespace ParapluieBulgare.Code
         protected int width = 100;
 
         //texture
-        protected Animation animation;
+        protected Animation idleAnimation;
+        protected Animation walkAnimation;
+        protected Animation currentAnimation;
+        protected bool flip;
 
         //dialog
         protected SpriteFont font;
@@ -27,14 +31,36 @@ namespace ParapluieBulgare.Code
         protected string currentText;
         protected bool dialogOpened = false;
         
+        public Character(Animation idle, Animation walk)
+        {
+            idleAnimation = idle;
+            walkAnimation = walk;
+            currentAnimation = idle;
+        }
+
         public void InitDialogContent(SpriteFont font, Texture2D dialogBoxTex)
         {
             this.dialogBoxTexture = dialogBoxTex;
             this.font = font;
             this.currentText = "Bonjour, je m appelle Hugo ! Et j aime raconter ma life dans des dialog box ! Je peux faire encore des lignes tu sais ^^";
-
         }
 
+        public virtual void Update()
+        {
+            if (x != prevX)
+            {
+                currentAnimation = walkAnimation;
+                if (x < prevX) flip = false;
+                else flip = true;
+            }
+            else
+            {
+                currentAnimation = idleAnimation;
+            }
+
+            currentAnimation.Update();
+            prevX = x;
+        }
 
         public void say(string text)
         {

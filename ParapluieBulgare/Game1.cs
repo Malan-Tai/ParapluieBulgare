@@ -63,16 +63,16 @@ namespace ParapluieBulgare
         {
             base.Initialize();
 
-            player = new Player(new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10), white);
+            player = new Player(GetAnimation("MC_Walk_SpriteSheet"), GetAnimation("MC_Walk_SpriteSheet"), white);
             player.InitDialogContent(font, textureDict["bulleDeTexte"]);
             floors = new Floor[]
             {
-                new Floor(player, 0, white, new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10)),
-                new Floor(player, 1, white, new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10)),
-                new Floor(player, 2, white, new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10)),
-                new Floor(player, 3, white, new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10)),
-                new Floor(player, 4, white, new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10)),
-                new Floor(player, 5, white, new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10))
+                new Floor(player, 0, white, GetFloorNPCs(0)),
+                new Floor(player, 1, white, GetFloorNPCs(0)),
+                new Floor(player, 2, white, GetFloorNPCs(0)),
+                new Floor(player, 3, white, GetFloorNPCs(0)),
+                new Floor(player, 4, white, GetFloorNPCs(0)),
+                new Floor(player, 5, white, GetFloorNPCs(0))
             };
             currentFloor = floors[0];
         }
@@ -92,6 +92,24 @@ namespace ParapluieBulgare
                 textureDict.Add(text, Content.Load<Texture2D>(text));
             }
             white = textureDict["white"];
+        }
+
+        private Animation GetAnimation(string spritesheet)
+        {
+            switch (spritesheet)
+            {
+                case "MC_Walk_SpriteSheet":
+                    return new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10);
+                default:
+                    return null;
+            }
+        }
+
+        private List<NPC> GetFloorNPCs(int floor)
+        {
+            List<NPC> npcs = new List<NPC>();
+
+            return npcs;
         }
 
         /// <summary>
