@@ -17,6 +17,10 @@ namespace ParapluieBulgare
 
         Texture2D white;
 
+        Texture2D dialogBoxTexture;
+
+        SpriteFont font;
+
         Player player;
         Floor currentFloor;
 
@@ -41,6 +45,7 @@ namespace ParapluieBulgare
             base.Initialize();
 
             player = new Player(white);
+            player.InitDialogContent(font, dialogBoxTexture);
             currentFloor = new Floor(0, white);
         }
 
@@ -55,6 +60,10 @@ namespace ParapluieBulgare
 
             // TODO: use this.Content to load your game content here
             white = Content.Load<Texture2D>("white");
+
+            font = Content.Load<SpriteFont>("font");
+
+            dialogBoxTexture = Content.Load<Texture2D>("bulleDeTexte");
         }
 
         /// <summary>

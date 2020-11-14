@@ -9,17 +9,16 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ParapluieBulgare.Code
 {
-    class Player
+    class Player : Character
     {
-        private int x;
-        private int width = 100;
-        private Texture2D texture;
-        
+      
         public Player(Texture2D t)
         {
             x = 0;
+            y = 100;
             texture = t;
         }
+
 
         public int CameraX(int windowWidth)
         {
@@ -40,7 +39,8 @@ namespace ParapluieBulgare.Code
 
         public void Draw(SpriteBatch spriteBatch, int cameraX)
         {
-            spriteBatch.Draw(texture, new Rectangle(x - cameraX, 50, width, width), Color.White);
+            spriteBatch.Draw(texture, new Rectangle(x - cameraX, y, width, width), Color.White);
+            DrawDialog(spriteBatch, cameraX);
         }
     }
 }

@@ -8,11 +8,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ParapluieBulgare.Code
 {
-    class NPC
+    class NPC : Character
     {
-        private int x;
-        private int width = 100;
-        private Texture2D texture;
 
         public NPC(Texture2D t)
         {
