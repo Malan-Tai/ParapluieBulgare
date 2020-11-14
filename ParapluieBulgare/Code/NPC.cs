@@ -19,7 +19,7 @@ namespace ParapluieBulgare.Code
         public NPC(Animation idle, Animation walk, int x = 500) : base(idle, walk)
         {
             this.x = x;
-            y = 200;
+            y = 2 * Game1.HEIGHT / 3 - width - 20;
         }
         public virtual void Die(List<NPC> npcs)
         {

@@ -27,19 +27,19 @@ namespace ParapluieBulgare.Code
         {
             get
             {
-                return new Point(x, 50);
+                return new Point(x, y);
             }
         }
         public Rectangle BoxCollider
         {
             get
             {
-                return new Rectangle(Coords.X, Coords.Y, width, width);
+                return new Rectangle(x, y, width, width);
             }
         }
 
         //size
-        protected int width = 100;
+        protected int width;
 
         //texture
         protected Animation idleAnimation;
@@ -52,6 +52,9 @@ namespace ParapluieBulgare.Code
             idleAnimation = idle;
             walkAnimation = walk;
             currentAnimation = idle;
+
+            int ratio = 4 * Game1.HEIGHT / (9 * 32);
+            width = ratio * 32 - 20;
         }
 
         public void SetDialogTree(DialogTree dialog)
@@ -102,10 +105,6 @@ namespace ParapluieBulgare.Code
                     StopInteraction();
                 }
             }
-            //if (interactingWith != null && tree == null)
-            //{
-            //    StopInteraction();
-            //}
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, int cameraX)
