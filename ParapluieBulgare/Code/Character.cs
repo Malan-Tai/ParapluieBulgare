@@ -22,16 +22,36 @@ namespace ParapluieBulgare.Code
         protected Texture2D texture;
 
         //dialog
-        protected SpriteFont m_font;
-        protected Texture2D m_dialogBoxTexture;
+        protected SpriteFont font;
+        protected Texture2D dialogBoxTexture;
+        protected string currentText;
+        protected bool dialogOpened = false;
         
         public void InitDialogContent(SpriteFont font, Texture2D dialogBoxTex)
         {
-            m_dialogBoxTexture = dialogBoxTex;
-            m_font = font;
+            this.dialogBoxTexture = dialogBoxTex;
+            this.font = font;
+            this.currentText = "Bonjour, je m appelle Hugo ! Et j aime raconter ma life dans des dialog box ! Je peux faire encore des lignes tu sais ^^";
+
         }
+
+
+        public void say(string text)
+        {
+            dialogOpened = true;
+            currentText = text;
+        }
+
+        public void closeDialog()
+        {
+            dialogOpened = false;
+            currentText = "...";
+        }
+
         public void DrawDialog(SpriteBatch spriteBatch , int cameraX)
         {
+            if (!dialogOpened)
+                return;
 
             Rectangle boxRect = new Rectangle();
             boxRect.Width = 4 * width;
@@ -46,18 +66,15 @@ namespace ParapluieBulgare.Code
             textRect.Width = (int)(boxRect.Width * 0.9);
             boxRect.Height = (int)(boxRect.Height * 0.9);
 
-
-            string text = "Bonjour, je m appelle Hugo ! Et j aime raconter ma life dans des dialog box ! Je peux faire encore des lignes tu sais ^^";
             
-            int lineHeight = (int) m_font.MeasureString(text).Y;
-            List<string> lines = TextWrap.Wrap(text, textRect.Width, m_font);
-
+            int lineHeight = (int) font.MeasureString(currentText).Y;
+            List<string> lines = TextWrap.Wrap(currentText, textRect.Width, font);
             
-            spriteBatch.Draw(m_dialogBoxTexture, boxRect, Color.White);
+            spriteBatch.Draw(dialogBoxTexture, boxRect, Color.White);
             for (int i = 0; i < lines.Count(); i++)
             {
                 Console.WriteLine(lines[i]);
-                spriteBatch.DrawString(m_font, lines[i],
+                spriteBatch.DrawString(font, lines[i],
                     new Vector2(textRect.X, textRect.Y + i*lineHeight),
                     Color.Black, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
             }
