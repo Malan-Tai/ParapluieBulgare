@@ -10,21 +10,21 @@ namespace ParapluieBulgare.Code
 {
     class NPC : Character
     {
-
-        public NPC(Texture2D t)
+        public NPC(Animation idle, Animation walk, int x = 500) : base(idle, walk)
         {
-            x = 500;
-            texture = t;
+            this.x = x;
+            this.y = 100;
         }
 
-        public void Update()
+        public override void Update()
         {
-            x -= 1;
+            base.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch, int cameraX)
         {
-            spriteBatch.Draw(texture, new Rectangle(x - cameraX, 50, width, width), Color.Black);
+            currentAnimation.Draw(spriteBatch, new Rectangle(x - cameraX, 50, width, width), flip);
+            DrawDialog(spriteBatch, cameraX);
         }
     }
 }

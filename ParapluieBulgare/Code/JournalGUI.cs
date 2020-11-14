@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ParapluieBulgare.Code
@@ -10,8 +11,11 @@ namespace ParapluieBulgare.Code
         private List<Hint> hints;
         private bool open = false;
 
-        public JournalGUI()
+        private Texture2D texture;
+
+        public JournalGUI(Texture2D t)
         {
+            texture = t;
             hints = new List<Hint>();
         }
 
@@ -25,11 +29,20 @@ namespace ParapluieBulgare.Code
             open = !open;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, SpriteFont font)
         {
             if (open)
             {
+                spriteBatch.Draw(texture, new Rectangle(20, 20, 700, 300), Color.BlanchedAlmond);
 
+                int h = (int)font.MeasureString("A").Y;
+                int y = h;
+
+                foreach (Hint hint in hints)
+                {
+                    spriteBatch.DrawString(font, hint.Text, new Vector2(40, y), Color.Black);
+                    y += h;
+                }
             }
         }
     }
