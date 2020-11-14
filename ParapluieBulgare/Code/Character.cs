@@ -12,9 +12,12 @@ namespace ParapluieBulgare.Code
     class Character
     {
         public static SpriteFont font;
-        public static Texture2D dialogBoxTexture;
 
+        private DialogTree tree = null;
+        private DialogBox box = null;
         protected Character interactingWith = null;
+
+        protected bool leftConversation = false;
 
         //position
         private int prevX;
@@ -34,7 +37,6 @@ namespace ParapluieBulgare.Code
                 return new Rectangle(Coords.X, Coords.Y, width, width);
             }
         }
-     
 
         //size
         protected int width = 100;
@@ -43,11 +45,7 @@ namespace ParapluieBulgare.Code
         protected Animation idleAnimation;
         protected Animation walkAnimation;
         protected Animation currentAnimation;
-        protected bool flip;
-
-        //dialog
-        protected string currentText;
-        protected bool dialogOpened = false;
+        public bool Flip { get; set; }
         
         public Character(Animation idle, Animation walk)
         {
@@ -56,18 +54,34 @@ namespace ParapluieBulgare.Code
             currentAnimation = idle;
         }
 
+        public void SetDialogTree(DialogTree dialog)
+        {
+            tree = dialog;
+        }
+
         public void StartInteraction(Character other)
         {
             interactingWith = other;
+            if (tree != null) box = tree.Next();
+            else StopInteraction();
         }
 
-        public virtual void Update()
+        public void StopInteraction(bool stopOther = true)
         {
+            if (stopOther) interactingWith.StopInteraction(false);
+            interactingWith = null;
+            leftConversation = true;
+        }
+
+        public virtual void Update(KeyboardState keyState, KeyboardState prevKeyState)
+        {
+            if (leftConversation) leftConversation = false;
+
             if (x != prevX)
             {
                 currentAnimation = walkAnimation;
-                if (x < prevX) flip = false;
-                else flip = true;
+                if (x < prevX) Flip = false;
+                else Flip = true;
             }
             else
             {
@@ -76,32 +90,30 @@ namespace ParapluieBulgare.Code
 
             currentAnimation.Update();
             prevX = x;
+
+            if (interactingWith != null && tree != null)
+            {
+                if (keyState.IsKeyDown(Keys.E) && !prevKeyState.IsKeyDown(Keys.E))
+                {
+                    box = tree.Next();
+                }
+                if (box.End)
+                {
+                    StopInteraction();
+                }
+            }
+            //if (interactingWith != null && tree == null)
+            //{
+            //    StopInteraction();
+            //}
         }
-        
-        public void Say(string text)
+
+        public virtual void Draw(SpriteBatch spriteBatch, int cameraX)
         {
-            dialogOpened = true;
-            currentText = text;
-        }
-
-        public void CloseDialog()
-        {
-            dialogOpened = false;
-            currentText = "...";
-        }
-
-        public void DrawDialog(SpriteBatch spriteBatch , int cameraX)
-        {
-            if (!dialogOpened)
-                return;
-
-            Rectangle boxRect = new Rectangle();
-            boxRect.Width = 4 * width;
-            boxRect.Height = (int)(0.261 * boxRect.Width);
-            boxRect.X = x - cameraX;
-            boxRect.Y = y - boxRect.Height;
-
-            DialogManager.DrawDialog(spriteBatch, boxRect, currentText);
+            if (interactingWith != null && tree != null)
+            {
+                box.Draw(spriteBatch, cameraX);
+            }
         }
     }
 }

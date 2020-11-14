@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace ParapluieBulgare.Code
 {
@@ -13,18 +14,18 @@ namespace ParapluieBulgare.Code
         public NPC(Animation idle, Animation walk, int x = 500) : base(idle, walk)
         {
             this.x = x;
-            this.y = 100;
+            y = 200;
         }
 
-        public override void Update()
+        public override void Update(KeyboardState keyState, KeyboardState prevKeyState)
         {
-            base.Update();
+            base.Update(keyState, prevKeyState);
         }
 
-        public void Draw(SpriteBatch spriteBatch, int cameraX)
+        public override void Draw(SpriteBatch spriteBatch, int cameraX)
         {
-            currentAnimation.Draw(spriteBatch, new Rectangle(x - cameraX, 50, width, width), flip);
-            DrawDialog(spriteBatch, cameraX);
+            currentAnimation.Draw(spriteBatch, new Rectangle(x - cameraX, y, width, width), Flip);
+            base.Draw(spriteBatch, cameraX);
         }
     }
 }

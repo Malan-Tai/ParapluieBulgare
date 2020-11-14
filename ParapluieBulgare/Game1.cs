@@ -74,9 +74,9 @@ namespace ParapluieBulgare
             base.Initialize();
 
             Character.font = font;
-            Character.dialogBoxTexture = textureDict["bulleDeTexte"];
-
-            DialogManager.InitContent(font, textureDict["bulleDeTexte"]);
+            DialogBox.font = font;
+            DialogBox.dialogBoxTexture = textureDict["bulleDeTexte"];
+            DialogBox.boxRect = new Rectangle(0, 0, 400, (int)(0.261 * 400));
 
             player = new Player(GetAnimation("MC_Walk_SpriteSheet"), GetAnimation("MC_Walk_SpriteSheet"), white);
             floors = new Floor[]
@@ -150,6 +150,13 @@ namespace ParapluieBulgare
                         new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 55),
                         new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 500)
                     };
+
+                    NPC npc = npcs[2];
+                    DialogBox b1 = new DialogBox("coucou", npc);
+                    DialogBox b2 = new DialogBox("wesh frr", player);
+                    DialogBox b3 = new DialogBox("vazy kass toa", npc);
+                    DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3 });
+                    npc.SetDialogTree(tree);
                     break;
                 case 1:
                     break;

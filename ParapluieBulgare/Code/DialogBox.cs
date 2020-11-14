@@ -1,49 +1,51 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Text;
-//using Microsoft.Xna.Framework;
-//using Microsoft.Xna.Framework.Graphics;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-//namespace ParapluieBulgare.Code
-//{
-//    class DialogBox
-//    {
-//        public static SpriteFont font;
-//        public static Texture2D dialogBoxTexture;
+namespace ParapluieBulgare.Code
+{
+    class DialogBox
+    {
+        public static SpriteFont font;
+        public static Texture2D dialogBoxTexture;
+        public static Rectangle boxRect;
 
-//        private Rectangle boxRect;
-//        private string text;
+        private string text;
+        public bool End { get; set; }
 
-//        public DialogBox(int x, int y, int w, int h, string t)
-//        {
-//            boxRect = new Rectangle(x, y, w, h);
-//            text = t;
-//        }
+        private Character talker;
 
-//        public void Increment(int h)
-//        {
-//            boxRect = new Rectangle(boxRect.X, boxRect.Y - h, boxRect.Width, boxRect.Height);
-//        }
+        public DialogBox(string t, Character sayer, bool end = false)
+        {
+            text = t;
+            talker = sayer;
+            End = end;
+        }
 
-//        public void Draw(SpriteBatch spriteBatch)
-//        {
-//            Rectangle textRect = new Rectangle();
-//            textRect.X = boxRect.X + (int)(boxRect.Width * 0.05);
-//            textRect.Y = boxRect.Y + (int)(boxRect.Height * 0.05);
-//            textRect.Width = (int)(boxRect.Width * 0.9);
-//            textRect.Height = (int)(boxRect.Height * 0.9);
+        public void Draw(SpriteBatch spriteBatch, int cameraX)
+        {
+            Rectangle textRect = new Rectangle();
+            Point coords = talker.Coords;
 
+            textRect.X = coords.X - cameraX + (int)(boxRect.Width * 0.05);
+            textRect.Y = coords.Y + (int)(boxRect.Height * 0.05);
+            textRect.Width = (int)(boxRect.Width * 0.9);
+            textRect.Height = (int)(boxRect.Height * 0.9);
 
-//            int lineHeight = (int)font.MeasureString(text).Y;
-//            List<string> lines = TextWrap.Wrap(text, textRect.Width, font);
+            int lineHeight = (int)font.MeasureString(text).Y;
+            List<string> lines = TextWrap.Wrap(text, textRect.Width, font);
 
-//            spriteBatch.Draw(dialogBoxTexture, boxRect, Color.White);
-//            for (int i = 0; i < lines.Count; i++)
-//            {
-//                spriteBatch.DrawString(font, lines[i],
-//                    new Vector2(textRect.X, textRect.Y + i * lineHeight),
-//                    Color.Black, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
-//            }
-//        }
-//    }
-//}
+            SpriteEffects effects = SpriteEffects.FlipHorizontally;
+            if (talker.Flip) effects = SpriteEffects.None;
+            spriteBatch.Draw(dialogBoxTexture, new Rectangle(coords.X - cameraX, coords.Y, boxRect.Width, boxRect.Height), null, Color.White, 0, new Vector2(), effects, 0);
+            for (int i = 0; i < lines.Count; i++)
+            {
+                spriteBatch.DrawString(font, lines[i],
+                    new Vector2(textRect.X, textRect.Y + i * lineHeight),
+                    Color.Black, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
+            }
+        }
+    }
+}
