@@ -36,7 +36,8 @@ namespace ParapluieBulgare
             "Directeur_idle",
             "Journaliste_IDLE",
             "rando_fem_idle",
-            "background"
+            "background",
+            "vigile_walk_3"
         };
         Dictionary<string, Texture2D> textureDict;
         Texture2D white;
@@ -47,6 +48,7 @@ namespace ParapluieBulgare
 
         Floor[] floors;
         Floor currentFloor;
+        List<Guard> guards;
 
         Timer timer;
 
@@ -54,6 +56,9 @@ namespace ParapluieBulgare
         ElevatorGUI elevatorGUI = null;
 
         SoundEffect soundBulgared;
+
+        public static int ThreatLevel = 0;
+        public static bool Win = false;
 
         public Game1()
         {
@@ -92,6 +97,11 @@ namespace ParapluieBulgare
                 new Floor(player, 3, textureDict["background"], GetFloorNPCs(3)),
                 new Floor(player, 4, textureDict["background"], GetFloorNPCs(4))
             };
+
+            guards = new List<Guard>
+            {
+                new Guard(GetAnimation("vigile_walk_3"), GetAnimation("vigile_walk_3"), 0, 700)
+            };
             currentFloor = floors[1];
 
             timer = new Timer(600);
@@ -124,6 +134,8 @@ namespace ParapluieBulgare
             {
                 case "MC_Walk_SpriteSheet":
                     return new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10);
+                case "vigile_walk_3":
+                    return new Animation(textureDict["vigile_walk_3"], 32, 32, 6, 10);
                 case "costard_fem_idle":
                     return new Animation(textureDict["costard_fem_idle"], 32, 32, 2, 60);
                 case "costard_idle":
@@ -158,6 +170,8 @@ namespace ParapluieBulgare
                         new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 200),
                         new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 500)
                     };
+
+                    npcs[0].Target = true;
 
                     NPC npc = npcs[2];
                     DialogBox b1 = new DialogBox("coucou", npc);
@@ -204,6 +218,11 @@ namespace ParapluieBulgare
             if (!elevator)
             {
                 string switchFloor = currentFloor.Update(state, prevKeyState);
+
+                foreach (Guard guard in guards)
+                {
+                    guard.Update(state, prevKeyState, player, currentFloor.Number);
+                }
 
                 if (switchFloor == "stairs up")
                 {
@@ -255,12 +274,19 @@ namespace ParapluieBulgare
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
 
-            currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
+            int cameraX = currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
+            foreach (Guard guard in guards)
+            {
+                guard.Draw(spriteBatch, cameraX, currentFloor.Number);
+            }
+
             if (elevator) elevatorGUI.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
 
             string time = timer.getTime();
             Vector2 position = new Vector2(400, 10);
             spriteBatch.DrawString(font, time, position, Color.Black);
+
+            if (Win) spriteBatch.DrawString(font, "YOU WIN", new Vector2(300, 150), Color.Red);
 
             spriteBatch.End();
 
