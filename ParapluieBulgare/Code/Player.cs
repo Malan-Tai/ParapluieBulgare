@@ -15,6 +15,14 @@ namespace ParapluieBulgare.Code
         private int width = 100;
         private Texture2D texture;
         
+        public Point Coords
+        {
+            get
+            {
+                return new Point(x, 50);
+            }
+        }
+
         public Player(Texture2D t)
         {
             x = 0;
@@ -26,7 +34,7 @@ namespace ParapluieBulgare.Code
             return x - (windowWidth - width) / 2;
         }
 
-        public void Update(KeyboardState keyState, KeyboardState prevKeyState)
+        public string Update(KeyboardState keyState, KeyboardState prevKeyState)
         {
             if (keyState.IsKeyDown(Keys.Right))
             {
@@ -36,6 +44,16 @@ namespace ParapluieBulgare.Code
             {
                 x -= 10;
             }
+
+            if (keyState.IsKeyDown(Keys.Down) && !prevKeyState.IsKeyDown(Keys.Down))
+            {
+                return "down";
+            }
+            if (keyState.IsKeyDown(Keys.Up) && !prevKeyState.IsKeyDown(Keys.Up))
+            {
+                return "up";
+            }
+            return "";
         }
 
         public void Draw(SpriteBatch spriteBatch, int cameraX)

@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+//using System.Windows.Forms;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ParapluieBulgare.Code;
@@ -10,6 +12,11 @@ namespace ParapluieBulgare
     /// </summary>
     public class Game1 : Game
     {
+        //public static System.Drawing.Rectangle res = Screen.PrimaryScreen.Bounds;
+
+        //public static int WIDTH = res.Width;
+        //public static int HEIGHT = res.Height;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -18,14 +25,21 @@ namespace ParapluieBulgare
         Texture2D white;
 
         Player player;
+
+        Floor[] floors;
         Floor currentFloor;
 
-        int cameraX;
+        bool elevator = false;
+        ElevatorGUI elevatorGUI = null;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            //graphics.PreferredBackBufferWidth = WIDTH;
+            //graphics.PreferredBackBufferHeight = HEIGHT;
+            //graphics.IsFullScreen = true;
         }
 
         /// <summary>
@@ -36,12 +50,20 @@ namespace ParapluieBulgare
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
 
             player = new Player(white);
-            currentFloor = new Floor(0, white);
+
+            floors = new Floor[]
+            {
+                new Floor(player, 0, white),
+                new Floor(player, 1, white),
+                new Floor(player, 2, white),
+                new Floor(player, 3, white),
+                new Floor(player, 4, white),
+                new Floor(player, 5, white)
+            };
+            currentFloor = floors[0];
         }
 
         /// <summary>
@@ -50,10 +72,8 @@ namespace ParapluieBulgare
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
             white = Content.Load<Texture2D>("white");
         }
 
@@ -78,10 +98,45 @@ namespace ParapluieBulgare
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-            player.Update(state, prevKeyState);
-            cameraX = player.CameraX(graphics.PreferredBackBufferWidth);
-            currentFloor.Update();
+            if (!elevator)
+            {
+                string switchFloor = currentFloor.Update(state, prevKeyState);
+
+                if (switchFloor == "stairs up")
+                {
+                    int n = currentFloor.Number;
+                    if (n <= floors.Length - 2)
+                    {
+                        currentFloor = floors[n + 1];
+                    }
+                    Console.Out.WriteLine("floor up : " + (n + 1));
+                }
+                else if (switchFloor == "stairs down")
+                {
+                    int n = currentFloor.Number;
+                    if (n >= 1)
+                    {
+                        currentFloor = floors[n - 1];
+                    }
+                    Console.Out.WriteLine("floor down : " + (n - 1));
+                }
+                else if (switchFloor == "elevator")
+                {
+                    elevator = true;
+                    elevatorGUI = new ElevatorGUI(floors.Length, currentFloor.Number, white);
+                }
+            }
+            else
+            {
+                int switchFloor = elevatorGUI.Update(state, prevKeyState);
+                if (switchFloor != -1)
+                {
+                    currentFloor = floors[switchFloor];
+                    elevator = false;
+                    elevatorGUI = null;
+                    Console.Out.WriteLine("elevator : " + switchFloor);
+                }
+            }
 
             prevKeyState = state;
             base.Update(gameTime);
@@ -95,11 +150,10 @@ namespace ParapluieBulgare
         {
             GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
             spriteBatch.Begin();
 
-            currentFloor.Draw(spriteBatch, cameraX);
-            player.Draw(spriteBatch, cameraX);
+            currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
+            if (elevator) elevatorGUI.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
 
             spriteBatch.End();
 
