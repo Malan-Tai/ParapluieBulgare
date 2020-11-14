@@ -16,7 +16,7 @@ namespace ParapluieBulgare.Code
         public Player(Animation idle, Animation walk, Texture2D t) : base(idle, walk)
         {
             x = 0;
-            y = 100;
+            y = 200;
 
             journal = new JournalGUI(t);
             journal.AddHint(new Hint("La cible est un chercheur."));
@@ -29,55 +29,60 @@ namespace ParapluieBulgare.Code
 
         public string Update(KeyboardState keyState, KeyboardState prevKeyState, List<NPC> npcs)
         {
-            if (keyState.IsKeyDown(Keys.Right))
+            string returned = "";
+            if (interactingWith == null && !leftConversation)
             {
-                x += 10;
-            }
-            if (keyState.IsKeyDown(Keys.Left))
-            {
-                x -= 10;
+                if (keyState.IsKeyDown(Keys.Right))
+                {
+                    x += 10;
+                }
+                if (keyState.IsKeyDown(Keys.Left))
+                {
+                    x -= 10;
+                }
+
+                if (keyState.IsKeyDown(Keys.E) && !prevKeyState.IsKeyDown(Keys.E))
+                {
+                    Interaction(npcs);
+                }
+                if (keyState.IsKeyDown(Keys.J) && !prevKeyState.IsKeyDown(Keys.J))
+                {
+                    journal.Toggle();
+                }
+
+                if (keyState.IsKeyDown(Keys.Down) && !prevKeyState.IsKeyDown(Keys.Down))
+                {
+                    returned = "down";
+                }
+                if (keyState.IsKeyDown(Keys.Up) && !prevKeyState.IsKeyDown(Keys.Up))
+                {
+                    returned = "up";
+                }
             }
 
-            if (keyState.IsKeyDown(Keys.E) && !prevKeyState.IsKeyDown(Keys.E))
-            {
-                Interaction(npcs);
-            }
-            if (keyState.IsKeyDown(Keys.J) && !prevKeyState.IsKeyDown(Keys.J))
-            {
-                journal.Toggle();
-            }
-
-            base.Update();
-
-            if (keyState.IsKeyDown(Keys.Down) && !prevKeyState.IsKeyDown(Keys.Down))
-            {
-                return "down";
-            }
-            if (keyState.IsKeyDown(Keys.Up) && !prevKeyState.IsKeyDown(Keys.Up))
-            {
-                return "up";
-            }
-            return "";
+            base.Update(keyState, prevKeyState);
+            return returned;
         }
 
         public void Interaction(List<NPC> npcs)
         {
+            Console.Out.WriteLine("trying interaction");
             foreach(NPC npc in npcs)
             {
                 if (BoxCollider.Intersects(npc.BoxCollider))
                 {
+                    Console.Out.WriteLine("found");
                     interactingWith = npc;
                     npc.StartInteraction(this);
-
                     break;
                 }
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, int cameraX)
+        public override void Draw(SpriteBatch spriteBatch, int cameraX)
         {
-            currentAnimation.Draw(spriteBatch, new Rectangle(x - cameraX, y, width, width), flip);
-            DrawDialog(spriteBatch, cameraX);
+            currentAnimation.Draw(spriteBatch, new Rectangle(x - cameraX, y, width, width), Flip);
+            base.Draw(spriteBatch, cameraX);
             journal.Draw(spriteBatch, font);
         }
     }

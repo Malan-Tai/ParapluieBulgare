@@ -40,7 +40,7 @@ namespace ParapluieBulgare.Code
         {
             foreach (NPC npc in npcs)
             {
-                npc.Update();
+                npc.Update(keyState, prevKeyState);
             }
             string key = player.Update(keyState, prevKeyState, npcs);
 
