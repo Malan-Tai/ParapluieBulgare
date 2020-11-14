@@ -14,6 +14,7 @@ namespace ParapluieBulgare.Code
         public NPC(Texture2D t)
         {
             x = 500;
+            y = 50;
             texture = t;
         }
 
@@ -24,7 +25,8 @@ namespace ParapluieBulgare.Code
 
         public void Draw(SpriteBatch spriteBatch, int cameraX)
         {
-            spriteBatch.Draw(texture, new Rectangle(x - cameraX, 50, width, width), Color.Black);
+            spriteBatch.Draw(texture, new Rectangle(x - cameraX, y, width, width), Color.Black);
+            DrawDialog(spriteBatch, cameraX);
         }
     }
 }

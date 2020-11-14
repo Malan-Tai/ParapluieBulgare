@@ -11,13 +11,6 @@ namespace ParapluieBulgare.Code
 {
     class Player : Character
     {
-        public Point Coords
-        {
-            get
-            {
-                return new Point(x, 50);
-            }
-        }
 
         public Player(Texture2D t)
         {
@@ -26,13 +19,12 @@ namespace ParapluieBulgare.Code
             texture = t;
         }
 
-
         public int CameraX(int windowWidth)
         {
             return x - (windowWidth - width) / 2;
         }
 
-        public string Update(KeyboardState keyState, KeyboardState prevKeyState)
+        public string Update(KeyboardState keyState, KeyboardState prevKeyState, List<NPC> npcs)
         {
             if (keyState.IsKeyDown(Keys.Right))
             {
@@ -51,7 +43,26 @@ namespace ParapluieBulgare.Code
             {
                 return "up";
             }
+            if (keyState.IsKeyDown(Keys.Space) &&  !prevKeyState.IsKeyDown(Keys.Space))
+            {
+                Console.WriteLine("interaction !\n");
+                Interaction(npcs);
+            }
             return "";
+        }
+
+        public void Interaction(List<NPC> npcs)
+        {
+            foreach(NPC npc in npcs)
+            {
+                if (BoxCollider.Intersects(npc.BoxCollider))
+                {
+                    //Console.WriteLine("un npc dis bonjour !\n");
+                    npc.say("Bonjour ! Je suis un NPC qui n'a pas grand chose a dire ...");
+                    say("hello");
+                    break;
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch, int cameraX)

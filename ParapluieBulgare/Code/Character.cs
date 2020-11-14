@@ -14,6 +14,21 @@ namespace ParapluieBulgare.Code
         //position
         protected int x;
         protected int y;
+        public Point Coords
+        {
+            get
+            {
+                return new Point(x, 50);
+            }
+        }
+        public Rectangle BoxCollider
+        {
+            get
+            {
+                return new Rectangle(Coords.X, Coords.Y, width, width);
+            }
+        }
+     
 
         //size
         protected int width = 100;
@@ -22,19 +37,9 @@ namespace ParapluieBulgare.Code
         protected Texture2D texture;
 
         //dialog
-        protected SpriteFont font;
-        protected Texture2D dialogBoxTexture;
         protected string currentText;
         protected bool dialogOpened = false;
         
-        public void InitDialogContent(SpriteFont font, Texture2D dialogBoxTex)
-        {
-            this.dialogBoxTexture = dialogBoxTex;
-            this.font = font;
-            this.currentText = "Bonjour, je m appelle Hugo ! Et j aime raconter ma life dans des dialog box ! Je peux faire encore des lignes tu sais ^^";
-
-        }
-
 
         public void say(string text)
         {
@@ -58,26 +63,8 @@ namespace ParapluieBulgare.Code
             boxRect.Height = (int)(0.261 * boxRect.Width);
             boxRect.X = x - cameraX;
             boxRect.Y = y - boxRect.Height;
-           
 
-            Rectangle textRect = new Rectangle();
-            textRect.X = boxRect.X + (int)(boxRect.Width * 0.05);
-            textRect.Y = boxRect.Y + (int)(boxRect.Height * 0.05);
-            textRect.Width = (int)(boxRect.Width * 0.9);
-            boxRect.Height = (int)(boxRect.Height * 0.9);
-
-            
-            int lineHeight = (int) font.MeasureString(currentText).Y;
-            List<string> lines = TextWrap.Wrap(currentText, textRect.Width, font);
-            
-            spriteBatch.Draw(dialogBoxTexture, boxRect, Color.White);
-            for (int i = 0; i < lines.Count(); i++)
-            {
-                Console.WriteLine(lines[i]);
-                spriteBatch.DrawString(font, lines[i],
-                    new Vector2(textRect.X, textRect.Y + i*lineHeight),
-                    Color.Black, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
-            }
+            DialogManager.DrawDialog(spriteBatch, boxRect, currentText);
         }
     }
 }

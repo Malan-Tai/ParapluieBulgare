@@ -30,6 +30,7 @@ namespace ParapluieBulgare.Code
             {
                 new NPC(t)
             };
+          
 
             stairs = new List<Rectangle>
             {
@@ -45,7 +46,7 @@ namespace ParapluieBulgare.Code
             {
                 npc.Update();
             }
-            string key = player.Update(keyState, prevKeyState);
+            string key = player.Update(keyState, prevKeyState, npcs);
 
             if (key != "")
             {
