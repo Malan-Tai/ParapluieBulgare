@@ -13,9 +13,9 @@ namespace ParapluieBulgare.Code
 
         private Texture2D texture;
 
-        public JournalGUI(Texture2D t)
+        public JournalGUI(Texture2D texture)
         {
-            texture = t;
+            this.texture = texture;
             hints = new List<Hint>();
         }
 

@@ -12,7 +12,7 @@ namespace ParapluieBulgare.Code
     {
         private int currentFloor;
 
-        public Guard(Animation idle, Animation walk, int floor, int x = 500) : base(idle, walk, x)
+        public Guard(Animation idle, Animation walk, Texture2D face, int floor, int x = 500) : base(idle, walk, face, x)
         {
             currentFloor = floor;
         }

@@ -13,10 +13,9 @@ namespace ParapluieBulgare.Code
     class NPC : Character
     {
         public static SoundEffect soundBulgared;
-
         public bool Target { get; set; } = false;
 
-        public NPC(Animation idle, Animation walk, int x = 500) : base(idle, walk)
+        public NPC(Animation idle, Animation walk, Texture2D face, int x = 500) : base(idle, walk, face)
         {
             this.x = x;
             y = 200;
@@ -26,6 +25,7 @@ namespace ParapluieBulgare.Code
             Console.WriteLine("Argh! Je suis mort !");
             soundBulgared.CreateInstance().Play();
             npcs.Remove(this);
+
             if (!Target)
             {
                 Game1.ThreatLevel++;

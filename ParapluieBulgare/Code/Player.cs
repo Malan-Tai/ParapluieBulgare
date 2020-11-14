@@ -13,12 +13,12 @@ namespace ParapluieBulgare.Code
     {
         JournalGUI journal;
 
-        public Player(Animation idle, Animation walk, Texture2D t) : base(idle, walk)
+        public Player(Animation idle, Animation walk, Texture2D face, Texture2D texture) : base(idle, walk, face)
         {
             x = 0;
             y = 200;
 
-            journal = new JournalGUI(t);
+            journal = new JournalGUI(texture);
             journal.AddHint(new Hint("La cible est un chercheur."));
         }
 

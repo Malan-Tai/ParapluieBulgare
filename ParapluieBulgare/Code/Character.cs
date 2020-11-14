@@ -12,6 +12,7 @@ namespace ParapluieBulgare.Code
     class Character
     {
         public static SpriteFont font;
+        public static Texture2D faceSprite;
 
         private DialogTree tree = null;
         private DialogBox box = null;
@@ -23,6 +24,7 @@ namespace ParapluieBulgare.Code
         private int prevX;
         protected int x;
         protected int y;
+
         public Point Coords
         {
             get
@@ -47,8 +49,9 @@ namespace ParapluieBulgare.Code
         protected Animation currentAnimation;
         public bool Flip { get; set; }
         
-        public Character(Animation idle, Animation walk)
+        public Character(Animation idle, Animation walk, Texture2D face)
         {
+            faceSprite = face;
             idleAnimation = idle;
             walkAnimation = walk;
             currentAnimation = idle;

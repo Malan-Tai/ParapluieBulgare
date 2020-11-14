@@ -40,6 +40,15 @@ namespace ParapluieBulgare
             "vigile_walk_3"
         };
         Dictionary<string, Texture2D> textureDict;
+
+        List<string> allfaces = new List<string>
+        {
+            "face01",
+            "face02",
+            "faceVigile"
+        };
+        Dictionary<string, Texture2D> facebook;
+
         Texture2D white;
 
         SpriteFont font;
@@ -63,6 +72,7 @@ namespace ParapluieBulgare
         public Game1()
         {
             textureDict = new Dictionary<string, Texture2D>();
+            facebook = new Dictionary<string, Texture2D>();
 
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -90,7 +100,7 @@ namespace ParapluieBulgare
             DialogBox.dialogBoxTexture = textureDict["bulleDeTexte"];
             DialogBox.boxRect = new Rectangle(0, 0, 400, (int)(0.261 * 400));
 
-            player = new Player(GetAnimation("MC_Walk_SpriteSheet"), GetAnimation("MC_Walk_SpriteSheet"), white);
+            player = new Player(GetAnimation("MC_Walk_SpriteSheet"), GetAnimation("MC_Walk_SpriteSheet"), facebook["face01"], white);
             floors = new Floor[]
             {
                 new Floor(player, -1, textureDict["background"], GetFloorNPCs(-1)),
@@ -103,7 +113,7 @@ namespace ParapluieBulgare
 
             guards = new List<Guard>
             {
-                new Guard(GetAnimation("vigile_walk_3"), GetAnimation("vigile_walk_3"), 0, 700)
+                new Guard(GetAnimation("vigile_walk_3"), GetAnimation("vigile_walk_3"), facebook["faceVigile"], 0, 700)
             };
             currentFloor = floors[1];
 
@@ -126,6 +136,11 @@ namespace ParapluieBulgare
             {
                 textureDict.Add(text, Content.Load<Texture2D>(text));
             }
+            foreach (string text in allfaces)
+            {
+                facebook.Add(text, Content.Load<Texture2D>(text));
+            }
+
             white = textureDict["white"];
 
             soundBulgared = Content.Load<SoundEffect>("Bulgared");
@@ -169,9 +184,9 @@ namespace ParapluieBulgare
                 case 0:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 80),
-                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 200),
-                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 500)
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), facebook["face02"], 80),
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), facebook["face02"], 200),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 500)
                     };
 
                     npcs[0].Target = true;
@@ -286,8 +301,7 @@ namespace ParapluieBulgare
             if (elevator) elevatorGUI.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
 
             string time = timer.getTime();
-            Vector2 position = new Vector2(400, 10);
-            spriteBatch.DrawString(font, time, position, Color.Black);
+            spriteBatch.DrawString(font, time, new Vector2(400, 10), Color.Black);
 
             if (Win) spriteBatch.DrawString(font, "YOU WIN", new Vector2(300, 150), Color.Red);
 
