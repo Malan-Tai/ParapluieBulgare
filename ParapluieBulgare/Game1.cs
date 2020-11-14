@@ -41,6 +41,7 @@ namespace ParapluieBulgare
             base.Initialize();
 
             player = new Player(white);
+            currentFloor = new Floor(0, white);
         }
 
         /// <summary>
@@ -80,6 +81,7 @@ namespace ParapluieBulgare
             // TODO: Add your update logic here
             player.Update(state, prevKeyState);
             cameraX = player.CameraX(graphics.PreferredBackBufferWidth);
+            currentFloor.Update();
 
             prevKeyState = state;
             base.Update(gameTime);
@@ -91,11 +93,12 @@ namespace ParapluieBulgare
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
+            currentFloor.Draw(spriteBatch, cameraX);
             player.Draw(spriteBatch, cameraX);
 
             spriteBatch.End();

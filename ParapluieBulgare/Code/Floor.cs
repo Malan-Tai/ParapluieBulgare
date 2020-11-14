@@ -21,7 +21,10 @@ namespace ParapluieBulgare.Code
             texture = t;
             number = n;
 
-            npcs = new List<NPC>();
+            npcs = new List<NPC>
+            {
+                new NPC(t)
+            };
         }
 
         public void Update()
