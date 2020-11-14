@@ -11,6 +11,8 @@ namespace ParapluieBulgare.Code
 {
     class Player : Character
     {
+        JournalGUI journal;
+
         public Point Coords
         {
             get
@@ -24,6 +26,9 @@ namespace ParapluieBulgare.Code
             x = 0;
             y = 100;
             texture = t;
+
+            journal = new JournalGUI(t);
+            journal.AddHint(new Hint("La cible est un chercheur."));
         }
 
 
@@ -43,6 +48,11 @@ namespace ParapluieBulgare.Code
                 x -= 10;
             }
 
+            if (keyState.IsKeyDown(Keys.J) && !prevKeyState.IsKeyDown(Keys.J))
+            {
+                journal.Toggle();
+            }
+
             if (keyState.IsKeyDown(Keys.Down) && !prevKeyState.IsKeyDown(Keys.Down))
             {
                 return "down";
@@ -58,6 +68,7 @@ namespace ParapluieBulgare.Code
         {
             spriteBatch.Draw(texture, new Rectangle(x - cameraX, y, width, width), Color.White);
             DrawDialog(spriteBatch, cameraX);
+            journal.Draw(spriteBatch, font);
         }
     }
 }
