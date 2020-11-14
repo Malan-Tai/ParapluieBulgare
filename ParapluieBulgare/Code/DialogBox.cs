@@ -29,12 +29,12 @@ namespace ParapluieBulgare.Code
             Rectangle textRect = new Rectangle();
             Point coords = talker.Coords;
 
-            textRect.X = coords.X - cameraX + (int)(boxRect.Width * 0.05);
-            textRect.Y = coords.Y + (int)(boxRect.Height * 0.05);
-            textRect.Width = (int)(boxRect.Width * 0.9);
-            textRect.Height = (int)(boxRect.Height * 0.9);
+            textRect.X = coords.X - cameraX + (int)(boxRect.Width * 0.1);
+            textRect.Y = coords.Y + (int)(boxRect.Height * 0.1);
+            textRect.Width = (int)(boxRect.Width * 0.8);
+            textRect.Height = (int)(boxRect.Height * 0.8);
 
-            int lineHeight = (int)font.MeasureString(text).Y;
+            int lineHeight = (int)font.MeasureString("AJGZTYFRuidfuyzaegfuy78941!.").Y;
             List<string> lines = TextWrap.Wrap(text, textRect.Width, font);
 
             SpriteEffects effects = SpriteEffects.FlipHorizontally;

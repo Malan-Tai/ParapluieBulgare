@@ -36,7 +36,8 @@ namespace ParapluieBulgare
             "Directeur_idle",
             "Journaliste_IDLE",
             "rando_fem_idle",
-            "background"
+            "background",
+            "DRH1"
         };
         Dictionary<string, Texture2D> textureDict;
         Texture2D white;
@@ -80,7 +81,7 @@ namespace ParapluieBulgare
             Character.font = font;
             DialogBox.font = font;
             DialogBox.dialogBoxTexture = textureDict["bulleDeTexte"];
-            DialogBox.boxRect = new Rectangle(0, 0, 400, (int)(0.261 * 400));
+            DialogBox.boxRect = new Rectangle(0, 0, 400, (int)(/*0.261*/0.4 * 400));
 
             player = new Player(GetAnimation("MC_Walk_SpriteSheet"), GetAnimation("MC_Walk_SpriteSheet"), white);
             floors = new Floor[]
@@ -140,6 +141,8 @@ namespace ParapluieBulgare
                     return new Animation(textureDict["Journaliste_IDLE"], 32, 32, 2, 60);
                 case "rando_fem_idle":
                     return new Animation(textureDict["rando_fem_idle"], 32, 32, 2, 60);
+                case "DRH1":
+                    return new Animation(textureDict["DRH1"], 32, 32, 2, 60);
                 default:
                     return null;
             }
@@ -154,9 +157,12 @@ namespace ParapluieBulgare
                 case 0:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 80),
+                        new NPC(GetAnimation("Directeur_idle"), GetAnimation("Journaliste_IDLE"), 80),
                         new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 200),
-                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 500)
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 500),
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Directeur_idle"), 1500),
+                        new NPC(GetAnimation("Directeur_idle"), GetAnimation("Directeur_idle"), 3500),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 4500)
                     };
 
                     NPC npc = npcs[2];
@@ -167,8 +173,51 @@ namespace ParapluieBulgare
                     npc.SetDialogTree(tree);
                     break;
                 case 1:
+                    npcs = new List<NPC>
+                    {
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 2500),
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 1500),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 1600),
+                        new NPC(GetAnimation("costard_fem_idle"), GetAnimation("costard_fem_idle"), 700),
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 3500),
+                        new NPC(GetAnimation("costard_fem_idle"), GetAnimation("costard_fem_idle"), 3400),
+                    };
+                    break;
+
+                case 4:
+                    npcs = new List<NPC>
+                    {
+                        new NPC(GetAnimation("DRH1"), GetAnimation("DRH1"), 500),
+                        new NPC(GetAnimation("costard_fem_idle"), GetAnimation("costard_fem_idle"), 300),
+                    };
+
+                    DialogBox c1 = new DialogBox("... nan j'avais pas mon mot a dire ! Ca venait carrement de la-haut", npcs[0]);
+                    DialogBox c2 = new DialogBox("Mais c'est n'importe quoi... Une 'happiness manager'. Ce qu'on n'invente pas aujourd'hui franchement...", npcs[1]);
+                    DialogBox c3 = new DialogBox("Et comme par hasard, c'est la p'tite Alicia qui est 'promue'. Moi, je te dis que ca passe sous le bu...", npcs[0]);
+                    DialogBox c4 = new DialogBox("Eh oh t'y vas un peu fort la, en plus d'etre carrement sexiste ! Va falloir changer de mentalite Arnaud !", npcs[1]);
+                    DialogBox c5 = new DialogBox("Eh puis tout compte fait, c'est peut-etre pas si mal, ca reduira peut-etre notre turnover", npcs[1]);
+                    DialogBox c6 = new DialogBox("Mouais pas faux... Enfin moi, j'vois deja Gabrielle faire des yeux comme ca ", npcs[0]);
+                    DialogBox c7 = new DialogBox("lorsqu'elle verra le budget de ces activites '100 % happy avec Marpha Biotech'", npcs[0]);
+                    DialogBox c8 = new DialogBox("C'est vrai qu'au 3eme, y a de la demande. Les comptables vont pleurer.", npcs[1]);
+
+
+                    DialogTree tree2 = new DialogTree(new List<DialogBox> { c1, c2, c3, c4, c5, c6, c7, c8 });
+                    npcs[0].SetDialogTree(tree2);
                     break;
                 default:
+                    npcs = new List<NPC>
+                    {
+                    new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 2500),
+                    new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 1500),
+                    new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 1600),
+                    new NPC(GetAnimation("costard_fem_idle"), GetAnimation("costard_fem_idle"), 700),
+                    new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), 3500),
+                    new NPC(GetAnimation("costard_fem_idle"), GetAnimation("costard_fem_idle"), 3400),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 500),
+                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Directeur_idle"), 5000),
+                        new NPC(GetAnimation("Directeur_idle"), GetAnimation("Directeur_idle"), 3500),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), 4500)
+                    };
                     break;
             }
 
