@@ -29,6 +29,7 @@ namespace ParapluieBulgare
             "bulleDeTexte",
             "background",
             "ascenseur",
+            "carnet",
 
             "player_walk",
             "costard_idle",
@@ -119,7 +120,7 @@ namespace ParapluieBulgare
             DialogBox.dialogBoxTexture = textureDict["bulleDeTexte"];
             DialogBox.boxRect = new Rectangle(0, 0, WIDTH - (HEIGHT / 3), HEIGHT / 3 + 30); //(int)(0.261 * (WIDTH - (HEIGHT / 3))));
 
-            player = new Player(GetAnimation("player_walk"), GetAnimation("player_walk"), facebook["face01"], white);
+            player = new Player(GetAnimation("player_walk"), GetAnimation("player_walk"), facebook["face01"], textureDict["carnet"]);
             floors = new Floor[]
             {
                 new Floor(player, -1, textureDict["background"], GetFloorNPCs(-1), GetFloorFurnitures(-1)),

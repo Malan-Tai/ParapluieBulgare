@@ -44,15 +44,34 @@ namespace ParapluieBulgare.Code
         {
             if (open)
             {
-                spriteBatch.Draw(texture, new Rectangle(20, 20, 700, 300), Color.BlanchedAlmond);
+                //int ratio = Game1.HEIGHT / texture.Height;
+                int height = Game1.HEIGHT - 20; //texture.Height * ratio;
+                int width = Game1.WIDTH - 20; //texture.Width * ratio;
+                int x = (Game1.WIDTH - width) / 2;
+                int y = 10;
+
+                spriteBatch.Draw(texture, new Rectangle(x, y, width, height), Color.White);
+
+                Rectangle textRect1 = new Rectangle(50, 80, (width - 100) / 2, height - 110);
+                Rectangle textRect2 = new Rectangle(width / 2 + 70, 80, (width - 100) / 2, height - 110);
+                Rectangle curRect = textRect1;
 
                 int h = (int)font.MeasureString("A").Y;
-                int y = h;
+                y = curRect.Y;
 
                 foreach (Hint hint in hints)
                 {
-                    spriteBatch.DrawString(font, hint.Text, new Vector2(40, y), Color.Black);
-                    y += h;
+                    List<string> lines = TextWrap.Wrap(hint.Text, curRect.Width, font);
+                    foreach (string line in lines)
+                    {
+                        spriteBatch.DrawString(font, line, new Vector2(curRect.X, y), Color.Black);
+                        y += h;
+                        if (y > curRect.Y + curRect.Height)
+                        {
+                            curRect = textRect2;
+                            y = curRect.Y;
+                        }
+                    }
                 }
             }
         }

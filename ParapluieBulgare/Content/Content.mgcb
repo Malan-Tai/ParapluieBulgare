@@ -55,6 +55,18 @@
 /processorParam:TextureFormat=Color
 /build:bulleDeTexte.png
 
+#begin carnet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:carnet.png
+
 #begin costard_fem_idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -188,12 +200,6 @@
 /processorParam:Quality=Best
 /build:Intro.wav
 
-#begin Intro.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Intro.wav
-
 #begin journaliste_idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -217,18 +223,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:player_walk.png
-
-#begin TitleScreen.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:TitleScreen.png
 
 #begin TitleScreen.png
 /importer:TextureImporter
