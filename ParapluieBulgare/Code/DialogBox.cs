@@ -33,6 +33,9 @@ namespace ParapluieBulgare.Code
             if (talker.Flip) effects = SpriteEffects.None;
             spriteBatch.Draw(dialogBoxTexture, new Rectangle(offset, 2 * Game1.HEIGHT / 3 - 30, boxRect.Width, boxRect.Height), null, Color.White, 0, new Vector2(), effects, 0);
 
+            if (talker.Flip) talker.DrawFace(spriteBatch, 0, Game1.HEIGHT * 2 / 3);
+            else talker.DrawFace(spriteBatch, Game1.WIDTH - Game1.HEIGHT / 3, Game1.HEIGHT * 2 / 3);
+
             Rectangle textRect = new Rectangle(offset + 50, 2 * Game1.HEIGHT / 3 + 20, boxRect.Width - 100, boxRect.Height - 100);
 
             int lineHeight = (int)font.MeasureString(text).Y;

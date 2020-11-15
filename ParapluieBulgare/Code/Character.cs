@@ -12,7 +12,7 @@ namespace ParapluieBulgare.Code
     class Character
     {
         public static SpriteFont font;
-        public static Texture2D faceSprite;
+        private Texture2D faceSprite;
 
         private DialogTree tree = null;
         private DialogBox box = null;
@@ -116,6 +116,11 @@ namespace ParapluieBulgare.Code
             {
                 box.Draw(spriteBatch, cameraX);
             }
+        }
+
+        public void DrawFace(SpriteBatch spriteBatch, int facex, int facey)
+        {
+            spriteBatch.Draw(faceSprite, new Rectangle(facex, facey, Game1.HEIGHT / 3, Game1.HEIGHT / 3), Color.White);
         }
     }
 }
