@@ -47,7 +47,7 @@ namespace ParapluieBulgare.Code
         protected Animation idleAnimation;
         protected Animation walkAnimation;
         protected Animation currentAnimation;
-        public bool Flip { get; set; }
+        public bool Flip { get; set; } = false;
         
         public Character(Animation idle, Animation walk, Texture2D face)
         {
@@ -87,11 +87,11 @@ namespace ParapluieBulgare.Code
         {
             if (leftConversation) leftConversation = false;
 
-            if (x != prevX)
+            if (x != prevX && prevX != 0)
             {
                 currentAnimation = walkAnimation;
-                if (x <= prevX) Flip = false;
-                else Flip = true;
+                if (x < prevX) Flip = false;
+                else if (x > prevX) Flip = true;
             }
             else
             {
