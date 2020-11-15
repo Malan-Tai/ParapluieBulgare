@@ -9,31 +9,65 @@ namespace ParapluieBulgare.Code
     {
         public static List<string> Wrap(string text, int width, SpriteFont font)
         {
-            List<string> list = new List<string>();
-            if (text == null) return list;
+            int MaxCharsPerLine = 95;
+            int MaxLines = 3;
+            var pages = new List<string>();
 
-            string[] words = text.Split(new char[] { ' ' });
+            var capacity = MaxCharsPerLine * MaxLines > text.Length ? text.Length : MaxCharsPerLine * MaxLines;
 
-            int curWidth = 0;
-            string curText = "";
+            var result = new StringBuilder(capacity);
+            var resultLines = 0;
 
-            foreach (string word in words)
+            var currentWord = new StringBuilder();
+            var currentLine = new StringBuilder();
+
+            for (var i = 0; i < text.Length; i++)
             {
-                curWidth += (int)font.MeasureString(word + " ").X;
-                if (curWidth > width)
+                var currentChar = text[i];
+                var isNewLine = text[i] == '\n';
+                var isLastChar = i == text.Length - 1;
+
+                currentWord.Append(currentChar);
+
+                if (char.IsWhiteSpace(currentChar) || isLastChar)
                 {
-                    list.Add(curText);
-                    curText = word;
-                    curWidth = (int)font.MeasureString(word + " ").X;
-                }
-                else
-                {
-                    curText += word + " ";
+                    var potentialLength = currentLine.Length + currentWord.Length;
+
+                    if (potentialLength > MaxCharsPerLine)
+                    {
+                        result.AppendLine(currentLine.ToString());
+
+                        currentLine.Clear();
+
+                        resultLines++;
+                    }
+
+                    currentLine.Append(currentWord);
+
+                    currentWord.Clear();
+
+                    if (isLastChar || isNewLine)
+                    {
+                        result.AppendLine(currentLine.ToString());
+                    }
+
+                    if (resultLines > MaxLines || isLastChar || isNewLine)
+                    {
+                        pages.Add(result.ToString());
+
+                        result.Clear();
+
+                        resultLines = 0;
+
+                        if (isNewLine)
+                        {
+                            currentLine.Clear();
+                        }
+                    }
                 }
             }
-            list.Add(curText);
 
-            return list;
+            return pages;
         }
     }
 }
