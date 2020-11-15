@@ -250,6 +250,81 @@ namespace ParapluieBulgare
             white = textureDict["white"];
         }
 
+        public Texture2D GetTronche(string spritesheet)
+        {
+            switch (spritesheet)
+            {
+                case "cadre1":
+                    return textureDict["persos/Cadres/Cadre1Tronche"];
+                case "cadre2":
+                    return textureDict["persos/Cadres/Cadre2Tronche"];
+                case "cadre3":
+                    return textureDict["persos/Cadres/Cadre3Tronche"];
+                case "cadre4":
+                    return textureDict["persos/Cadres/Cadre4Tronche"];
+                case "secretaire":
+                    return textureDict["persos/Cadres/SecretaireTronche"];
+
+                case "chercheur1":
+                    return textureDict["persos/Chercheuses/Chercheur1Tronche"];
+                case "chercheuse1":
+                    return textureDict["persos/Chercheuses/Chercheuse1Tronche"];
+                case "chercheur2":
+                    return textureDict["persos/Chercheuses/Chercheur2Tronche"];
+                case "chercheuse2":
+                    return textureDict["persos/Chercheuses/Chercheuse2Tronche"];
+
+                case "cuistot1":
+                    return textureDict["persos/Cuisinier/Cuistot1Tronche"];
+                case "cuistot2":
+                    return textureDict["persos/Cuisinier/Cuistot2Tronche"];
+
+                case "directeur1":
+                    return textureDict["persos/Direction/Directeur1Tronche"];
+                case "directeur2":
+                    return textureDict["persos/Direction/Directeur2Tronche"];
+                case "directeur4":
+                    return textureDict["persos/Direction/Directeur4Tronche"];
+
+                case "employe1":
+                    return textureDict["persos/Employees/Employe1Tronche"];
+                case "employe2":
+                    return textureDict["persos/Employees/Employe2Tronche"];
+                case "employe3":
+                    return textureDict["persos/Employees/Employe3Tronche"];
+                case "employe4":
+                    return textureDict["persos/Employees/Employe4Tronche"];
+                case "employe5":
+                    return textureDict["persos/Employees/Employe5Tronche"];
+                case "employe6":
+                    return textureDict["persos/Employees/Employe6Tronche"];
+                case "employe7":
+                    return textureDict["persos/Employees/Employe7Tronche"];
+                case "employe8":
+                    return textureDict["persos/Employees/Employe8Tronche"];
+
+                case "joueur":
+                    return textureDict["persos/Joueur/JoueurTronche"];
+
+                case "journaliste":
+                    return textureDict["persos/Journalistes/JournalisteTronche"];
+
+                case "techos1":
+                    return textureDict["persos/Techniciens/Techos1Tronche"];
+                case "techos2":
+                    return textureDict["persos/Techniciens/Techos2Tronche"];
+                case "techos3":
+                    return textureDict["persos/Techniciens/Techos3Tronche"];
+                case "techos4":
+                    return textureDict["persos/Techniciens/Techos4Tronche"];
+
+                case "vigile":
+                    return textureDict["persos/Vigiles/VigileTronche"];
+
+                default:
+                    return null;
+            }
+        }
         private Animation GetAnimation(string spritesheet)
         {
             switch (spritesheet)
