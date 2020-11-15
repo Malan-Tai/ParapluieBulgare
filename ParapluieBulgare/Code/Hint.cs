@@ -12,6 +12,7 @@ namespace ParapluieBulgare.Code
         //PrenomSophie,
         DoloresDemandee,
         DoloresSecretaire,
+        DoloresPartie,
         BureauPatron,
         RespoProjet,
         ChatBerlioz,
@@ -49,6 +50,9 @@ namespace ParapluieBulgare.Code
                     break;
                 case HintsEnum.DoloresSecretaire:
                     Text = "La secretaire du patron s'appelle Dolores";
+                    break;
+                case HintsEnum.DoloresPartie:
+                    Text = "La secretaire a quitte le bureau du patron";
                     break;
                 case HintsEnum.BureauPatron:
                     Text = "J'ai acces au bureau du patron";

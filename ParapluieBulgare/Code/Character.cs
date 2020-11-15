@@ -89,7 +89,6 @@ namespace ParapluieBulgare.Code
 
             if (x != prevX && prevX != 0)
             {
-                Console.Out.WriteLine(x);
                 currentAnimation = walkAnimation;
                 if (x < prevX) Flip = false;
                 else if (x > prevX) Flip = true;

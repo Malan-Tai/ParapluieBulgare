@@ -32,6 +32,7 @@ namespace ParapluieBulgare
             "carnet",
             "transparent",
             "TitleScreen",
+            "Viseur",
 
             "persos/Cadres/Cadre1",
             "persos/Cadres/Cadre2",
@@ -192,6 +193,26 @@ namespace ParapluieBulgare
             DialogBox.boxRect = new Rectangle(0, 0, WIDTH - (HEIGHT / 3), HEIGHT / 3 + 30); //(int)(0.261 * (WIDTH - (HEIGHT / 3))));
 
             player = new Player(GetAnimation("joueur_idle"), GetAnimation("joueur_walk"), facebook["persos/Cadres/Cadre1Tronche"], textureDict["carnet"]);
+
+            guards = new List<Guard>
+            {
+                new Guard(GetAnimation("vigile_idle"), GetAnimation("vigile_walk"), facebook["persos/Vigiles/VigileTronche"], 0, 1500),
+                new Guard(GetAnimation("vigile_idle"), GetAnimation("vigile_walk"), facebook["persos/Vigiles/VigileTronche"], 2, 300),
+                new Guard(GetAnimation("vigile_idle"), GetAnimation("vigile_walk"), facebook["persos/Vigiles/VigileTronche"], 2, 1450)
+            };
+            Guard guard = guards[1];
+            guard.SetUnlockingConditions(new List<HintsEnum> { HintsEnum.BadgeLabo });
+            DialogBox b1 = new DialogBox("Desole monsieur, vous n'avez pas acces au laboratoire.", guard);
+            DialogTree t = new DialogTree(new List<DialogBox> { b1 });
+            guard.SetDialogTree(t);
+            guard = guards[2];
+            guard.SetUnlockingConditions(new List<HintsEnum> { HintsEnum.BadgeLabo });
+            b1 = new DialogBox("Desole monsieur, vous n'avez pas acces au laboratoire.", guard);
+            t = new DialogTree(new List<DialogBox> { b1 });
+            guard.SetDialogTree(t);
+
+            guards[2].Flip = true;
+
             floors = new Floor[]
             {
                 new Floor(player, -1, textureDict["background"], GetFloorNPCs(-1), GetFloorFurnitures(-1)),
@@ -201,21 +222,6 @@ namespace ParapluieBulgare
                 new Floor(player, 3, textureDict["background"], GetFloorNPCs(3), GetFloorFurnitures(3)),
                 new Floor(player, 4, textureDict["background"], GetFloorNPCs(4), GetFloorFurnitures(4))
             };
-
-            guards = new List<Guard>
-            {
-                new Guard(GetAnimation("vigile_idle"), GetAnimation("vigile_walk"), facebook["persos/Vigiles/VigileTronche"], 0, 1500),
-                new Guard(GetAnimation("vigile_idle"), GetAnimation("vigile_walk"), facebook["persos/Vigiles/VigileTronche"], 2, 300),
-                new Guard(GetAnimation("vigile_idle"), GetAnimation("vigile_walk"), facebook["persos/Vigiles/VigileTronche"], 2, 1450)
-            };
-            //Guard guard = guards[0];
-            //guard.SetUnlockingConditions(new List<HintsEnum> { HintsEnum.BadgeLabo });
-            //DialogBox b1 = new DialogBox("Halte la malheureux, acces au labo interdit!", guard);
-            //DialogTree t = new DialogTree(new List<DialogBox> { b1 });
-            //guard.SetDialogTree(t);
-
-            guards[2].Flip = true;
-
             currentFloor = floors[1];
 
             timer = new Timer(600);
@@ -439,19 +445,16 @@ namespace ParapluieBulgare
                         new NPC(GetAnimation("techos2"), GetAnimation("techos2"), facebook["persos/Cadres/Cadre1Tronche"], 1000),
                     };
 
-                    npcs[0].Target = true;
                     npcs[0].Flip = true;
 
-                    //NPC npc = npcs[0];
-                    //DialogBox b1 = new DialogBox("coucou", npc);
-                    //DialogBox b2 = new DialogBox("wesh frr", player);
-                    //DialogBox b3 = new DialogBox("vazy kass toa", npc, false, HintsEnum.BadgeLabo);
+                    DialogBox b1 = new DialogBox("... devrait pas avoir le droit de nous faire travailler autant !", npcs[0]);
+                    DialogBox b2 = new DialogBox("C'est vrai, mais le syndicat a reussi a obtenir plus de budget pour organiser des activites bien-etre. C'est un premier pas.", npcs[1]);
+                    DialogBox b3 = new DialogBox("De la poudre aux yeux moi je te dis !", npcs[0]);
+                    DialogBox b4 = new DialogBox("Peut-etre mais c'est un premier pas. Tu devrais assister a l'atelier cuisine, c'est assez cool comme ambiance. Meme les chefs de projet semblent plus '.sympathiques' !", npcs[1], false, HintsEnum.AtelierCuisine);
+                    DialogBox b5 = new DialogBox("Mouais... J'irai y jeter un oeil... Mais le combat n'est pas fini !", npcs[0]);
+                    DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5 });
+                    npcs[1].SetDialogTree(tree);
 
-                    //DialogBox b4 = new DialogBox("Alors poto le labo ?", npc);
-
-                    //DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3 }, new List<HintsEnum> { HintsEnum.BadgeLabo }, new List<DialogBox> { b4 });
-                    //npc.SetDialogTree(tree);
-                    
                     break;
                 case 0:
                     npcs = new List<NPC>
@@ -467,6 +470,26 @@ namespace ParapluieBulgare
                     npcs[0].Flip = true;
                     npcs[1].Flip = true;
                     npcs[3].Flip = true;
+
+                    b1 = new DialogBox("Non Monsieur, vous ne passerez pas ! Vous ne disposez d'aucune autorisation !", guards[0]);
+                    b2 = new DialogBox("Vous ne pouvez pas faire ca ! C'est contraire a la liberte de la presse ! Des choses se passent ici et nous le saurons, soyez-en sur !", npcs[1]);
+                    b3 = new DialogBox("Oui oui c'est ca, c'est ca. Partez ou je serai contraint d'appeler la police.", guards[0]);
+                    b4 = new DialogBox("Ouais c'est ca allez-y, appelez les flics ! Histoire qu'ils decouvrent vos petites manigances. On sait ce que vous cachez sur vos serveurs !", npcs[1]);
+                    b5 = new DialogBox("Bien sur, et moi je suis reptilien...", guards[0]);
+                    DialogBox b6 = new DialogBox("Moquez-vous !", npcs[1]);
+                    tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5, b6 });
+                    npcs[1].SetDialogTree(tree);
+
+                    b1 = new DialogBox("...  et  la  je  suis  tombee  sur  ce  compte,  regarde.", npcs[4]);
+                    b2 = new DialogBox("Oh  nooooon  trop  mignon  !  Mais  il  est  a  qui  ce  petit  bebe  chat  ?", npcs[3]);
+                    b3 = new DialogBox("Au  patron  figure-toi  !", npcs[4]);
+                    b4 = new DialogBox("Serieux  ??  Je  ne  le  voyais  pas  aussi... 'connecte'.", npcs[3]);
+                    b5 = new DialogBox("Ouais  enfin  mate  le  nom  du  chat  :  Berlioz...  C'est  pas  le  blaze  le  plus  tendance  non  plus...  ", npcs[4], false, HintsEnum.ChatBerlioz);
+                    b6 = new DialogBox("Eh  !  Ca  reste  un  vieux  schnock  multimillionnaire  apres  tout...", npcs[3]);
+                    DialogBox b7 = new DialogBox("Chuuuuut  parle  moins  fort,  y  a  un  type  chelou  qui  nous  observe  !", npcs[4]);
+                    DialogBox b8 = new DialogBox("  ...", npcs[3]);
+                    tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5, b6, b7, b8 });
+                    npcs[4].SetDialogTree(tree);
 
                     break;
                 case 1:
@@ -488,6 +511,19 @@ namespace ParapluieBulgare
                     npcs[2].Flip = true;
                     npcs[5].Flip = true;
                     npcs[6].Flip = true;
+
+                    npcs[7].Target = true;
+
+                    b1 = new DialogBox("Eh  j't'ai  pas  raconte  mon  rendez-vous  la  semaine  derniere  avec  la  DRH.", npcs[3]);
+                    b2 = new DialogBox("Siii  Patrick,  ca  fait  trois  fois  que  tu  nous  la  racontes...  Eh  tu  devrais  pas  t'en  vanter  merde  !  Te  toucher  au  boulot,  sans  rire  ??", npcs[2]);
+                    b3 = new DialogBox("Rooh  c'est  bon,  j'explose  tous  les  commerciaux,  j'ai  l'droit  a  mon  moment  detente.", npcs[3]);
+                    b4 = new DialogBox("...", npcs[2]);
+                    b5 = new DialogBox("Donc  je  disais...  Tu  vois  la  secretaire  du  boss.", npcs[3]);
+                    b6 = new DialogBox("Dolores  ?", npcs[2], false, HintsEnum.DoloresSecretaire);
+                    b7 = new DialogBox("Ouais  c'est  ca  !  Elle  a  deboule  super  furax  dans  le  bureau.  Soit  disant  que  Sophie  aurait  vu  le  patron  sans  passer  par  elle,  qu'elle  trouvait  ca  intolerable.  Elle  m'a  fait  peur  cette  con  mais  en  vrai  ca  m'a  un  peu  excite...", npcs[3]);
+                    b8 = new DialogBox("T'es  vraiment  irrecuperable...  Raah  j'ai  plus  faim  maintenant,  t'es  chiant...  ", npcs[2]);
+                    tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5, b6, b7, b8 });
+                    npcs[3].SetDialogTree(tree);
 
                     break;
                 case 2:
@@ -518,6 +554,25 @@ namespace ParapluieBulgare
                     npcs[0].Flip = true;
                     npcs[3].Flip = true;
 
+                    b1 = new DialogBox("Eh  Christine,  t'as  vu  Dolores  aujourd'hui  ?", npcs[2], false, HintsEnum.DoloresDemandee);
+                    b2 = new DialogBox("Euh...  Nan  je  crois  pas,  elle  est  peut-etre  en  conge.  C'est  important  ?", npcs[1]);
+                    b3 = new DialogBox("J'aimerais  bien  prendre  rendez-vous  avec  le  big  boss  et  discuter  tranquillement  promotion  t'vois.", npcs[2]);
+                    b4 = new DialogBox("Ah  ouais  au  culot  en  fait.", npcs[1]);
+                    b5 = new DialogBox("Faut  bien  s'imposer  ma  bonne  dame.  Bon,  j'appellerai  directement  a  son  bureau  en  fin  de  journee.", npcs[2]);
+
+                    b6 = new DialogBox("Tu  n'as  toujours  pas  teste  les  nouvelles  activites  proposees  par  le  CE  pour  'avoir  le  smile'  ?", npcs[2]);
+                    b7 = new DialogBox("Nan  j'ai  pas  vraiment  regarde.", npcs[1]);
+                    b8 = new DialogBox("Ca  devrait  t'interesser  pourtant,  c'est  Alicia  qui  s'en  charge.", npcs[2]);
+                    DialogBox b9 = new DialogBox("A...  Arrete  !  Tu  sais  tres  bien  que  je  suis  trop  genee  quand  elle  est  la...", npcs[1]);
+                    DialogBox b10 = new DialogBox("Fais  gaffe,  tu  vas  te  faire  devancer  par  Camille  hahaha", npcs[2]);
+                    DialogBox b11 = new DialogBox("Par...  Camille,  celle  dont  tout  le  monde  parle  !?", npcs[1]);
+                    DialogBox b12 = new DialogBox("Oui,  qui  travaille  sur  le  projet  de  super-vaccin,  celle-la  meme.", npcs[2]);
+                    DialogBox b13 = new DialogBox("Eh  qu'est-ce  qui  te  fait  croire  qu'elle  est  aussi...  ", npcs[1]);
+                    DialogBox b14 = new DialogBox("J'ai  mes  sources  eheheh.  Et  puis,  elle  reserve  toujours  les  creneaux  entiers  ou  Alicia  participe  egalement...  C'est  tellement  crame  !  Encore  aujourd'hui,  elle  a  bloque  sa  journee  pour  faire  l'atelier  cuisine  !", npcs[2], false, HintsEnum.AtelierCuisine);
+
+                    tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5 }, new List<HintsEnum> { HintsEnum.HappinessManager }, new List<DialogBox> { b6, b7, b8, b8, b9, b10, b11, b12, b13, b14 });
+                    npcs[2].SetDialogTree(tree);
+
                     break;
                 case 4:
                     npcs = new List<NPC>
@@ -528,6 +583,22 @@ namespace ParapluieBulgare
                     };
 
                     npcs[0].Flip = true;
+
+                    NPC npc = npcs[2];
+                    npc.SetUnlockingConditions(new List<HintsEnum> { HintsEnum.DoloresPartie });
+                    b1 = new DialogBox("Que faites-vous la ? C'est prive, vous n'avez pas a etre ici.", npc);
+                    b2 = new DialogBox("J'ai croise Camille a l'instant a la cafeteria. Elle souhaiterait vous voir concernant le rendez-v...", player);
+                    b3 = new DialogBox("Quel toupet.", npcs[2], false, HintsEnum.DoloresPartie);
+                    tree = new DialogTree(new List<DialogBox> { b1 }, new List<HintsEnum> { HintsEnum.DoloresSecretaire, HintsEnum.DoloresDemandee}, new List<DialogBox> { b2, b3 });
+                    npc.SetDialogTree(tree);
+
+                    b1 = new DialogBox("...  nan  j'avais  pas  mon  mot  a  dire  !  Ca  venait  carrement  de  la-haut.", npcs[0]);
+                    b2 = new DialogBox("Mais  c'est  n'importe  quoi...  Une  'happiness  manager'.  Ce  qu'on  n'invente  pas  aujourd'hui  franchement...  ", npcs[1]);
+                    b3 = new DialogBox("Et  comme  par  hasard,  c'est  la  p'tite  Alicia  qui  est  'promue'.  Moi,  je  te  dis  que  ça  passe  sous  le  bu...", npcs[0]);
+                    b4 = new DialogBox("Eh  oh  t'y  vas  un  peu  fort  la,  en  plus  d'être  carrement  sexiste  !  Va  falloir  changer  de  mentalite  Arnaud  !  Eh  puis  tout  compte  fait,  c'est  peut-être  pas  si  mal,  ça  reduira  peut-etre  notre  turnover.", npcs[1]);
+                    b5 = new DialogBox("Mouais  pas  faux...  Enfin  moi,  j'vois  deja  Gabrielle  faire  des  yeux  comme  ca  lorsqu'elle  verra  le  budget  de  ces  activites  '100%  happy  avec  Marpha  Biotech'", npcs[0], false, HintsEnum.HappinessManager);
+                    tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5 });
+                    npcs[1].SetDialogTree(tree);
 
                     break;
                 default:
@@ -612,9 +683,9 @@ namespace ParapluieBulgare
 
             if (!Win && !Lose)
             {
-                if (sniper == null && ThreatLevel == 1)
+                if (sniper == null && ThreatLevel == 2)
                 {
-                    sniper = new Sniper(white);
+                    sniper = new Sniper(textureDict["Viseur"]);
                 }
 
                 timer.update(gameTime.ElapsedGameTime.TotalSeconds);

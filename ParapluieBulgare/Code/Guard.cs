@@ -38,14 +38,14 @@ namespace ParapluieBulgare.Code
         public void Update(KeyboardState keyState, KeyboardState prevKeyState, Player player, int playerFloor)
         {
             Point playerCoords = player.Coords;
-            if (Game1.ThreatLevel >= 2)
+            if (Game1.ThreatLevel >= 1)
             {
                 if (playerFloor == currentFloor)
                 {
                     if (!BoxCollider.Intersects(player.BoxCollider))
                     {
-                        if (playerCoords.X > x) x += speed;
-                        else x -= speed;
+                        if (playerCoords.X > x) x += speed * Game1.ThreatLevel;
+                        else x -= speed * Game1.ThreatLevel;
                     }
                     else
                     {
