@@ -52,8 +52,8 @@ namespace ParapluieBulgare.Code
 
                 spriteBatch.Draw(texture, new Rectangle(x, y, width, height), Color.White);
 
-                Rectangle textRect1 = new Rectangle(50, 80, (width - 100) / 2, height - 110);
-                Rectangle textRect2 = new Rectangle(width / 2 + 70, 80, (width - 100) / 2, height - 110);
+                Rectangle textRect1 = new Rectangle(50, 80, (width - 150) / 2, height - 110);
+                Rectangle textRect2 = new Rectangle(width / 2 + 70, 80, (width - 150) / 2, height - 110);
                 Rectangle curRect = textRect1;
 
                 int h = (int)font.MeasureString("A").Y;

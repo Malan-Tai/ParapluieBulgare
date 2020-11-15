@@ -41,7 +41,7 @@ namespace ParapluieBulgare.Code
             if (talker.Flip) talker.DrawFace(spriteBatch, 10, Game1.HEIGHT * 2 / 3 - 10);
             else talker.DrawFace(spriteBatch, Game1.WIDTH - Game1.HEIGHT / 3 - 10, Game1.HEIGHT * 2 / 3 - 10);
 
-            Rectangle textRect = new Rectangle(offset + 50, 2 * Game1.HEIGHT / 3 + 20, boxRect.Width - 100, boxRect.Height - 100);
+            Rectangle textRect = new Rectangle(offset + 50, 2 * Game1.HEIGHT / 3 + 20, boxRect.Width - 150, boxRect.Height - 100);
 
             int lineHeight = (int)font.MeasureString(text).Y;
             List<string> lines = TextWrap.Wrap(text, textRect.Width, font);
