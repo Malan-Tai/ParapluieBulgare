@@ -41,7 +41,7 @@ namespace ParapluieBulgare
         };
         Dictionary<string, Texture2D> textureDict;
 
-        List<string> allfaces = new List<string>
+        List<string> allFaces = new List<string>
         {
             "face01",
             "face02",
@@ -146,7 +146,7 @@ namespace ParapluieBulgare
             {
                 textureDict.Add(text, Content.Load<Texture2D>(text));
             }
-            foreach (string text in allfaces)
+            foreach (string text in allFaces)
             {
                 facebook.Add(text, Content.Load<Texture2D>(text));
             }
