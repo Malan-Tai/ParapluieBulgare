@@ -7,6 +7,7 @@ namespace ParapluieBulgare.Code
     enum HintsEnum
     {
         CibleChercheur,
+        JournalisteToilettes,
         BadgeLabo,
         VaccinJM0T4,
         //PrenomSophie,

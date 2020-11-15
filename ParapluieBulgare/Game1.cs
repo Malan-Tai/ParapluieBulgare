@@ -564,7 +564,9 @@ namespace ParapluieBulgare
                         new NPC(GetAnimation("employe7"), GetAnimation("employe7"), GetTronche("employe7"), 900),
                         new NPC(GetAnimation("employe8"), GetAnimation("employe8"), GetTronche("employe8"), 1020),
                         new NPC(GetAnimation("cadre3"), GetAnimation("cadre3"), GetTronche("cadre3"), 2200),
-                        new NPC(GetAnimation("cadre4"), GetAnimation("cadre4"), GetTronche("cadre4"), 2400)
+                        new NPC(GetAnimation("cadre4"), GetAnimation("cadre4"), GetTronche("cadre4"), 2400),
+
+                        new NPC(GetAnimation("transparent"), GetAnimation("transparent"), GetTronche("journaliste"), 3500)
                     };
 
                     npcs[0].Flip = true;
@@ -589,6 +591,12 @@ namespace ParapluieBulgare
                     tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5 }, new List<HintsEnum> { HintsEnum.HappinessManager }, new List<DialogBox> { b6, b7, b8, b8, b9, b10, b11, b12, b13, b14 });
                     npcs[2].SetDialogTree(tree);
 
+                    NPC npc = npcs[5];
+                    npc.SetUnlockingConditions(new List<HintsEnum> { HintsEnum.JournalisteToilettes });
+                    b1 = new DialogBox("Pfiouuu, c'est pas passe loin ! J'en suis encore tout tremblotant. Heureusement que Laurent a pique sa crise. J'ai meme pu recuperer un badge d'acces dans la confusion eheheh... Merde j'l'ai foutu ou d'ailleurs... Ah le lavabo !", npc, false, HintsEnum.JournalisteToilettes);
+                    tree = new DialogTree(new List<DialogBox> { b1 });
+                    npc.SetDialogTree(tree);
+
                     break;
                 case 4:
                     npcs = new List<NPC>
@@ -600,7 +608,7 @@ namespace ParapluieBulgare
 
                     npcs[0].Flip = true;
 
-                    NPC npc = npcs[2];
+                    npc = npcs[2];
                     npc.SetUnlockingConditions(new List<HintsEnum> { HintsEnum.DoloresPartie });
                     b1 = new DialogBox("Que faites-vous la ? C'est prive, vous n'avez pas a etre ici.", npc);
                     b2 = new DialogBox("J'ai croise Camille a l'instant a la cafeteria. Elle souhaiterait vous voir concernant le rendez-v...", player);
@@ -640,8 +648,7 @@ namespace ParapluieBulgare
                 case 3:
                     furnitures = new List<Furniture>
                     {
-                        new Furniture(GetAnimation("transparent"), GetTronche("Badge"), 2800),
-                        new Furniture(GetAnimation("transparent"), GetTronche("journaliste"), 3500)
+                        new Furniture(GetAnimation("transparent"), GetTronche("Badge"), 2800)
                     };
                     break;
                 case 4:
@@ -703,7 +710,7 @@ namespace ParapluieBulgare
             {
                 if (sniper == null && ThreatLevel == 2)
                 {
-                    sniper = new Sniper(textureDict["Viseur"]);
+                    sniper = new Sniper(textureDict["Viseur"], player.Coords);
                 }
 
                 timer.update(gameTime.ElapsedGameTime.TotalSeconds);

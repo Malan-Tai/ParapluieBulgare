@@ -23,11 +23,11 @@ namespace ParapluieBulgare.Code
             }
         }
 
-        public Sniper(Texture2D t)
+        public Sniper(Texture2D t, Point coords)
         {
             texture = t;
-            x = 0;
-            y = 0;
+            x = coords.X - Game1.WIDTH / 2;
+            y = coords.Y;
             width = 30;
         }
 

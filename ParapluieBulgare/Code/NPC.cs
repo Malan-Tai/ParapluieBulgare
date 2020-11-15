@@ -15,7 +15,7 @@ namespace ParapluieBulgare.Code
         public static SoundEffect soundBulgared;
         public bool Target { get; set; } = false;
 
-        private List<HintsEnum> unlockConditions = null;
+        protected List<HintsEnum> unlockConditions = null;
 
         public NPC(Animation idle, Animation walk, Texture2D face, int x = 500) : base(idle, walk, face)
         {
