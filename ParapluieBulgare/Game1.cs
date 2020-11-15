@@ -48,7 +48,7 @@ namespace ParapluieBulgare
         };
         Dictionary<string, Texture2D> facebook;
 
-        Texture2D white;
+        public static Texture2D white;
 
         SpriteFont font;
 

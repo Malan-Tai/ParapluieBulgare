@@ -37,7 +37,7 @@ namespace ParapluieBulgare.Code
             return x - (windowWidth - width) / 2;
         }
 
-        public string Update(KeyboardState keyState, KeyboardState prevKeyState, List<NPC> npcs, List<Guard> guards)
+        public string Update(KeyboardState keyState, KeyboardState prevKeyState, List<NPC> npcs, List<Guard> guards, int floor)
         {
             string returned = "";
             if (interactingWith == null && !leftConversation)
@@ -85,7 +85,7 @@ namespace ParapluieBulgare.Code
                 }
                 foreach (Guard guard in guards)
                 {
-                    if (BoxCollider.Intersects(guard.BoxCollider) && guard.Blocks(this))
+                    if (BoxCollider.Intersects(guard.BoxCollider) && guard.Blocks(this, floor))
                     {
                         x = prevX;
                         interactingWith = guard;
