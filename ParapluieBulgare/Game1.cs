@@ -29,6 +29,7 @@ namespace ParapluieBulgare
             "ascenseur",
 
             "player_walk",
+            "Employe1",
             "costard_idle",
             "costard_idle2",
             "costard_fem_idle",
@@ -166,6 +167,8 @@ namespace ParapluieBulgare
                     return new Animation(textureDict["player_walk"], 32, 32, 6, 10);
                 case "vigile_walk":
                     return new Animation(textureDict["vigile_walk"], 32, 32, 6, 10);
+                case "Employe1":
+                    return new Animation(textureDict["Employe1"], 32, 32, 2, 60);
                 case "costard_fem_idle":
                     return new Animation(textureDict["costard_fem_idle"], 32, 32, 2, 60);
                 case "costard_fem_idle2":
@@ -216,7 +219,7 @@ namespace ParapluieBulgare
                 case 0:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 600),
+                        new NPC(GetAnimation("Employe1"), GetAnimation("Employe1"), facebook["face02"], 600),
                         new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 1300),
 
                         new NPC(GetAnimation("costard_fem_idle"), GetAnimation("costard_fem_idle"), facebook["face02"], 2400),
