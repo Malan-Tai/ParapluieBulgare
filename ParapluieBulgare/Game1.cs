@@ -650,7 +650,12 @@ namespace ParapluieBulgare
                     {
                         new Furniture(GetAnimation("transparent"), GetTronche("Badge"), 2800)
                     };
-                    break;
+
+                    DialogBox b1 = new DialogBox("Un badge de chercheur...", furnitures[0]);
+                    DialogBox b2 = new DialogBox("Il devrait me permettre d'acceder au labo", player, false, HintsEnum.BadgeLabo);
+                    DialogTree tree = new DialogTree(new List<DialogBox>(), new List<HintsEnum> { HintsEnum.JournalisteToilettes } , new List<DialogBox> { b1, b2 });
+                    furnitures[0].SetDialogTree(tree);
+            break;
                 case 4:
                     furnitures = new List<Furniture>
                     {
