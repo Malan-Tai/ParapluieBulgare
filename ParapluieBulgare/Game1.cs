@@ -191,7 +191,7 @@ namespace ParapluieBulgare
             DialogBox.dialogBoxTexture = textureDict["bulleDeTexte"];
             DialogBox.boxRect = new Rectangle(0, 0, WIDTH - (HEIGHT / 3), HEIGHT / 3 + 30); //(int)(0.261 * (WIDTH - (HEIGHT / 3))));
 
-            player = new Player(GetAnimation("joueur_idle"), GetAnimation("joueur_walk"), facebook["persos/Cadres/Cadre1Tronche"], textureDict["carnet"]);
+            player = new Player(GetAnimation("joueur_idle"), GetAnimation("joueur_walk"), GetTronche("joueur"), textureDict["carnet"]);
             floors = new Floor[]
             {
                 new Floor(player, -1, textureDict["background"], GetFloorNPCs(-1), GetFloorFurnitures(-1)),
@@ -204,9 +204,9 @@ namespace ParapluieBulgare
 
             guards = new List<Guard>
             {
-                new Guard(GetAnimation("vigile_idle"), GetAnimation("vigile_walk"), facebook["persos/Vigiles/VigileTronche"], 0, 1500),
-                new Guard(GetAnimation("vigile_idle"), GetAnimation("vigile_walk"), facebook["persos/Vigiles/VigileTronche"], 2, 300),
-                new Guard(GetAnimation("vigile_idle"), GetAnimation("vigile_walk"), facebook["persos/Vigiles/VigileTronche"], 2, 1450)
+                new Guard(GetAnimation("vigile_idle"), GetAnimation("vigile_walk"), GetTronche("vigile"), 0, 1500),
+                new Guard(GetAnimation("vigile_idle"), GetAnimation("vigile_walk"), GetTronche("vigile"), 2, 300),
+                new Guard(GetAnimation("vigile_idle"), GetAnimation("vigile_walk"), GetTronche("vigile"), 2, 1450)
             };
             //Guard guard = guards[0];
             //guard.SetUnlockingConditions(new List<HintsEnum> { HintsEnum.BadgeLabo });
@@ -259,71 +259,71 @@ namespace ParapluieBulgare
             switch (spritesheet)
             {
                 case "cadre1":
-                    return textureDict["persos/Cadres/Cadre1Tronche"];
+                    return facebook["persos/Cadres/Cadre1Tronche"];
                 case "cadre2":
-                    return textureDict["persos/Cadres/Cadre2Tronche"];
+                    return facebook["persos/Cadres/Cadre2Tronche"];
                 case "cadre3":
-                    return textureDict["persos/Cadres/Cadre3Tronche"];
+                    return facebook["persos/Cadres/Cadre3Tronche"];
                 case "cadre4":
-                    return textureDict["persos/Cadres/Cadre4Tronche"];
+                    return facebook["persos/Cadres/Cadre4Tronche"];
                 case "secretaire":
-                    return textureDict["persos/Cadres/SecretaireTronche"];
+                    return facebook["persos/Cadres/SecretaireTronche"];
 
                 case "chercheur1":
-                    return textureDict["persos/Chercheuses/Chercheur1Tronche"];
+                    return facebook["persos/Chercheuses/Chercheur1Tronche"];
                 case "chercheuse1":
-                    return textureDict["persos/Chercheuses/Chercheuse1Tronche"];
+                    return facebook["persos/Chercheuses/Chercheuse1Tronche"];
                 case "chercheur2":
-                    return textureDict["persos/Chercheuses/Chercheur2Tronche"];
+                    return facebook["persos/Chercheuses/Chercheur2Tronche"];
                 case "chercheuse2":
-                    return textureDict["persos/Chercheuses/Chercheuse2Tronche"];
+                    return facebook["persos/Chercheuses/Chercheuse2Tronche"];
 
                 case "cuistot1":
-                    return textureDict["persos/Cuisinier/Cuistot1Tronche"];
+                    return facebook["persos/Cuisinier/Cuistot1Tronche"];
                 case "cuistot2":
-                    return textureDict["persos/Cuisinier/Cuistot2Tronche"];
+                    return facebook["persos/Cuisinier/Cuistot2Tronche"];
 
                 case "directeur1":
-                    return textureDict["persos/Direction/Directeur1Tronche"];
+                    return facebook["persos/Direction/Directeur1Tronche"];
                 case "directeur2":
-                    return textureDict["persos/Direction/Directeur2Tronche"];
+                    return facebook["persos/Direction/Directeur2Tronche"];
                 case "directeur4":
-                    return textureDict["persos/Direction/Directeur4Tronche"];
+                    return facebook["persos/Direction/Directeur4Tronche"];
 
                 case "employe1":
-                    return textureDict["persos/Employees/Employe1Tronche"];
+                    return facebook["persos/Employees/Employe1Tronche"];
                 case "employe2":
-                    return textureDict["persos/Employees/Employe2Tronche"];
+                    return facebook["persos/Employees/Employe2Tronche"];
                 case "employe3":
-                    return textureDict["persos/Employees/Employe3Tronche"];
+                    return facebook["persos/Employees/Employe3Tronche"];
                 case "employe4":
-                    return textureDict["persos/Employees/Employe4Tronche"];
+                    return facebook["persos/Employees/Employe4Tronche"];
                 case "employe5":
-                    return textureDict["persos/Employees/Employe5Tronche"];
+                    return facebook["persos/Employees/Employe5Tronche"];
                 case "employe6":
-                    return textureDict["persos/Employees/Employe6Tronche"];
+                    return facebook["persos/Employees/Employe6Tronche"];
                 case "employe7":
-                    return textureDict["persos/Employees/Employe7Tronche"];
+                    return facebook["persos/Employees/Employe7Tronche"];
                 case "employe8":
-                    return textureDict["persos/Employees/Employe8Tronche"];
+                    return facebook["persos/Employees/Employe8Tronche"];
 
                 case "joueur":
-                    return textureDict["persos/Joueur/JoueurTronche"];
+                    return facebook["persos/Joueur/JoueurTronche"];
 
                 case "journaliste":
-                    return textureDict["persos/Journalistes/JournalisteTronche"];
+                    return facebook["persos/Journalistes/JournalisteTronche"];
 
                 case "techos1":
-                    return textureDict["persos/Techniciens/Techos1Tronche"];
+                    return facebook["persos/Techniciens/Techos1Tronche"];
                 case "techos2":
-                    return textureDict["persos/Techniciens/Techos2Tronche"];
+                    return facebook["persos/Techniciens/Techos2Tronche"];
                 case "techos3":
-                    return textureDict["persos/Techniciens/Techos3Tronche"];
+                    return facebook["persos/Techniciens/Techos3Tronche"];
                 case "techos4":
-                    return textureDict["persos/Techniciens/Techos4Tronche"];
+                    return facebook["persos/Techniciens/Techos4Tronche"];
 
                 case "vigile":
-                    return textureDict["persos/Vigiles/VigileTronche"];
+                    return facebook["persos/Vigiles/VigileTronche"];
 
                 default:
                     return null;
@@ -435,8 +435,8 @@ namespace ParapluieBulgare
                 case -1:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("techos4"), GetAnimation("techos4"), facebook["persos/Cadres/Cadre1Tronche"], 700),
-                        new NPC(GetAnimation("techos2"), GetAnimation("techos2"), facebook["persos/Cadres/Cadre1Tronche"], 1000),
+                        new NPC(GetAnimation("techos4"), GetAnimation("techos4"), GetTronche("techos4"), 700),
+                        new NPC(GetAnimation("techos2"), GetAnimation("techos2"), GetTronche("techos2"), 1000),
                     };
 
                     npcs[0].Target = true;
@@ -456,12 +456,12 @@ namespace ParapluieBulgare
                 case 0:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("employe1"), GetAnimation("employe1"), facebook["persos/Cadres/Cadre1Tronche"], 600),
-                        new NPC(GetAnimation("journaliste"), GetAnimation("journaliste"), facebook["persos/Cadres/Cadre1Tronche"], 1300),
+                        new NPC(GetAnimation("employe1"), GetAnimation("employe1"), GetTronche("employe1"), 600),
+                        new NPC(GetAnimation("journaliste"), GetAnimation("journaliste"), GetTronche("journaliste"), 1300),
 
-                        new NPC(GetAnimation("cadre1"), GetAnimation("cadre1"), facebook["persos/Cadres/Cadre1Tronche"], 2400),
-                        new NPC(GetAnimation("employe2"), GetAnimation("employe2"), facebook["persos/Cadres/Cadre1Tronche"], 3200),
-                        new NPC(GetAnimation("employe3"), GetAnimation("employe3"), facebook["persos/Cadres/Cadre1Tronche"], 3550)
+                        new NPC(GetAnimation("cadre1"), GetAnimation("cadre1"), GetTronche("cadre1"), 2400),
+                        new NPC(GetAnimation("employe2"), GetAnimation("employe2"), GetTronche("employe2"), 3200),
+                        new NPC(GetAnimation("employe3"), GetAnimation("employe3"), GetTronche("employe3"), 3550)
                     };
 
                     npcs[0].Flip = true;
@@ -472,16 +472,16 @@ namespace ParapluieBulgare
                 case 1:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("chercheuse1"), GetAnimation("chercheuse1"), facebook["persos/Cadres/Cadre1Tronche"], 400),
-                        new NPC(GetAnimation("employe4"), GetAnimation("employe4"), facebook["persos/Cadres/Cadre1Tronche"], 600),
-                        new NPC(GetAnimation("cadre2"), GetAnimation("cadre2"), facebook["persos/Cadres/Cadre1Tronche"], 1100),
-                        new NPC(GetAnimation("employe5"), GetAnimation("employe5"), facebook["persos/Cadres/Cadre1Tronche"], 1300),
-                        new NPC(GetAnimation("directeur2"), GetAnimation("directeur2"), facebook["persos/Cadres/Cadre1Tronche"], 2380),
+                        new NPC(GetAnimation("chercheuse1"), GetAnimation("chercheuse1"), GetTronche("chercheuse1"), 400),
+                        new NPC(GetAnimation("employe4"), GetAnimation("employe4"), GetTronche("employe4"), 600),
+                        new NPC(GetAnimation("cadre2"), GetAnimation("cadre2"), GetTronche("cadre2"), 1100),
+                        new NPC(GetAnimation("employe5"), GetAnimation("employe5"), GetTronche("employe2"), 1300),
+                        new NPC(GetAnimation("directeur2"), GetAnimation("directeur2"), GetTronche("directeur2"), 2380),
 
-                        new NPC(GetAnimation("techos1"), GetAnimation("techos1"), facebook["persos/Cadres/Cadre1Tronche"], 2800),
-                        new NPC(GetAnimation("cuistot1"), GetAnimation("cuistot1"), facebook["persos/Cadres/Cadre1Tronche"], 3280),
-                        new NPC(GetAnimation("cuistot2"), GetAnimation("cuistot2"), facebook["persos/Cadres/Cadre1Tronche"], 3550),
-                        new NPC(GetAnimation("cuistot3"), GetAnimation("cuistot3"), facebook["persos/Cadres/Cadre1Tronche"], 3850)
+                        new NPC(GetAnimation("techos1"), GetAnimation("techos1"), GetTronche("techos1"), 2800),
+                        new NPC(GetAnimation("cuistot1"), GetAnimation("cuistot1"), GetTronche("cuistot1"), 3280),
+                        new NPC(GetAnimation("cuistot2"), GetAnimation("cuistot2"), GetTronche("cuistot2"), 3550),
+                        new NPC(GetAnimation("cuistot3"), GetAnimation("cuistot3"), GetTronche("cuistot3"), 3850)
                     };
 
                     npcs[0].Flip = true;
@@ -493,12 +493,12 @@ namespace ParapluieBulgare
                 case 2:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("chercheur1"), GetAnimation("chercheur1"), facebook["persos/Cadres/Cadre1Tronche"], 600),
-                        new NPC(GetAnimation("directeur1"), GetAnimation("directeur1"), facebook["persos/Cadres/Cadre1Tronche"], 1100),
-                        new NPC(GetAnimation("chercheuse2"), GetAnimation("chercheuse2"), facebook["persos/Cadres/Cadre1Tronche"], 1300),
+                        new NPC(GetAnimation("chercheur1"), GetAnimation("chercheur1"), GetTronche("chercheuse1"), 600),
+                        new NPC(GetAnimation("directeur1"), GetAnimation("directeur1"), GetTronche("directeur1"), 1100),
+                        new NPC(GetAnimation("chercheuse2"), GetAnimation("chercheuse2"), GetTronche("chercheuse2"), 1300),
 
-                        new NPC(GetAnimation("chercheur2"), GetAnimation("chercheur2"), facebook["persos/Cadres/Cadre1Tronche"], 2850),
-                        new NPC(GetAnimation("techos3"), GetAnimation("techos3"), facebook["persos/Cadres/Cadre1Tronche"], 3700)
+                        new NPC(GetAnimation("chercheur2"), GetAnimation("chercheur2"), GetTronche("chercheur2"), 2850),
+                        new NPC(GetAnimation("techos3"), GetAnimation("techos3"), GetTronche("techos3"), 3700)
                     };
 
                     npcs[1].Flip = true;
@@ -508,11 +508,11 @@ namespace ParapluieBulgare
                 case 3:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("employe6"), GetAnimation("employe6"), facebook["persos/Cadres/Cadre1Tronche"], 580),
-                        new NPC(GetAnimation("employe7"), GetAnimation("employe7"), facebook["persos/Cadres/Cadre1Tronche"], 900),
-                        new NPC(GetAnimation("employe8"), GetAnimation("employe8"), facebook["persos/Cadres/Cadre1Tronche"], 1020),
-                        new NPC(GetAnimation("cadre3"), GetAnimation("cadre3"), facebook["persos/Cadres/Cadre1Tronche"], 2200),
-                        new NPC(GetAnimation("cadre4"), GetAnimation("cadre4"), facebook["persos/Cadres/Cadre1Tronche"], 2400)
+                        new NPC(GetAnimation("employe6"), GetAnimation("employe6"), GetTronche("employe6"), 580),
+                        new NPC(GetAnimation("employe7"), GetAnimation("employe7"), GetTronche("employe7"), 900),
+                        new NPC(GetAnimation("employe8"), GetAnimation("employe8"), GetTronche("employe8"), 1020),
+                        new NPC(GetAnimation("cadre3"), GetAnimation("cadre3"), GetTronche("cadre3"), 2200),
+                        new NPC(GetAnimation("cadre4"), GetAnimation("cadre4"), GetTronche("cadre4"), 2400)
                     };
 
                     npcs[0].Flip = true;
@@ -522,9 +522,9 @@ namespace ParapluieBulgare
                 case 4:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("directeur3"), GetAnimation("directeur3"), facebook["persos/Cadres/Cadre1Tronche"], 350),
-                        new NPC(GetAnimation("directeur4"), GetAnimation("directeur4"), facebook["persos/Cadres/Cadre1Tronche"], 700),
-                        new NPC(GetAnimation("secretaire"), GetAnimation("secretaire_walk"), facebook["persos/Cadres/Cadre1Tronche"], 2450)
+                        new NPC(GetAnimation("directeur3"), GetAnimation("directeur3"), GetTronche("directeur3"), 350),
+                        new NPC(GetAnimation("directeur4"), GetAnimation("directeur4"), GetTronche("directeur4"), 700),
+                        new NPC(GetAnimation("secretaire"), GetAnimation("secretaire_walk"), GetTronche("secretaire"), 2450)
                     };
 
                     npcs[0].Flip = true;
@@ -546,21 +546,21 @@ namespace ParapluieBulgare
                 case 2:
                     furnitures = new List<Furniture>
                     {
-                        new Furniture(GetAnimation("transparent"), facebook["persos/Cadres/Cadre1Tronche"], 900),
-                        new Furniture(GetAnimation("transparent"), facebook["persos/Cadres/Cadre1Tronche"], 3420)
+                        new Furniture(GetAnimation("transparent"), GetTronche("directeur1"), 900),
+                        new Furniture(GetAnimation("transparent"), GetTronche("directeur1"), 3420)
                     };
                     break;
                 case 3:
                     furnitures = new List<Furniture>
                     {
-                        new Furniture(GetAnimation("transparent"), facebook["persos/Cadres/Cadre1Tronche"], 2800),
-                        new Furniture(GetAnimation("transparent"), facebook["persos/Cadres/Cadre1Tronche"], 3500)
+                        new Furniture(GetAnimation("transparent"), GetTronche("directeur1"), 2800),
+                        new Furniture(GetAnimation("transparent"), GetTronche("directeur1"), 3500)
                     };
                     break;
                 case 4:
                     furnitures = new List<Furniture>
                     {
-                        new Furniture(GetAnimation("transparent"), facebook["persos/Cadres/Cadre1Tronche"], 3350)
+                        new Furniture(GetAnimation("transparent"), GetTronche("directeur1"), 3350)
                     };
                     break;
                 default:
