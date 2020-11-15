@@ -644,6 +644,14 @@ namespace ParapluieBulgare
                         new Furniture(GetAnimation("transparent"), GetTronche("Docu_Vaccin"), 900),
                         new Furniture(GetAnimation("moniteur"), GetTronche("Serveur"), 3420)
                     };
+
+                    DialogBox b1 = new DialogBox("Nom du dossier : JM0-T4", furnitures[0]);
+                    DialogBox b2 = new DialogBox("Nom commercial : REVOLUVAX", furnitures[0]);
+                    DialogBox b3 = new DialogBox("Type : Vaccin", furnitures[0]);
+                    DialogBox b4 = new DialogBox("Chercheuse-Cheffe de projet : Sophie DELVERNE", furnitures[0]);
+                    DialogTree tree = new DialogTree(new List<DialogBox>(), new List<HintsEnum>(), new List<DialogBox> { b1, b2, b3, b4 });
+                    furnitures[0].SetDialogTree(tree);
+
                     break;
                 case 3:
                     furnitures = new List<Furniture>
@@ -651,9 +659,9 @@ namespace ParapluieBulgare
                         new Furniture(GetAnimation("transparent"), GetTronche("Badge"), 2800)
                     };
 
-                    DialogBox b1 = new DialogBox("Un badge de chercheur...", furnitures[0]);
-                    DialogBox b2 = new DialogBox("Il devrait me permettre d'acceder au labo", player, false, HintsEnum.BadgeLabo);
-                    DialogTree tree = new DialogTree(new List<DialogBox>(), new List<HintsEnum> { HintsEnum.JournalisteToilettes } , new List<DialogBox> { b1, b2 });
+                    b1 = new DialogBox("Un badge de chercheur...", furnitures[0]);
+                    b2 = new DialogBox("Il devrait me permettre d'acceder au labo", player, false, HintsEnum.BadgeLabo);
+                    tree = new DialogTree(new List<DialogBox>(), new List<HintsEnum> { HintsEnum.JournalisteToilettes } , new List<DialogBox> { b1, b2 });
                     furnitures[0].SetDialogTree(tree);
             break;
                 case 4:
