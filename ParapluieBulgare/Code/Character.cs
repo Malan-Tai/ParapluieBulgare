@@ -90,7 +90,7 @@ namespace ParapluieBulgare.Code
             if (x != prevX)
             {
                 currentAnimation = walkAnimation;
-                if (x < prevX) Flip = false;
+                if (x <= prevX) Flip = false;
                 else Flip = true;
             }
             else

@@ -13,7 +13,10 @@ namespace ParapluieBulgare.Code
 {
     class Floor
     {
-        static readonly int nbFloors = 6;  
+        static readonly int nbFloors = 6;
+        public static int width;
+        public static int height;
+
 
         private Texture2D texture;
         public int Number { get; set; }
@@ -85,6 +88,8 @@ namespace ParapluieBulgare.Code
             int ratio = 2 * Game1.HEIGHT / (3 * sourceRectangle.Height);
             int h = sourceRectangle.Height * ratio;
             int w = sourceRectangle.Width * ratio;
+            Floor.width = w;
+            Floor.height = h;
             spriteBatch.Draw(texture, new Rectangle(-cameraX, 0, w, h), sourceRectangle, Color.White);
 
             //foreach (Rectangle rect in elevators)
