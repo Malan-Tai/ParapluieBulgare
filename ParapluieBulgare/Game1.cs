@@ -325,7 +325,7 @@ namespace ParapluieBulgare
             currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth, guards);
             if (sniper != null) sniper.Draw(spriteBatch, player.CameraX(WIDTH));
 
-            if (elevator) elevatorGUI.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
+            if (elevator) elevatorGUI.Draw(spriteBatch);
 
             string time = timer.getTime();
             spriteBatch.DrawString(font, time, new Vector2(400, 10), Color.Black);
