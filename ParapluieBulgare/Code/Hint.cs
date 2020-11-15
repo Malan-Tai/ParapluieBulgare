@@ -43,9 +43,9 @@ namespace ParapluieBulgare.Code
                 case HintsEnum.VaccinJM0T4:
                     Text = "Le projet de vaccin est code JM0-T4";
                     break;
-                //case HintsEnum.PrenomSophie:
-                //    Text = "";
-                //    break;
+                case HintsEnum.JournalisteToilettes:
+                    Text = "Un journaliste a laisse un badge du labo sur le lavabo";
+                    break;
                 case HintsEnum.DoloresDemandee:
                     Text = "Une certaine Dolores est demandee a la cafet";
                     break;

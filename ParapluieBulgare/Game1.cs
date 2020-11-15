@@ -664,7 +664,7 @@ namespace ParapluieBulgare
 
                     DialogBox b1 = new DialogBox("Nom du dossier : JM0-T4", furnitures[0]);
                     DialogBox b2 = new DialogBox("Nom commercial : REVOLUVAX", furnitures[0]);
-                    DialogBox b3 = new DialogBox("Type : Vaccin", furnitures[0]);
+                    DialogBox b3 = new DialogBox("Type : Vaccin", furnitures[0], false, HintsEnum.VaccinJM0T4);
                     DialogTree tree = new DialogTree(new List<DialogBox>(), new List<HintsEnum>(), new List<DialogBox> { b1, b2, b3 });
                     furnitures[0].SetDialogTree(tree);
 
@@ -686,7 +686,7 @@ namespace ParapluieBulgare
                     DialogBox b16 = new DialogBox("Identite 104 : Philippe TRAN, 54 ans, Homme, Blanc, chauve", furnitures[1]);
                     DialogBox b17 = new DialogBox("...", furnitures[1]);
                     DialogBox b18 = new DialogBox("...", furnitures[1]);
-                    DialogBox b19 = new DialogBox("Politique de diversite engageante. Quota legal bientot atteint.", furnitures[1]);
+                    DialogBox b19 = new DialogBox("Politique de diversite engageante. Quota legal bientot atteint.", furnitures[1], false, HintsEnum.FichierPhysique);
                     tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19 });
                     furnitures[1].SetDialogTree(tree);
 
@@ -697,7 +697,7 @@ namespace ParapluieBulgare
                         new Furniture(GetAnimation("transparent"), GetTronche("Badge"), 2800)
                     };
 
-                    DialogBox b0 = new DialogBox("Il est beau le lavabo.", furnitures[0]);
+                    DialogBox b0 = new DialogBox("Il est beau le lavabo.", player);
                     b1 = new DialogBox("Un badge de chercheur...", furnitures[0]);
                     b2 = new DialogBox("Il devrait me permettre d'acceder au labo", player, false, HintsEnum.BadgeLabo);
                     tree = new DialogTree(new List<DialogBox> {b0} , new List<HintsEnum> { HintsEnum.JournalisteToilettes } , new List<DialogBox> { b1, b2 });
@@ -709,24 +709,26 @@ namespace ParapluieBulgare
                         new Furniture(GetAnimation("transparent"), GetTronche("PC_Boss"), 3350)
                     };
 
-                     b1 = new DialogBox("Nom du dossier : JM0-T4", furnitures[0]);
-                     b2 = new DialogBox("Nom commercial : REVOLUVAX", furnitures[0]);
-                     b3 = new DialogBox("Type : Vaccin", furnitures[0]);
-                     b4 = new DialogBox("Chercheuse-Cheffe de projet : Sophie DELVERNE", furnitures[0]);
-                     b5 = new DialogBox("Nom du dossier : GB15-11", furnitures[0]);
-                     b6 = new DialogBox("Nom commercial : CHROROPALINE", furnitures[0]);
-                     b7 = new DialogBox("Type : Antibiotique", furnitures[0]);
-                     b8 = new DialogBox("Chercheur-Chef de projet : Didier TAOUNE", furnitures[0]);
-                     b9 = new DialogBox("Nom du dossier : YM3-U", furnitures[0]);
-                     b10 = new DialogBox("Nom commercial : FULNIZONE", furnitures[0]);
-                     b11 = new DialogBox("Type : Antiparasite", furnitures[0]);
-                     b12 = new DialogBox("Chercheur-Chef de projet : Laurent GARENTI", furnitures[0]);
-                     b13 = new DialogBox("Nom du dossier : JIN21-21", furnitures[0]);
-                     b14 = new DialogBox("Nom commercial : ORINAX", furnitures[0]);
-                     b15 = new DialogBox("Type : Vaccin", furnitures[0]);
-                     b16 = new DialogBox("Chercheur-Chef de projet : Laurent GARENTI", furnitures[0]);
-                     b17 = new DialogBox("Developpement du projet :", furnitures[0]);
-                    tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17 });
+                    b18 = new DialogBox("Mot de passe ?", furnitures[0]);
+                    b19 = new DialogBox("Berlioz", player);
+                    b1 = new DialogBox("Nom du dossier : JM0-T4", furnitures[0]);
+                    b2 = new DialogBox("Nom commercial : REVOLUVAX", furnitures[0]);
+                    b3 = new DialogBox("Type : Vaccin", furnitures[0]);
+                    b4 = new DialogBox("Chercheuse-Cheffe de projet : Sophie DELVERNE", furnitures[0]);
+                    b5 = new DialogBox("Nom du dossier : GB15-11", furnitures[0]);
+                    b6 = new DialogBox("Nom commercial : CHROROPALINE", furnitures[0]);
+                    b7 = new DialogBox("Type : Antibiotique", furnitures[0]);
+                    b8 = new DialogBox("Chercheur-Chef de projet : Didier TAOUNE", furnitures[0]);
+                    b9 = new DialogBox("Nom du dossier : YM3-U", furnitures[0]);
+                    b10 = new DialogBox("Nom commercial : FULNIZONE", furnitures[0]);
+                    b11 = new DialogBox("Type : Antiparasite", furnitures[0]);
+                    b12 = new DialogBox("Chercheur-Chef de projet : Laurent GARENTI", furnitures[0]);
+                    b13 = new DialogBox("Nom du dossier : JIN21-21", furnitures[0]);
+                    b14 = new DialogBox("Nom commercial : ORINAX", furnitures[0]);
+                    b15 = new DialogBox("Type : Vaccin", furnitures[0]);
+                    b16 = new DialogBox("Chercheur-Chef de projet : Laurent GARENTI", furnitures[0]);
+                    b17 = new DialogBox("Developpement du projet :", furnitures[0], false, HintsEnum.RespoProjet);
+                    tree = new DialogTree(new List<DialogBox> { b18 }, new List<HintsEnum> { HintsEnum.ChatBerlioz }, new List<DialogBox> { b18, b19, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17 });
                     furnitures[0].SetDialogTree(tree);
                     break;
                 default:
@@ -761,6 +763,7 @@ namespace ParapluieBulgare
                     isPlayingIntro = false;
                     audioIntroInstance.Stop();
                     audioIntroInstance.Dispose();
+                    MediaPlayer.Volume = 0.1f;
                     MediaPlayer.Play(music);
                     MediaPlayer.IsRepeating = true;
                 }
