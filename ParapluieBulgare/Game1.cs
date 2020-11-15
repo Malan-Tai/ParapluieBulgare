@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using ParapluieBulgare.Code;
 
 namespace ParapluieBulgare
@@ -16,12 +17,13 @@ namespace ParapluieBulgare
         public static int WIDTH = 1280;
         public static int HEIGHT = 720;
 
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         KeyboardState prevKeyState;
 
-        List<string> allTextures = new List<string>
+        List<string> allTextures = new List<string> 
         {
             "white",
             "bulleDeTexte",
@@ -38,6 +40,13 @@ namespace ParapluieBulgare
             "directeur_idle",
             "journaliste_idle",
             "vigile_walk",
+
+            "TitleScreen"
+        };
+        List<string> allSounds = new List<string>
+        {
+            "Bulgared",
+            "Intro"
         };
         Dictionary<string, Texture2D> textureDict;
 
@@ -65,16 +74,24 @@ namespace ParapluieBulgare
         bool elevator = false;
         ElevatorGUI elevatorGUI = null;
 
-        SoundEffect soundBulgared;
+        Dictionary<string, SoundEffect> soundDict;
+
+
 
         public static int ThreatLevel = 0;
         public static bool Win = false;
         public static bool Lose = false;
 
+        private bool isPlayingIntro = true;
+
+        SoundEffectInstance audioIntroInstance;
+
         public Game1()
         {
             textureDict = new Dictionary<string, Texture2D>();
             facebook = new Dictionary<string, Texture2D>();
+            soundDict = new Dictionary<string, SoundEffect>();
+
 
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -129,7 +146,12 @@ namespace ParapluieBulgare
 
             timer = new Timer(600);
 
-            NPC.soundBulgared = soundBulgared;
+            NPC.soundBulgared = soundDict["Bulgared"];
+
+            //jouer l'intro
+            audioIntroInstance = soundDict["Intro"].CreateInstance();
+            audioIntroInstance.Play();
+            isPlayingIntro = true;
         }
 
         /// <summary>
@@ -150,10 +172,12 @@ namespace ParapluieBulgare
             {
                 facebook.Add(text, Content.Load<Texture2D>(text));
             }
-
+            foreach (string text in allSounds)
+            {
+                Console.WriteLine(text);
+                soundDict.Add(text, Content.Load<SoundEffect>(text));
+            }
             white = textureDict["white"];
-
-            soundBulgared = Content.Load<SoundEffect>("Bulgared");
         }
 
         private Animation GetAnimation(string spritesheet)
@@ -328,6 +352,25 @@ namespace ParapluieBulgare
         {
             KeyboardState state = Keyboard.GetState();
 
+            if (isPlayingIntro)
+            {
+                if(audioIntroInstance.State == SoundState.Stopped || state.GetPressedKeys().Length > 0)
+                {
+                    isPlayingIntro = false;
+                    audioIntroInstance.Stop();
+                    audioIntroInstance.Dispose();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            timer.update(gameTime.ElapsedGameTime.TotalSeconds);
+
+            if (timer.isOver())
+                Exit();
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -412,9 +455,15 @@ namespace ParapluieBulgare
             if (Win) spriteBatch.DrawString(font, "YOU WIN", new Vector2(300, 150), Color.Red);
             if (Lose) spriteBatch.DrawString(font, "YOU LOSE", new Vector2(300, 150), Color.Red);
 
+            if (isPlayingIntro)
+            {
+                spriteBatch.Draw(textureDict["TitleScreen"], new Rectangle(0,0,WIDTH,HEIGHT), Color.White);
+            }
+
+
             spriteBatch.End();
 
-            base.Draw(gameTime);
+            base.Draw(gameTime);       
         }
     }
 }
