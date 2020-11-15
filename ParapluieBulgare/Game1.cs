@@ -48,11 +48,12 @@ namespace ParapluieBulgare
         };
         Dictionary<string, Texture2D> facebook;
 
-        public static Texture2D white;
+        Texture2D white;
 
         SpriteFont font;
 
         Player player;
+        Sniper sniper;
 
         Floor[] floors;
         Floor currentFloor;
@@ -67,6 +68,7 @@ namespace ParapluieBulgare
 
         public static int ThreatLevel = 0;
         public static bool Win = false;
+        public static bool Lose = false;
 
         public Game1()
         {
@@ -248,6 +250,11 @@ namespace ParapluieBulgare
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (sniper == null && ThreatLevel == 1)
+            {
+                sniper = new Sniper(white);
+            }
+
             timer.update(gameTime.ElapsedGameTime.TotalSeconds);
 
             if (timer.isOver())
@@ -258,9 +265,11 @@ namespace ParapluieBulgare
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            int oldFloor = currentFloor.Number;
             if (!elevator)
             {
                 string switchFloor = currentFloor.Update(state, prevKeyState, guards);
+                if (sniper != null) sniper.Update(player);
 
                 if (switchFloor == "stairs up")
                 {
@@ -297,6 +306,7 @@ namespace ParapluieBulgare
                     Console.Out.WriteLine("elevator : " + (switchFloor - 1));
                 }
             }
+            if (sniper != null) sniper.SwitchFloor(oldFloor, currentFloor.Number);
 
             prevKeyState = state;
             base.Update(gameTime);
@@ -313,6 +323,7 @@ namespace ParapluieBulgare
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
 
             currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth, guards);
+            if (sniper != null) sniper.Draw(spriteBatch, player.CameraX(WIDTH));
 
             if (elevator) elevatorGUI.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
 
@@ -320,12 +331,11 @@ namespace ParapluieBulgare
             spriteBatch.DrawString(font, time, new Vector2(400, 10), Color.Black);
 
             if (Win) spriteBatch.DrawString(font, "YOU WIN", new Vector2(300, 150), Color.Red);
+            if (Lose) spriteBatch.DrawString(font, "YOU LOSE", new Vector2(300, 150), Color.Red);
 
             spriteBatch.End();
 
             base.Draw(gameTime);
-
-            
         }
     }
 }

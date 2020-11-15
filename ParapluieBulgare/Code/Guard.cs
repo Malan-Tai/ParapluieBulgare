@@ -47,6 +47,10 @@ namespace ParapluieBulgare.Code
                         if (playerCoords.X > x) x += speed;
                         else x -= speed;
                     }
+                    else
+                    {
+                        Game1.Lose = true;
+                    }
                 }
                 else if (isGoingToChangeFloor)
                 {
