@@ -601,7 +601,7 @@ namespace ParapluieBulgare
                 case 4:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("directeur3"), GetAnimation("directeur3"), GetTronche("directeur3"), 350),
+                        new NPC(GetAnimation("directeur3"), GetAnimation("directeur3"), GetTronche("directeur2"), 350),
                         new NPC(GetAnimation("directeur4"), GetAnimation("directeur4"), GetTronche("directeur4"), 700),
                         new NPC(GetAnimation("secretaire"), GetAnimation("secretaire_walk"), GetTronche("secretaire"), 2450)
                     };
@@ -648,9 +648,30 @@ namespace ParapluieBulgare
                     DialogBox b1 = new DialogBox("Nom du dossier : JM0-T4", furnitures[0]);
                     DialogBox b2 = new DialogBox("Nom commercial : REVOLUVAX", furnitures[0]);
                     DialogBox b3 = new DialogBox("Type : Vaccin", furnitures[0]);
-                    DialogBox b4 = new DialogBox("Chercheuse-Cheffe de projet : Sophie DELVERNE", furnitures[0]);
-                    DialogTree tree = new DialogTree(new List<DialogBox>(), new List<HintsEnum>(), new List<DialogBox> { b1, b2, b3, b4 });
+                    DialogTree tree = new DialogTree(new List<DialogBox>(), new List<HintsEnum>(), new List<DialogBox> { b1, b2, b3 });
                     furnitures[0].SetDialogTree(tree);
+
+                    b1 = new DialogBox("Etude identificatoire pour la diversite du personnel", furnitures[1]);
+                    b2 = new DialogBox("Identite 1 : Didier TAOUNE, 61 ans, Homme, Blanc, cheveux gris,...", furnitures[1]);
+                    b3 = new DialogBox("Identite 2 : Patrick SIFREDO, 45 ans, Homme, Blanc, cheveux chatains,...", furnitures[1]);
+                    DialogBox b4 = new DialogBox("Identite 3 : Etienne SISSOKO, 42 ans, Homme, Noir, cheveux bruns,...", furnitures[1]);
+                    DialogBox b5 = new DialogBox("Identite 4 : Sophie DELVERNE, 30 ans, Femme, Blanche, cheveux bruns,...", furnitures[1]);
+                    DialogBox b6 = new DialogBox("Identite 5 : Yukiko TAKAHASHI, 31 ans, Femme, Asiatique, cheveux bruns,...", furnitures[1]);
+                    DialogBox b7 = new DialogBox("...", furnitures[1]);
+                    DialogBox b8 = new DialogBox("...", furnitures[1]);
+                    DialogBox b9 = new DialogBox("Identite 52 : Christine SUAREZ, 36 ans, Femme, Blanche, cheveux chatains,...", furnitures[1]);
+                    DialogBox b10 = new DialogBox("Identite 53 : Sophie OUVINI, 48 ans, Femme, Blanche, cheveux roux,...", furnitures[1]);
+                    DialogBox b11 = new DialogBox("Identite 54 : Alicia ROSLINSKI, 25 ans, Femme, Blanche, cheveux blonds,...", furnitures[1]);
+                    DialogBox b12 = new DialogBox("...", furnitures[1]);
+                    DialogBox b13 = new DialogBox("...", furnitures[1]);
+                    DialogBox b14 = new DialogBox("Identite 102 : Opaline DIAWARA, 29 ans, Femme, Noire, cheveux bruns,...", furnitures[1]);
+                    DialogBox b15 = new DialogBox("Identite 103 : Franck RILANDET, 46 ans, Homme, Blanc, cheveux blonds", furnitures[1]);
+                    DialogBox b16 = new DialogBox("Identite 104 : Philippe TRAN, 54 ans, Homme, Blanc, chauve", furnitures[1]);
+                    DialogBox b17 = new DialogBox("...", furnitures[1]);
+                    DialogBox b18 = new DialogBox("...", furnitures[1]);
+                    DialogBox b19 = new DialogBox("Politique de diversite engageante. Quota legal bientot atteint.", furnitures[1]);
+                    tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19 });
+                    furnitures[1].SetDialogTree(tree);
 
                     break;
                 case 3:
@@ -669,6 +690,25 @@ namespace ParapluieBulgare
                     {
                         new Furniture(GetAnimation("transparent"), GetTronche("PC_Boss"), 3350)
                     };
+
+                     b1 = new DialogBox("Nom du dossier : JM0-T4", furnitures[0]);
+                     b2 = new DialogBox("Nom commercial : REVOLUVAX", furnitures[0]);
+                     b3 = new DialogBox("Type : Vaccin", furnitures[0]);
+                     b4 = new DialogBox("Chercheuse-Cheffe de projet : Sophie DELVERNE", furnitures[0]);
+                     b5 = new DialogBox("Nom du dossier : GB15-11", furnitures[0]);
+                     b6 = new DialogBox("Nom commercial : CHROROPALINE", furnitures[0]);
+                     b7 = new DialogBox("Type : Antibiotique", furnitures[0]);
+                     b8 = new DialogBox("Chercheur-Chef de projet : Didier TAOUNE", furnitures[0]);
+                     b9 = new DialogBox("Nom du dossier : YM3-U", furnitures[0]);
+                     b10 = new DialogBox("Nom commercial : FULNIZONE", furnitures[0]);
+                     b11 = new DialogBox("Type : Antiparasite", furnitures[0]);
+                     b12 = new DialogBox("Chercheur-Chef de projet : Laurent GARENTI", furnitures[0]);
+                     b13 = new DialogBox("Nom du dossier : JIN21-21", furnitures[0]);
+                     b14 = new DialogBox("Nom commercial : ORINAX", furnitures[0]);
+                     b15 = new DialogBox("Type : Vaccin", furnitures[0]);
+                     b16 = new DialogBox("Chercheur-Chef de projet : Laurent GARENTI", furnitures[0]);
+                     b17 = new DialogBox("Developpement du projet :", furnitures[0]);
+                    tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17 });
                     break;
                 default:
                     break;
