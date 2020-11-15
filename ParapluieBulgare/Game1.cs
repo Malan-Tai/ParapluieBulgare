@@ -25,18 +25,19 @@ namespace ParapluieBulgare
         {
             "white",
             "bulleDeTexte",
-            "MC_Walk_SpriteSheet",
-            "costard_fem_idle",
+            "background",
+            "ascenseur",
+
+            "player_walk",
             "costard_idle",
-            "costard_idle_2",
+            "costard_idle2",
+            "costard_fem_idle",
+            "costard_fem_idle2",
             "cuistot_idle",
-            "cuistot_idle_2",
-            "Directeur_idle",
-            "Journaliste_IDLE",
-            "rando_fem_idle",
-            "Background",
-            "vigile_walk_3",
-            "Ascenseur"
+            "cuistot_idle2",
+            "directeur_idle",
+            "journaliste_idle",
+            "vigile_walk",
         };
         Dictionary<string, Texture2D> textureDict;
 
@@ -99,20 +100,22 @@ namespace ParapluieBulgare
             DialogBox.dialogBoxTexture = textureDict["bulleDeTexte"];
             DialogBox.boxRect = new Rectangle(0, 0, WIDTH - (HEIGHT / 3), HEIGHT / 3 + 30); //(int)(0.261 * (WIDTH - (HEIGHT / 3))));
 
-            player = new Player(GetAnimation("MC_Walk_SpriteSheet"), GetAnimation("MC_Walk_SpriteSheet"), facebook["face01"], white);
+            player = new Player(GetAnimation("player_walk"), GetAnimation("player_walk"), facebook["face01"], white);
             floors = new Floor[]
             {
-                new Floor(player, -1, textureDict["Background"], GetFloorNPCs(-1), GetFloorFurnitures(-1)),
-                new Floor(player, 0, textureDict["Background"], GetFloorNPCs(0), GetFloorFurnitures(0)),
-                new Floor(player, 1, textureDict["Background"], GetFloorNPCs(1), GetFloorFurnitures(1)),
-                new Floor(player, 2, textureDict["Background"], GetFloorNPCs(2), GetFloorFurnitures(2)),
-                new Floor(player, 3, textureDict["Background"], GetFloorNPCs(3), GetFloorFurnitures(3)),
-                new Floor(player, 4, textureDict["Background"], GetFloorNPCs(4), GetFloorFurnitures(4))
+                new Floor(player, -1, textureDict["background"], GetFloorNPCs(-1), GetFloorFurnitures(-1)),
+                new Floor(player, 0, textureDict["background"], GetFloorNPCs(0), GetFloorFurnitures(0)),
+                new Floor(player, 1, textureDict["background"], GetFloorNPCs(1), GetFloorFurnitures(1)),
+                new Floor(player, 2, textureDict["background"], GetFloorNPCs(2), GetFloorFurnitures(2)),
+                new Floor(player, 3, textureDict["background"], GetFloorNPCs(3), GetFloorFurnitures(3)),
+                new Floor(player, 4, textureDict["background"], GetFloorNPCs(4), GetFloorFurnitures(4))
             };
 
             guards = new List<Guard>
             {
-                new Guard(GetAnimation("vigile_walk_3"), GetAnimation("vigile_walk_3"), facebook["faceVigile"], 0, 700)
+                new Guard(GetAnimation("vigile_walk"), GetAnimation("vigile_walk"), facebook["faceVigile"], 0, 1700),
+                new Guard(GetAnimation("vigile_walk"), GetAnimation("vigile_walk"), facebook["faceVigile"], 2, 400),
+                new Guard(GetAnimation("vigile_walk"), GetAnimation("vigile_walk"), facebook["faceVigile"], 2, 1700)
             };
             currentFloor = floors[1];
 
@@ -149,26 +152,26 @@ namespace ParapluieBulgare
         {
             switch (spritesheet)
             {
-                case "MC_Walk_SpriteSheet":
-                    return new Animation(textureDict["MC_Walk_SpriteSheet"], 32, 32, 6, 10);
-                case "vigile_walk_3":
-                    return new Animation(textureDict["vigile_walk_3"], 32, 32, 6, 10);
+                case "player_walk":
+                    return new Animation(textureDict["player_walk"], 32, 32, 6, 10);
+                case "vigile_walk":
+                    return new Animation(textureDict["vigile_walk"], 32, 32, 6, 10);
                 case "costard_fem_idle":
                     return new Animation(textureDict["costard_fem_idle"], 32, 32, 2, 60);
+                case "rando_fem_idle":
+                    return new Animation(textureDict["costard_fem_idle2"], 32, 32, 2, 60);
                 case "costard_idle":
                     return new Animation(textureDict["costard_idle"], 32, 32, 2, 60);
-                case "costard_idle_2":
-                    return new Animation(textureDict["costard_idle_2"], 32, 32, 2, 60);
+                case "costard_idle2":
+                    return new Animation(textureDict["costard_idle2"], 32, 32, 2, 60);
                 case "cuistot_idle":
                     return new Animation(textureDict["cuistot_idle"], 32, 32, 2, 60);
-                case "cuistot_idle_2":
-                    return new Animation(textureDict["cuistot_idle_2"], 32, 32, 2, 60);
-                case "Directeur_idle":
-                    return new Animation(textureDict["Directeur_idle"], 32, 32, 7, 60);
-                case "Journaliste_IDLE":
-                    return new Animation(textureDict["Journaliste_IDLE"], 32, 32, 2, 60);
-                case "rando_fem_idle":
-                    return new Animation(textureDict["rando_fem_idle"], 32, 32, 2, 60);
+                case "cuistot_idle2":
+                    return new Animation(textureDict["cuistot_idle2"], 32, 32, 2, 60);
+                case "directeur_idle":
+                    return new Animation(textureDict["directeur_idle"], 32, 32, 7, 60);
+                case "journaliste_idle":
+                    return new Animation(textureDict["journaliste_idle"], 32, 32, 2, 60);
                 default:
                     return null;
             }
@@ -180,17 +183,17 @@ namespace ParapluieBulgare
 
             switch (floor)
             {
-                case 0:
+                case -1:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), facebook["face02"], 80),
-                        new NPC(GetAnimation("Journaliste_IDLE"), GetAnimation("Journaliste_IDLE"), facebook["face02"], 200),
-                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 500)
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 700),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 930),
                     };
 
                     npcs[0].Target = true;
+                    npcs[0].Flip = true;
 
-                    NPC npc = npcs[2];
+                    NPC npc = npcs[1];
                     DialogBox b1 = new DialogBox("coucou", npc);
                     DialogBox b2 = new DialogBox("wesh frr", player);
                     DialogBox b3 = new DialogBox("vazy kass toa", npc, false, HintsEnum.BadgeLabo);
@@ -200,7 +203,80 @@ namespace ParapluieBulgare
                     DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3 }, new List<HintsEnum> { HintsEnum.BadgeLabo }, new List<DialogBox> { b4 });
                     npc.SetDialogTree(tree);
                     break;
+                case 0:
+                    npcs = new List<NPC>
+                    {
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 660),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 1600),
+
+                        new NPC(GetAnimation("costard_fem_idle"), GetAnimation("costard_fem_idle"), facebook["face02"], 2200),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 2700),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 2800)
+                    };
+
+                    npcs[0].Flip = true;
+                    npcs[1].Flip = true;
+                    npcs[3].Flip = true;
+
+                    break;
                 case 1:
+                    npcs = new List<NPC>
+                    {
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 460),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 700),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 1170),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 1370),
+                        new NPC(GetAnimation("directeur_idle"), GetAnimation("directeur_idle"), facebook["face02"], 1800),
+
+                        new NPC(GetAnimation("cuistot_idle"), GetAnimation("cuistot_idle"), facebook["face02"], 2850),
+                        new NPC(GetAnimation("cuistot_idle"), GetAnimation("cuistot_idle"), facebook["face02"], 3700),
+                        new NPC(GetAnimation("cuistot_idle"), GetAnimation("cuistot_idle"), facebook["face02"], 3850)
+                    };
+
+                    npcs[0].Flip = true;
+                    npcs[2].Flip = true;
+                    npcs[5].Flip = true;
+
+                    break;
+                case 2:
+                    npcs = new List<NPC>
+                    {
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 700),
+                        new NPC(GetAnimation("direction_idle"), GetAnimation("direction_idle"), facebook["face02"], 1300),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 1400),
+
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 3100),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 4000)
+                    };
+
+                    npcs[1].Flip = true;
+                    npcs[3].Flip = true;
+
+                    break;
+                case 3:
+                    npcs = new List<NPC>
+                    {
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 650),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 800),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 900),
+                        new NPC(GetAnimation("costard_fem_idle"), GetAnimation("costard_fem_idle"), facebook["face02"], 1450),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 1700)
+                    };
+
+                    npcs[0].Flip = true;
+                    npcs[3].Flip = true;
+
+                    break;
+                case 4:
+                    npcs = new List<NPC>
+                    {
+                        new NPC(GetAnimation("direction_idle"), GetAnimation("direction_idle"), facebook["face02"], 1000),
+                        new NPC(GetAnimation("direction_idle"), GetAnimation("direction_idle"), facebook["face02"], 1200),
+                        new NPC(GetAnimation("costar_fem_idle2"), GetAnimation("costard_fem_idle2"), facebook["face02"], 2800)
+                    };
+
+                    npcs[0].Flip = true;
+
                     break;
                 default:
                     break;

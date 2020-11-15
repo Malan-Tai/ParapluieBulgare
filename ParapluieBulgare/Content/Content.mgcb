@@ -23,7 +23,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Ascenseur.png
+/build:Ascenseur.png;ascenseur.png
 
 #begin Background.png
 /importer:TextureImporter
@@ -35,7 +35,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Background.png
+/build:Background.png;background.png
 
 #begin Bulgared.wav
 /importer:WavImporter
@@ -67,6 +67,18 @@
 /processorParam:TextureFormat=Color
 /build:costard_fem_idle.png
 
+#begin costard_fem_idle2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:costard_fem_idle2.png
+
 #begin costard_idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -79,7 +91,7 @@
 /processorParam:TextureFormat=Color
 /build:costard_idle.png
 
-#begin costard_idle_2.png
+#begin costard_idle2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -89,7 +101,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:costard_idle_2.png
+/build:costard_idle2.png
 
 #begin cuistot_idle.png
 /importer:TextureImporter
@@ -103,7 +115,7 @@
 /processorParam:TextureFormat=Color
 /build:cuistot_idle.png
 
-#begin cuistot_idle_2.png
+#begin cuistot_idle2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -113,9 +125,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:cuistot_idle_2.png
+/build:cuistot_idle2.png
 
-#begin Directeur_idle.png
+#begin directeur_idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -125,7 +137,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Directeur_idle.png
+/build:directeur_idle.png
 
 #begin face01.png
 /importer:TextureImporter
@@ -170,7 +182,7 @@
 /processorParam:TextureFormat=Compressed
 /build:font.spritefont
 
-#begin Journaliste_IDLE.png
+#begin journaliste_idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -180,9 +192,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Journaliste_IDLE.png
+/build:journaliste_idle.png
 
-#begin MC_Walk_SpriteSheet.png
+#begin player_walk.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -192,19 +204,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:MC_Walk_SpriteSheet.png
-
-#begin rando_fem_idle.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:rando_fem_idle.png
+/build:player_walk.png
 
 #begin vigile_walk.png
 /importer:TextureImporter
@@ -217,30 +217,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:vigile_walk.png
-
-#begin vigile_walk_2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:vigile_walk_2.png
-
-#begin vigile_walk_3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:vigile_walk_3.png
 
 #begin white.png
 /importer:TextureImporter
