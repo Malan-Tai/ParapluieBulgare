@@ -250,7 +250,7 @@ namespace ParapluieBulgare
                     npcs = new List<NPC>
                     {
                         new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 700),
-                        new NPC(GetAnimation("direction_idle"), GetAnimation("direction_idle"), facebook["face02"], 1300),
+                        new NPC(GetAnimation("directeur_idle"), GetAnimation("directeur_idle"), facebook["face02"], 1300),
                         new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 1400),
 
                         new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 3100),
