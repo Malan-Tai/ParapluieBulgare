@@ -34,8 +34,9 @@ namespace ParapluieBulgare
             "Directeur_idle",
             "Journaliste_IDLE",
             "rando_fem_idle",
-            "background",
-            "vigile_walk_3"
+            "Background",
+            "vigile_walk_3",
+            "Ascenseur"
         };
         Dictionary<string, Texture2D> textureDict;
 
@@ -101,12 +102,12 @@ namespace ParapluieBulgare
             player = new Player(GetAnimation("MC_Walk_SpriteSheet"), GetAnimation("MC_Walk_SpriteSheet"), facebook["face01"], white);
             floors = new Floor[]
             {
-                new Floor(player, -1, textureDict["background"], GetFloorNPCs(-1)),
-                new Floor(player, 0, textureDict["background"], GetFloorNPCs(0)),
-                new Floor(player, 1, textureDict["background"], GetFloorNPCs(1)),
-                new Floor(player, 2, textureDict["background"], GetFloorNPCs(2)),
-                new Floor(player, 3, textureDict["background"], GetFloorNPCs(3)),
-                new Floor(player, 4, textureDict["background"], GetFloorNPCs(4))
+                new Floor(player, -1, textureDict["Background"], GetFloorNPCs(-1), GetFloorFurnitures(-1)),
+                new Floor(player, 0, textureDict["Background"], GetFloorNPCs(0), GetFloorFurnitures(0)),
+                new Floor(player, 1, textureDict["Background"], GetFloorNPCs(1), GetFloorFurnitures(1)),
+                new Floor(player, 2, textureDict["Background"], GetFloorNPCs(2), GetFloorFurnitures(2)),
+                new Floor(player, 3, textureDict["Background"], GetFloorNPCs(3), GetFloorFurnitures(3)),
+                new Floor(player, 4, textureDict["Background"], GetFloorNPCs(4), GetFloorFurnitures(4))
             };
 
             guards = new List<Guard>
@@ -192,8 +193,11 @@ namespace ParapluieBulgare
                     NPC npc = npcs[2];
                     DialogBox b1 = new DialogBox("coucou", npc);
                     DialogBox b2 = new DialogBox("wesh frr", player);
-                    DialogBox b3 = new DialogBox("vazy kass toa", npc);
-                    DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3 });
+                    DialogBox b3 = new DialogBox("vazy kass toa", npc, false, HintsEnum.BadgeLabo);
+
+                    DialogBox b4 = new DialogBox("Alors poto le labo ?", npc);
+
+                    DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3 }, new List<HintsEnum> { HintsEnum.BadgeLabo }, new List<DialogBox> { b4 });
                     npc.SetDialogTree(tree);
                     break;
                 case 1:
@@ -203,6 +207,23 @@ namespace ParapluieBulgare
             }
 
             return npcs;
+        }
+
+        private List<Furniture> GetFloorFurnitures(int floor)
+        {
+            List<Furniture> furnitures = new List<Furniture>();
+
+            switch (floor)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                default:
+                    break;
+            }
+
+            return furnitures;
         }
 
         /// <summary>
@@ -295,6 +316,7 @@ namespace ParapluieBulgare
             {
                 guard.Draw(spriteBatch, cameraX, currentFloor.Number);
             }
+            player.Draw(spriteBatch, cameraX);
 
             if (elevator) elevatorGUI.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
 

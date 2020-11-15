@@ -19,7 +19,17 @@ namespace ParapluieBulgare.Code
             y = 2 * Game1.HEIGHT / 3 - width - 20;
 
             journal = new JournalGUI(texture);
-            journal.AddHint(new Hint("La cible est un chercheur."));
+            journal.AddHint(new Hint(HintsEnum.CibleChercheur));
+        }
+
+        public void AddHint(Hint hint)
+        {
+            journal.AddHint(hint);
+        }
+
+        public bool CheckHints(List<HintsEnum> hints)
+        {
+            return journal.CheckHints(hints);
         }
 
         public int CameraX(int windowWidth)
