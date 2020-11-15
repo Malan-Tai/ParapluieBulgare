@@ -132,15 +132,17 @@ namespace ParapluieBulgare
 
             guards = new List<Guard>
             {
-                new Guard(GetAnimation("vigile_walk"), GetAnimation("vigile_walk"), facebook["faceVigile"], 0, 1700),
-                new Guard(GetAnimation("vigile_walk"), GetAnimation("vigile_walk"), facebook["faceVigile"], 2, 400),
-                new Guard(GetAnimation("vigile_walk"), GetAnimation("vigile_walk"), facebook["faceVigile"], 2, 1700)
+                new Guard(GetAnimation("vigile_walk"), GetAnimation("vigile_walk"), facebook["faceVigile"], 0, 1500),
+                new Guard(GetAnimation("vigile_walk"), GetAnimation("vigile_walk"), facebook["faceVigile"], 2, 300),
+                new Guard(GetAnimation("vigile_walk"), GetAnimation("vigile_walk"), facebook["faceVigile"], 2, 1450)
             };
-            Guard guard = guards[0];
-            guard.SetUnlockingConditions(new List<HintsEnum> { HintsEnum.BadgeLabo });
-            DialogBox b1 = new DialogBox("Halte la malheureux, acces au labo interdit!", guard);
-            DialogTree t = new DialogTree(new List<DialogBox> { b1 });
-            guard.SetDialogTree(t);
+            //Guard guard = guards[0];
+            //guard.SetUnlockingConditions(new List<HintsEnum> { HintsEnum.BadgeLabo });
+            //DialogBox b1 = new DialogBox("Halte la malheureux, acces au labo interdit!", guard);
+            //DialogTree t = new DialogTree(new List<DialogBox> { b1 });
+            //guard.SetDialogTree(t);
+
+            guards[2].Flip = true;
 
             currentFloor = floors[1];
 
@@ -219,7 +221,7 @@ namespace ParapluieBulgare
                     npcs = new List<NPC>
                     {
                         new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 700),
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 930),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 1000),
                     };
 
                     npcs[0].Target = true;
@@ -238,12 +240,12 @@ namespace ParapluieBulgare
                 case 0:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 660),
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 1600),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 600),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 1300),
 
-                        new NPC(GetAnimation("costard_fem_idle"), GetAnimation("costard_fem_idle"), facebook["face02"], 2200),
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 2700),
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 2800)
+                        new NPC(GetAnimation("costard_fem_idle"), GetAnimation("costard_fem_idle"), facebook["face02"], 2400),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 3200),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 3550)
                     };
 
                     npcs[0].Flip = true;
@@ -254,14 +256,14 @@ namespace ParapluieBulgare
                 case 1:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 460),
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 700),
-                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 1170),
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 1370),
-                        new NPC(GetAnimation("directeur_idle"), GetAnimation("directeur_idle"), facebook["face02"], 1800),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 400),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 600),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 1100),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 1300),
+                        new NPC(GetAnimation("directeur_idle"), GetAnimation("directeur_idle"), facebook["face02"], 2380),
 
-                        new NPC(GetAnimation("cuistot_idle"), GetAnimation("cuistot_idle"), facebook["face02"], 2850),
-                        new NPC(GetAnimation("cuistot_idle"), GetAnimation("cuistot_idle"), facebook["face02"], 3700),
+                        new NPC(GetAnimation("cuistot_idle"), GetAnimation("cuistot_idle"), facebook["face02"], 3280),
+                        new NPC(GetAnimation("cuistot_idle"), GetAnimation("cuistot_idle"), facebook["face02"], 3550),
                         new NPC(GetAnimation("cuistot_idle"), GetAnimation("cuistot_idle"), facebook["face02"], 3850)
                     };
 
@@ -273,12 +275,12 @@ namespace ParapluieBulgare
                 case 2:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 700),
-                        new NPC(GetAnimation("directeur_idle"), GetAnimation("directeur_idle"), facebook["face02"], 1300),
-                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 1400),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 600),
+                        new NPC(GetAnimation("directeur_idle"), GetAnimation("directeur_idle"), facebook["face02"], 1100),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 1300),
 
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 3100),
-                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 4000)
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 2850),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 3700)
                     };
 
                     npcs[1].Flip = true;
@@ -288,11 +290,11 @@ namespace ParapluieBulgare
                 case 3:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 650),
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 800),
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 580),
                         new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 900),
-                        new NPC(GetAnimation("costard_fem_idle"), GetAnimation("costard_fem_idle"), facebook["face02"], 1450),
-                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 1700)
+                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 1020),
+                        new NPC(GetAnimation("costard_fem_idle"), GetAnimation("costard_fem_idle"), facebook["face02"], 2200),
+                        new NPC(GetAnimation("costard_idle"), GetAnimation("costard_idle"), facebook["face02"], 2400)
                     };
 
                     npcs[0].Flip = true;
@@ -302,9 +304,9 @@ namespace ParapluieBulgare
                 case 4:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("directeur_idle"), GetAnimation("directeur_idle"), facebook["face02"], 1000),
-                        new NPC(GetAnimation("directeur_idle"), GetAnimation("directeur_idle"), facebook["face02"], 1200),
-                        new NPC(GetAnimation("costard_fem_idle2"), GetAnimation("costard_fem_idle2"), facebook["face02"], 2800)
+                        new NPC(GetAnimation("directeur_idle"), GetAnimation("directeur_idle"), facebook["face02"], 350),
+                        new NPC(GetAnimation("directeur_idle"), GetAnimation("directeur_idle"), facebook["face02"], 700),
+                        new NPC(GetAnimation("costard_fem_idle2"), GetAnimation("costard_fem_idle2"), facebook["face02"], 2450)
                     };
 
                     npcs[0].Flip = true;
