@@ -59,10 +59,10 @@ namespace ParapluieBulgare.Code
                 }
                 else 
                 { 
-                    if (currentFloor == 0 || currentFloor == 5 || playerFloor == 0 || playerFloor == 5)
+                    if (currentFloor == -1 || currentFloor == 4 || playerFloor == -1 || playerFloor == 4)
                     {
                         //ascenceur
-                        target = Floor.width / 2;
+                        target = (int) (Floor.width * 0.42);
                     }
                     else if (x <= Floor.width /4)
                     {
@@ -77,7 +77,7 @@ namespace ParapluieBulgare.Code
                     else
                     {
                         //ascenceur
-                        target = Floor.width / 2;
+                        target = (int)(Floor.width * 0.42);
                     }
                     isGoingToChangeFloor = true;
                 }
