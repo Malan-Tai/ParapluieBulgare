@@ -37,6 +37,18 @@
 /processorParam:TextureFormat=Color
 /build:Background.png;background.png
 
+#begin Badge.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Badge.png
+
 #begin Bulgared.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -67,6 +79,18 @@
 /processorParam:TextureFormat=Color
 /build:carnet.png
 
+#begin Docu_Vaccin.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Docu_Vaccin.png
+
 #begin font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -79,6 +103,30 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Intro.wav
+
+#begin Monitor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Monitor.png
+
+#begin PC_Boss.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PC_Boss.png
 
 #begin persos/Cadres/Cadre1.png
 /importer:TextureImporter
@@ -367,6 +415,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:persos/Cuisinier/Cuistot3.png
+
+#begin persos/Cuisinier/Cuistot3Tronche.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:persos/Cuisinier/Cuistot3Tronche.png
 
 #begin persos/Direction/Directeur1.png
 /importer:TextureImporter
@@ -668,18 +728,6 @@
 /processorParam:TextureFormat=Color
 /build:persos/Joueur/JoueurTronche.png
 
-#begin persos/Joueur/JoueurTronche.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:persos/Joueur/JoueurTronche.png
-
 #begin persos/Joueur/JoueurWalk.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -848,6 +896,18 @@
 /processorParam:TextureFormat=Color
 /build:persos/Vigiles/VigileWalk.png
 
+#begin Serveur.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Serveur.png
+
 #begin TitleScreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -871,6 +931,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:transparent.png
+
+#begin Viseur.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Viseur.png
 
 #begin white.png
 /importer:TextureImporter

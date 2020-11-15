@@ -76,6 +76,8 @@ namespace ParapluieBulgare
             "persos/Vigiles/VigileIdle",
             "persos/Vigiles/VigileWalk",
 
+            "Monitor"
+
         };
         List<string> allSounds = new List<string>
         {
@@ -99,6 +101,7 @@ namespace ParapluieBulgare
 
             "persos/Cuisinier/Cuistot1Tronche",
             "persos/Cuisinier/Cuistot2Tronche",
+            "persos/Cuisinier/Cuistot3Tronche",
 
             "persos/Direction/Directeur1Tronche",
             "persos/Direction/Directeur2Tronche",
@@ -123,6 +126,11 @@ namespace ParapluieBulgare
             "persos/Techniciens/Techos4Tronche",
 
             "persos/Vigiles/VigileTronche",
+
+            "Badge",
+            "Docu_Vaccin",
+            "Serveur",
+            "PC_Boss"
         };
         Dictionary<string, Texture2D> facebook;
 
@@ -282,6 +290,8 @@ namespace ParapluieBulgare
                     return facebook["persos/Cuisinier/Cuistot1Tronche"];
                 case "cuistot2":
                     return facebook["persos/Cuisinier/Cuistot2Tronche"];
+                case "cuistot3":
+                    return facebook["persos/Cuisinier/Cuistot2Tronche"];
 
                 case "directeur1":
                     return facebook["persos/Direction/Directeur1Tronche"];
@@ -421,6 +431,9 @@ namespace ParapluieBulgare
                 case "vigile_walk":
                     return new Animation(textureDict["persos/Vigiles/VigileWalk"], 32, 32, 8, 10);
 
+                case "moniteur":
+                    return new Animation(textureDict["Monitor"], 32, 32, 8, 10);
+
                 default:
                     return null;
             }
@@ -546,21 +559,21 @@ namespace ParapluieBulgare
                 case 2:
                     furnitures = new List<Furniture>
                     {
-                        new Furniture(GetAnimation("transparent"), GetTronche("directeur1"), 900),
-                        new Furniture(GetAnimation("transparent"), GetTronche("directeur1"), 3420)
+                        new Furniture(GetAnimation("transparent"), GetTronche("Docu_Vaccin"), 900),
+                        new Furniture(GetAnimation("moniteur"), GetTronche("Serveur"), 3420)
                     };
                     break;
                 case 3:
                     furnitures = new List<Furniture>
                     {
-                        new Furniture(GetAnimation("transparent"), GetTronche("directeur1"), 2800),
-                        new Furniture(GetAnimation("transparent"), GetTronche("directeur1"), 3500)
+                        new Furniture(GetAnimation("transparent"), GetTronche("Badge"), 2800),
+                        new Furniture(GetAnimation("transparent"), GetTronche("journaliste"), 3500)
                     };
                     break;
                 case 4:
                     furnitures = new List<Furniture>
                     {
-                        new Furniture(GetAnimation("transparent"), GetTronche("directeur1"), 3350)
+                        new Furniture(GetAnimation("transparent"), GetTronche("PC_Boss"), 3350)
                     };
                     break;
                 default:
