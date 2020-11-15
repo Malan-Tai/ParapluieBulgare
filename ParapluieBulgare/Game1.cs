@@ -114,6 +114,12 @@ namespace ParapluieBulgare
             {
                 new Guard(GetAnimation("vigile_walk_3"), GetAnimation("vigile_walk_3"), facebook["faceVigile"], 0, 700)
             };
+            Guard guard = guards[0];
+            guard.SetUnlockingConditions(new List<HintsEnum> { HintsEnum.BadgeLabo });
+            DialogBox b1 = new DialogBox("Halte la malheureux, acces au labo interdit!", guard);
+            DialogTree t = new DialogTree(new List<DialogBox> { b1 });
+            guard.SetDialogTree(t);
+
             currentFloor = floors[1];
 
             timer = new Timer(600);
@@ -254,12 +260,7 @@ namespace ParapluieBulgare
 
             if (!elevator)
             {
-                string switchFloor = currentFloor.Update(state, prevKeyState);
-
-                foreach (Guard guard in guards)
-                {
-                    guard.Update(state, prevKeyState, player, currentFloor.Number);
-                }
+                string switchFloor = currentFloor.Update(state, prevKeyState, guards);
 
                 if (switchFloor == "stairs up")
                 {
@@ -311,12 +312,7 @@ namespace ParapluieBulgare
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
 
-            int cameraX = currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
-            foreach (Guard guard in guards)
-            {
-                guard.Draw(spriteBatch, cameraX, currentFloor.Number);
-            }
-            player.Draw(spriteBatch, cameraX);
+            currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth, guards);
 
             if (elevator) elevatorGUI.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
 

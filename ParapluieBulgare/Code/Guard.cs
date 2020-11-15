@@ -81,9 +81,8 @@ namespace ParapluieBulgare.Code
                     }
                     isGoingToChangeFloor = true;
                 }
-
-             
             }
+
 
             base.Update(keyState, prevKeyState);
         }

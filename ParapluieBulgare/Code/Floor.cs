@@ -45,7 +45,7 @@ namespace ParapluieBulgare.Code
             elevators = new List<Rectangle> { new Rectangle(2425, 20, 150, 150) };
         }
 
-        public string Update(KeyboardState keyState, KeyboardState prevKeyState)
+        public string Update(KeyboardState keyState, KeyboardState prevKeyState, List<Guard> guards)
         {
             foreach (Furniture furniture in furnitures)
             {
@@ -55,7 +55,11 @@ namespace ParapluieBulgare.Code
             {
                 npc.Update(keyState, prevKeyState);
             }
-            string key = player.Update(keyState, prevKeyState, npcs);
+            foreach (Guard guard in guards)
+            {
+                guard.Update(keyState, prevKeyState, player, Number);
+            }
+            string key = player.Update(keyState, prevKeyState, npcs, guards);
 
             if (key != "")
             {
@@ -75,7 +79,7 @@ namespace ParapluieBulgare.Code
             return "";
         }
 
-        public int Draw(SpriteBatch spriteBatch, int windowWidth)
+        public void Draw(SpriteBatch spriteBatch, int windowWidth, List<Guard> guards)
         {
             int cameraX = player.CameraX(windowWidth);
 
@@ -88,8 +92,8 @@ namespace ParapluieBulgare.Code
             int ratio = 2 * Game1.HEIGHT / (3 * sourceRectangle.Height);
             int h = sourceRectangle.Height * ratio;
             int w = sourceRectangle.Width * ratio;
-            Floor.width = w;
-            Floor.height = h;
+            width = w;
+            height = h;
             spriteBatch.Draw(texture, new Rectangle(-cameraX, 0, w, h), sourceRectangle, Color.White);
 
             //foreach (Rectangle rect in elevators)
@@ -109,9 +113,11 @@ namespace ParapluieBulgare.Code
             {
                 npc.Draw(spriteBatch, cameraX);
             }
-            //player.Draw(spriteBatch, cameraX);
-
-            return cameraX;
+            foreach (Guard guard in guards)
+            {
+                guard.Draw(spriteBatch, cameraX);
+            }
+            player.Draw(spriteBatch, cameraX);
         }
         
     }
