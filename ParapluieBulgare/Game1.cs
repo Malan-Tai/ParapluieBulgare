@@ -571,7 +571,7 @@ namespace ParapluieBulgare
                     b4 = new DialogBox("Peut-etre mais c'est un premier pas. Tu devrais essayer d'y assister.", player, false, HintsEnum.AtelierCuisine);
                     b5 = new DialogBox("Mouais... J'irai y jeter un oeil... Mais le combat n'est pas fini !", npcs[4]);
                     tree = new DialogTree(new List<DialogBox> { b1 }, new List<HintsEnum> { HintsEnum.HappinessManager }, new List<DialogBox> { b1, b2, b3, b4, b5 });
-                    npcs[1].SetDialogTree(tree);
+                    npcs[4].SetDialogTree(tree);
 
                     break;
                 case 3:
