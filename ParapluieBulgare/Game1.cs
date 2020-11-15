@@ -265,11 +265,14 @@ namespace ParapluieBulgare
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            KeyboardState state = Keyboard.GetState();
+
             if (isPlayingIntro)
             {
-                if(audioIntroInstance.State == SoundState.Stopped)
+                if(audioIntroInstance.State == SoundState.Stopped || state.GetPressedKeys().Length > 0)
                 {
                     isPlayingIntro = false;
+                    audioIntroInstance.Stop();
                     audioIntroInstance.Dispose();
                 }
                 else
@@ -283,7 +286,6 @@ namespace ParapluieBulgare
             if (timer.isOver())
                 Exit();
 
-            KeyboardState state = Keyboard.GetState();
             
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
