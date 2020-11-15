@@ -166,7 +166,7 @@ namespace ParapluieBulgare
                     return new Animation(textureDict["vigile_walk"], 32, 32, 6, 10);
                 case "costard_fem_idle":
                     return new Animation(textureDict["costard_fem_idle"], 32, 32, 2, 60);
-                case "rando_fem_idle":
+                case "costard_fem_idle2":
                     return new Animation(textureDict["costard_fem_idle2"], 32, 32, 2, 60);
                 case "costard_idle":
                     return new Animation(textureDict["costard_idle"], 32, 32, 2, 60);
@@ -201,7 +201,7 @@ namespace ParapluieBulgare
                     npcs[0].Target = true;
                     npcs[0].Flip = true;
 
-                    NPC npc = npcs[1];
+                    NPC npc = npcs[0];
                     DialogBox b1 = new DialogBox("coucou", npc);
                     DialogBox b2 = new DialogBox("wesh frr", player);
                     DialogBox b3 = new DialogBox("vazy kass toa", npc, false, HintsEnum.BadgeLabo);
@@ -278,9 +278,9 @@ namespace ParapluieBulgare
                 case 4:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("direction_idle"), GetAnimation("direction_idle"), facebook["face02"], 1000),
-                        new NPC(GetAnimation("direction_idle"), GetAnimation("direction_idle"), facebook["face02"], 1200),
-                        new NPC(GetAnimation("costar_fem_idle2"), GetAnimation("costard_fem_idle2"), facebook["face02"], 2800)
+                        new NPC(GetAnimation("directeur_idle"), GetAnimation("directeur_idle"), facebook["face02"], 1000),
+                        new NPC(GetAnimation("directeur_idle"), GetAnimation("directeur_idle"), facebook["face02"], 1200),
+                        new NPC(GetAnimation("costard_fem_idle2"), GetAnimation("costard_fem_idle2"), facebook["face02"], 2800)
                     };
 
                     npcs[0].Flip = true;
@@ -407,7 +407,10 @@ namespace ParapluieBulgare
             if (elevator) elevatorGUI.Draw(spriteBatch);
 
             string time = timer.getTime();
-            spriteBatch.DrawString(font, time, new Vector2(400, 10), Color.Black);
+            int len = (int)font.MeasureString(time).X;
+            int h = (int)font.MeasureString(time).Y;
+            spriteBatch.Draw(white, new Rectangle((WIDTH - len) / 2 - 20, 0, len + 40, h + 20), Color.Black);
+            spriteBatch.DrawString(font, time, new Vector2((WIDTH - len) / 2, 10), Color.Red);
 
             if (Win) spriteBatch.DrawString(font, "YOU WIN", new Vector2(300, 150), Color.Red);
             if (Lose) spriteBatch.DrawString(font, "YOU LOSE", new Vector2(300, 150), Color.Red);
