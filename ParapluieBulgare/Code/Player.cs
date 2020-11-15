@@ -116,7 +116,6 @@ namespace ParapluieBulgare.Code
             {
                 if (BoxCollider.Intersects(npc.BoxCollider))
                 {
-                    Console.Out.WriteLine("found");
                     interactingWith = npc;
                     npc.StartInteraction(this);
                     break;
