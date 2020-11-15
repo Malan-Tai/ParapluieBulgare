@@ -15,6 +15,8 @@ namespace ParapluieBulgare.Code
         public static SoundEffect soundBulgared;
         public bool Target { get; set; } = false;
 
+        private List<HintsEnum> unlockConditions = null;
+
         public NPC(Animation idle, Animation walk, Texture2D face, int x = 500) : base(idle, walk, face)
         {
             this.x = x;
@@ -34,6 +36,17 @@ namespace ParapluieBulgare.Code
             {
                 Game1.Win = true;
             }
+        }
+
+        public void SetUnlockingConditions(List<HintsEnum> hints)
+        {
+            unlockConditions = hints;
+        }
+
+        public bool Blocks(Player player)
+        {
+            if (unlockConditions == null) return false;
+            return !player.CheckHints(unlockConditions);
         }
 
         public override void Update(KeyboardState keyState, KeyboardState prevKeyState)

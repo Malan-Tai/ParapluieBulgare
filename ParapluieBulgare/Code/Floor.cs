@@ -37,15 +37,24 @@ namespace ParapluieBulgare.Code
             npcs = npcList;
             furnitures = furn;
 
-            stairs = new List<Rectangle>
+            int ratio = 2 * Game1.HEIGHT / (3 * 47);
+
+            if (n == -1 || n == 4)
             {
-                new Rectangle(0, 20, 150, 150),
-                new Rectangle(4850, 20, 150, 150)
-            };
-            elevators = new List<Rectangle> { new Rectangle(2425, 20, 150, 150) };
+                stairs = new List<Rectangle>();
+            }
+            else
+            {
+                stairs = new List<Rectangle>
+                {
+                    new Rectangle(0, 0, 33 * ratio, 47 * ratio),
+                    new Rectangle((467 - 54) * ratio, 0, 54 * ratio, 47 * ratio)
+                };
+            }
+            elevators = new List<Rectangle> { new Rectangle(182 * ratio, (47 - 32) * ratio, 32 * ratio, 32 * ratio) };
         }
 
-        public string Update(KeyboardState keyState, KeyboardState prevKeyState)
+        public string Update(KeyboardState keyState, KeyboardState prevKeyState, List<Guard> guards)
         {
             foreach (Furniture furniture in furnitures)
             {
@@ -55,13 +64,17 @@ namespace ParapluieBulgare.Code
             {
                 npc.Update(keyState, prevKeyState);
             }
-            string key = player.Update(keyState, prevKeyState, npcs);
+            foreach (Guard guard in guards)
+            {
+                guard.Update(keyState, prevKeyState, player, Number);
+            }
+            string key = player.Update(keyState, prevKeyState, npcs, guards, Number);
 
             if (key != "")
             {
                 foreach (Rectangle rect in stairs)
                 {
-                    if (rect.Contains(player.Coords))
+                    if (rect.Intersects(player.BoxCollider))
                     {
                         if (key == "up") return "stairs up";
                         if (key == "down") return "stairs down";
@@ -69,13 +82,13 @@ namespace ParapluieBulgare.Code
                 }
                 foreach (Rectangle rect in elevators)
                 {
-                    if (rect.Contains(player.Coords)) return "elevator";
+                    if (rect.Intersects(player.BoxCollider)) return "elevator";
                 }
             }
             return "";
         }
 
-        public int Draw(SpriteBatch spriteBatch, int windowWidth)
+        public void Draw(SpriteBatch spriteBatch, int windowWidth, List<Guard> guards)
         {
             int cameraX = player.CameraX(windowWidth);
 
@@ -88,17 +101,17 @@ namespace ParapluieBulgare.Code
             int ratio = 2 * Game1.HEIGHT / (3 * sourceRectangle.Height);
             int h = sourceRectangle.Height * ratio;
             int w = sourceRectangle.Width * ratio;
-            Floor.width = w;
-            Floor.height = h;
+            width = w;
+            height = h;
             spriteBatch.Draw(texture, new Rectangle(-cameraX, 0, w, h), sourceRectangle, Color.White);
 
             //foreach (Rectangle rect in elevators)
             //{
-            //    spriteBatch.Draw(texture, new Rectangle(rect.X - cameraX, rect.Y, rect.Width, rect.Height), Color.Yellow);
+            //    spriteBatch.Draw(Game1.white, new Rectangle(rect.X - cameraX, rect.Y, rect.Width, rect.Height), new Color(255, 0, 0, 20));
             //}
             //foreach (Rectangle rect in stairs)
             //{
-            //    spriteBatch.Draw(texture, new Rectangle(rect.X - cameraX, rect.Y, rect.Width, rect.Height), Color.DarkBlue);
+            //    spriteBatch.Draw(Game1.white, new Rectangle(rect.X - cameraX, rect.Y, rect.Width, rect.Height), new Color(255, 0, 0, 20));
             //}
 
             foreach (Furniture furniture in furnitures)
@@ -109,9 +122,11 @@ namespace ParapluieBulgare.Code
             {
                 npc.Draw(spriteBatch, cameraX);
             }
-            //player.Draw(spriteBatch, cameraX);
-
-            return cameraX;
+            foreach (Guard guard in guards)
+            {
+                guard.Draw(spriteBatch, cameraX, Number);
+            }
+            player.Draw(spriteBatch, cameraX);
         }
         
     }

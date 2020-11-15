@@ -36,7 +36,7 @@ namespace ParapluieBulgare.Code
         {
             get
             {
-                return new Rectangle(x, y, width, width);
+                return new Rectangle(x + width / 4, y, width / 2, width);
             }
         }
 
@@ -122,6 +122,7 @@ namespace ParapluieBulgare.Code
 
         public virtual void Draw(SpriteBatch spriteBatch, int cameraX)
         {
+            //spriteBatch.Draw(Game1.white, BoxCollider, new Color(255, 0, 0, 20));
             if (interactingWith != null && tree != null)
             {
                 box.Draw(spriteBatch, cameraX);

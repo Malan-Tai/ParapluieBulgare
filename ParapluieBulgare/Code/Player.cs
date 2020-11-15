@@ -37,11 +37,12 @@ namespace ParapluieBulgare.Code
             return x - (windowWidth - width) / 2;
         }
 
-        public string Update(KeyboardState keyState, KeyboardState prevKeyState, List<NPC> npcs)
+        public string Update(KeyboardState keyState, KeyboardState prevKeyState, List<NPC> npcs, List<Guard> guards, int floor)
         {
             string returned = "";
             if (interactingWith == null && !leftConversation)
             {
+                int prevX = x;
                 if (keyState.IsKeyDown(Keys.Right))
                 {
                     x += 10;
@@ -70,6 +71,37 @@ namespace ParapluieBulgare.Code
                 if (keyState.IsKeyDown(Keys.Up) && !prevKeyState.IsKeyDown(Keys.Up))
                 {
                     returned = "up";
+                }
+
+                foreach (NPC npc in npcs)
+                {
+                    if (BoxCollider.Intersects(npc.BoxCollider) && npc.Blocks(this))
+                    {
+                        x = prevX;
+                        interactingWith = npc;
+                        npc.StartInteraction(this);
+                        break;
+                    }
+                }
+                foreach (Guard guard in guards)
+                {
+                    if (BoxCollider.Intersects(guard.BoxCollider) && guard.Blocks(this, floor))
+                    {
+                        x = prevX;
+                        interactingWith = guard;
+                        guard.StartInteraction(this);
+                        break;
+                    }
+                }
+
+                int ratio = 2 * Game1.HEIGHT / (3 * 47);
+                int bigMaxX = 467 * ratio;
+                int smallMaxX = (467 - 54) * ratio;
+
+                if (x + width / 4 < 0) x = prevX;
+                else if (x + 3 * width / 4 > bigMaxX || ((floor == -1 || floor == 4) && x + 3 * width / 4 > smallMaxX))
+                {
+                    x = prevX;
                 }
             }
 

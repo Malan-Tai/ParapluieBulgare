@@ -54,6 +54,7 @@ namespace ParapluieBulgare
         SpriteFont font;
 
         Player player;
+        Sniper sniper;
 
         Floor[] floors;
         Floor currentFloor;
@@ -68,6 +69,7 @@ namespace ParapluieBulgare
 
         public static int ThreatLevel = 0;
         public static bool Win = false;
+        public static bool Lose = false;
 
         public Game1()
         {
@@ -117,6 +119,12 @@ namespace ParapluieBulgare
                 new Guard(GetAnimation("vigile_walk"), GetAnimation("vigile_walk"), facebook["faceVigile"], 2, 400),
                 new Guard(GetAnimation("vigile_walk"), GetAnimation("vigile_walk"), facebook["faceVigile"], 2, 1700)
             };
+            Guard guard = guards[0];
+            guard.SetUnlockingConditions(new List<HintsEnum> { HintsEnum.BadgeLabo });
+            DialogBox b1 = new DialogBox("Halte la malheureux, acces au labo interdit!", guard);
+            DialogTree t = new DialogTree(new List<DialogBox> { b1 });
+            guard.SetDialogTree(t);
+
             currentFloor = floors[1];
 
             timer = new Timer(600);
@@ -318,62 +326,68 @@ namespace ParapluieBulgare
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            timer.update(gameTime.ElapsedGameTime.TotalSeconds);
-
-            if (timer.isOver())
-                Exit();
-
             KeyboardState state = Keyboard.GetState();
-            
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (!elevator)
+            if (!Win && !Lose)
             {
-                string switchFloor = currentFloor.Update(state, prevKeyState);
-
-                foreach (Guard guard in guards)
+                if (sniper == null && ThreatLevel == 1)
                 {
-                    guard.Update(state, prevKeyState, player, currentFloor.Number);
+                    sniper = new Sniper(white);
                 }
 
-                if (switchFloor == "stairs up")
+                timer.update(gameTime.ElapsedGameTime.TotalSeconds);
+
+                if (timer.isOver())
+                    Exit();
+
+                int oldFloor = currentFloor.Number;
+                if (!elevator)
                 {
-                    int n = currentFloor.Number;
-                    if (n < floors[floors.Length-1].Number - 1)
+                    string switchFloor = currentFloor.Update(state, prevKeyState, guards);
+                    if (sniper != null) sniper.Update(player);
+
+                    if (switchFloor == "stairs up")
                     {
-                        currentFloor = floors[n + 2];
+                        int n = currentFloor.Number;
+                        if (n < floors[floors.Length - 1].Number - 1)
+                        {
+                            currentFloor = floors[n + 2];
+                        }
+                        Console.Out.WriteLine("floor up : " + (n + 1));
                     }
-                    Console.Out.WriteLine("floor up : " + (n + 1));
-                }
-                else if (switchFloor == "stairs down")
-                {
-                    int n = currentFloor.Number;
-                    if (n > 0)
+                    else if (switchFloor == "stairs down")
                     {
-                        currentFloor = floors[n];
+                        int n = currentFloor.Number;
+                        if (n > 0)
+                        {
+                            currentFloor = floors[n];
+                        }
+                        Console.Out.WriteLine("floor down : " + (n - 1));
                     }
-                    Console.Out.WriteLine("floor down : " + (n - 1));
+                    else if (switchFloor == "elevator")
+                    {
+                        elevator = true;
+                        elevatorGUI = new ElevatorGUI(floors.Length, currentFloor.Number, white);
+                    }
                 }
-                else if (switchFloor == "elevator")
+                else
                 {
-                    elevator = true;
-                    elevatorGUI = new ElevatorGUI(floors.Length, currentFloor.Number, white);
+                    int switchFloor = elevatorGUI.Update(state, prevKeyState);
+                    if (switchFloor != -1)
+                    {
+                        currentFloor = floors[switchFloor];
+                        elevator = false;
+                        elevatorGUI = null;
+                        Console.Out.WriteLine("elevator : " + (switchFloor - 1));
+                    }
                 }
-            }
-            else
-            {
-                int switchFloor = elevatorGUI.Update(state, prevKeyState);
-                if (switchFloor != -1)
-                {
-                    currentFloor = floors[switchFloor];
-                    elevator = false;
-                    elevatorGUI = null;
-                    Console.Out.WriteLine("elevator : " + (switchFloor - 1));
-                }
-            }
+                if (sniper != null) sniper.SwitchFloor(oldFloor, currentFloor.Number);
 
-            prevKeyState = state;
+                prevKeyState = state;
+            }
             base.Update(gameTime);
         }
 
@@ -387,25 +401,20 @@ namespace ParapluieBulgare
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
 
-            int cameraX = currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
-            foreach (Guard guard in guards)
-            {
-                guard.Draw(spriteBatch, cameraX, currentFloor.Number);
-            }
-            player.Draw(spriteBatch, cameraX);
+            currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth, guards);
+            if (sniper != null) sniper.Draw(spriteBatch, player.CameraX(WIDTH));
 
-            if (elevator) elevatorGUI.Draw(spriteBatch, graphics.PreferredBackBufferWidth);
+            if (elevator) elevatorGUI.Draw(spriteBatch);
 
             string time = timer.getTime();
             spriteBatch.DrawString(font, time, new Vector2(400, 10), Color.Black);
 
             if (Win) spriteBatch.DrawString(font, "YOU WIN", new Vector2(300, 150), Color.Red);
+            if (Lose) spriteBatch.DrawString(font, "YOU LOSE", new Vector2(300, 150), Color.Red);
 
             spriteBatch.End();
 
             base.Draw(gameTime);
-
-            
         }
     }
 }

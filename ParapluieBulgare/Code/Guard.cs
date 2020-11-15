@@ -25,6 +25,12 @@ namespace ParapluieBulgare.Code
             Console.WriteLine("Argh! Je suis mort ! En fait non.");
         }
 
+        public bool Blocks(Player player, int playerFloor)
+        {
+            if (currentFloor == playerFloor) return Blocks(player);
+            return false;
+        }
+
         public override void Update(KeyboardState keyState, KeyboardState prevKeyState)
         {
         }
@@ -40,6 +46,10 @@ namespace ParapluieBulgare.Code
                     {
                         if (playerCoords.X > x) x += speed;
                         else x -= speed;
+                    }
+                    else
+                    {
+                        Game1.Lose = true;
                     }
                 }
                 else if (isGoingToChangeFloor)
@@ -81,9 +91,8 @@ namespace ParapluieBulgare.Code
                     }
                     isGoingToChangeFloor = true;
                 }
-
-             
             }
+
 
             base.Update(keyState, prevKeyState);
         }
