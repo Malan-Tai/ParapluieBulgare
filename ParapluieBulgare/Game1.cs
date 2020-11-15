@@ -73,6 +73,10 @@ namespace ParapluieBulgare
         Timer timer;
 
         bool elevator = false;
+        bool switchFloorAnimation = false;
+        int curFloorAnimation = 0;
+        int leavingFloor = 0;
+        int nextFloor = 0;
         ElevatorGUI elevatorGUI = null;
 
         Dictionary<string, SoundEffect> soundDict;
@@ -357,7 +361,7 @@ namespace ParapluieBulgare
 
             if (isPlayingIntro)
             {
-                if(audioIntroInstance.State == SoundState.Stopped || state.GetPressedKeys().Length > 0)
+                if (audioIntroInstance.State == SoundState.Stopped || state.GetPressedKeys().Length > 0)
                 {
                     isPlayingIntro = false;
                     audioIntroInstance.Stop();
@@ -390,7 +394,7 @@ namespace ParapluieBulgare
                     Exit();
 
                 int oldFloor = currentFloor.Number;
-                if (!elevator)
+                if (!elevator && !switchFloorAnimation)
                 {
                     string switchFloor = currentFloor.Update(state, prevKeyState, guards);
                     if (sniper != null) sniper.Update(player);
@@ -401,6 +405,10 @@ namespace ParapluieBulgare
                         if (n < floors[floors.Length - 1].Number - 1)
                         {
                             currentFloor = floors[n + 2];
+                            switchFloorAnimation = true;
+                            curFloorAnimation = 120;
+                            leavingFloor = oldFloor;
+                            nextFloor = currentFloor.Number;
                         }
                         Console.Out.WriteLine("floor up : " + (n + 1));
                     }
@@ -410,6 +418,10 @@ namespace ParapluieBulgare
                         if (n > 0)
                         {
                             currentFloor = floors[n];
+                            switchFloorAnimation = true;
+                            curFloorAnimation = 120;
+                            leavingFloor = oldFloor;
+                            nextFloor = currentFloor.Number;
                         }
                         Console.Out.WriteLine("floor down : " + (n - 1));
                     }
@@ -417,6 +429,27 @@ namespace ParapluieBulgare
                     {
                         elevator = true;
                         elevatorGUI = new ElevatorGUI(floors.Length, currentFloor.Number, white);
+                    }
+                }
+                else if (switchFloorAnimation)
+                {
+                    curFloorAnimation--;
+                    if (curFloorAnimation % 120 == 0)
+                    {
+                        if (leavingFloor > nextFloor)
+                        {
+                            nextFloor--;
+                            leavingFloor--;
+                        }
+                        else
+                        {
+                            nextFloor++;
+                            leavingFloor++;
+                        }
+                    }
+                    if (curFloorAnimation <= 0)
+                    {
+                        switchFloorAnimation = false;
                     }
                 }
                 else
@@ -428,6 +461,15 @@ namespace ParapluieBulgare
                         elevator = false;
                         elevatorGUI = null;
                         Console.Out.WriteLine("elevator : " + (switchFloor - 1));
+
+                        if (oldFloor != currentFloor.Number)
+                        {
+                            switchFloorAnimation = true;
+                            curFloorAnimation = Math.Abs(currentFloor.Number - oldFloor) * 120;
+                            leavingFloor = oldFloor;
+                            if (currentFloor.Number > oldFloor) nextFloor = oldFloor + 1;
+                            else nextFloor = oldFloor - 1;
+                        }
                     }
                 }
                 if (sniper != null) sniper.SwitchFloor(oldFloor, currentFloor.Number);
@@ -447,8 +489,27 @@ namespace ParapluieBulgare
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
 
-            currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth, guards);
-            if (sniper != null) sniper.Draw(spriteBatch, player.CameraX(WIDTH));
+            if (!switchFloorAnimation)
+            {
+                currentFloor.Draw(spriteBatch, graphics.PreferredBackBufferWidth, guards);
+                if (sniper != null) sniper.Draw(spriteBatch, player.CameraX(WIDTH));
+            }
+            else
+            {
+                if (leavingFloor > nextFloor)
+                {
+                    floors[leavingFloor + 1].DrawFractionTowardsBottom(spriteBatch, curFloorAnimation % 120, true);
+                    floors[nextFloor + 1].DrawFractionTowardsBottom(spriteBatch, curFloorAnimation % 120, false);
+                }
+                else
+                {
+                    floors[leavingFloor + 1].DrawFractionTowardsTop(spriteBatch, curFloorAnimation % 120, true);
+                    floors[nextFloor + 1].DrawFractionTowardsTop(spriteBatch, curFloorAnimation % 120, false);
+                }
+
+                spriteBatch.Draw(white, new Rectangle(0, 2 * HEIGHT / 3, WIDTH, 2 * HEIGHT / 3), Color.Black);
+            }
+
 
             if (elevator) elevatorGUI.Draw(spriteBatch);
 

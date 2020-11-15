@@ -128,6 +128,71 @@ namespace ParapluieBulgare.Code
             }
             player.Draw(spriteBatch, cameraX);
         }
-        
+
+        public void DrawFractionTowardsTop(SpriteBatch spriteBatch,  int frame, bool leaving)
+        {
+            int cameraX = player.CameraX(Game1.WIDTH);
+            float frameRatio = frame / 120.0f;
+            frameRatio = 1 - frameRatio;
+
+            Rectangle sourceRectangle = new Rectangle();
+            sourceRectangle.Width = texture.Width;
+            sourceRectangle.X = 0;
+
+            sourceRectangle.Height = texture.Height / nbFloors;
+            sourceRectangle.Y = (nbFloors - Number - 2) * sourceRectangle.Height;
+
+            int y = 0;
+            if (leaving)
+            {
+                int hiddenHeight = (int)(sourceRectangle.Height * frameRatio);
+                y = hiddenHeight;
+            }
+            else
+            {
+                int hiddenHeight = (int)(sourceRectangle.Height * (1 - frameRatio));
+                y = -hiddenHeight;
+            }
+
+            int ratio = 2 * Game1.HEIGHT / (3 * sourceRectangle.Height);
+            int h = sourceRectangle.Height * ratio;
+            int w = sourceRectangle.Width * ratio;
+            width = w;
+            height = h;
+            spriteBatch.Draw(texture, new Rectangle(-cameraX, y * ratio, w, h), sourceRectangle, Color.White);
+        }
+
+        public void DrawFractionTowardsBottom(SpriteBatch spriteBatch, int frame, bool leaving)
+        {
+            int cameraX = player.CameraX(Game1.WIDTH);
+            float frameRatio = frame / 120.0f;
+
+            Rectangle sourceRectangle = new Rectangle();
+            sourceRectangle.Width = texture.Width;
+            sourceRectangle.X = 0;
+
+            sourceRectangle.Height = texture.Height / nbFloors;
+            sourceRectangle.Y = (nbFloors - Number - 2) * sourceRectangle.Height;
+
+            int y = 0;
+            if (leaving)
+            {
+                int hiddenHeight = (int)(sourceRectangle.Height * (1 - frameRatio));
+                y = -hiddenHeight;
+            }
+            else
+            {
+                int hiddenHeight = (int)(sourceRectangle.Height * frameRatio);
+                y = hiddenHeight;
+            }
+
+            int ratio = 2 * Game1.HEIGHT / (3 * sourceRectangle.Height);
+            int h = sourceRectangle.Height * ratio;
+            int w = sourceRectangle.Width * ratio;
+            width = w;
+            height = h;
+            spriteBatch.Draw(texture, new Rectangle(-cameraX, y * ratio, w, h), sourceRectangle, Color.White);
+        }
+
     }
 }
