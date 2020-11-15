@@ -14,7 +14,7 @@ namespace ParapluieBulgare.Code
     {
         public bool Target { get; set; } = false;
 
-        public Furniture(Animation idle, Animation walk, Texture2D face, int x = 500) : base(idle, walk, face)
+        public Furniture(Animation idle, Texture2D face, int x = 500) : base(idle, null, face)
         {
             this.x = x;
             y = 2 * Game1.HEIGHT / 3 - width - 20;

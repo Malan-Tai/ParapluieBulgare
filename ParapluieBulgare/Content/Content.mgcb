@@ -200,12 +200,6 @@
 /processorParam:Quality=Best
 /build:Intro.wav
 
-#begin Intro.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Intro.wav
-
 #begin journaliste_idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -242,7 +236,7 @@
 /processorParam:TextureFormat=Color
 /build:TitleScreen.png
 
-#begin TitleScreen.png
+#begin transparent.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -252,7 +246,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:TitleScreen.png
+/build:transparent.png
 
 #begin vigile_walk.png
 /importer:TextureImporter

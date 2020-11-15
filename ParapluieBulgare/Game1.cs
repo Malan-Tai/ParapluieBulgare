@@ -29,6 +29,7 @@ namespace ParapluieBulgare
             "bulleDeTexte",
             "background",
             "ascenseur",
+            "transparent",
 
             "player_walk",
             "Employe1",
@@ -187,6 +188,8 @@ namespace ParapluieBulgare
         {
             switch (spritesheet)
             {
+                case "transparent":
+                    return new Animation(textureDict["transparent"], 32, 32, 1, 60);
                 case "player_walk":
                     return new Animation(textureDict["player_walk"], 32, 32, 6, 10);
                 case "vigile_walk":
@@ -230,15 +233,16 @@ namespace ParapluieBulgare
                     npcs[0].Target = true;
                     npcs[0].Flip = true;
 
-                    NPC npc = npcs[0];
-                    DialogBox b1 = new DialogBox("coucou", npc);
-                    DialogBox b2 = new DialogBox("wesh frr", player);
-                    DialogBox b3 = new DialogBox("vazy kass toa", npc, false, HintsEnum.BadgeLabo);
+                    //NPC npc = npcs[0];
+                    //DialogBox b1 = new DialogBox("coucou", npc);
+                    //DialogBox b2 = new DialogBox("wesh frr", player);
+                    //DialogBox b3 = new DialogBox("vazy kass toa", npc, false, HintsEnum.BadgeLabo);
 
-                    DialogBox b4 = new DialogBox("Alors poto le labo ?", npc);
+                    //DialogBox b4 = new DialogBox("Alors poto le labo ?", npc);
 
-                    DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3 }, new List<HintsEnum> { HintsEnum.BadgeLabo }, new List<DialogBox> { b4 });
-                    npc.SetDialogTree(tree);
+                    //DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3 }, new List<HintsEnum> { HintsEnum.BadgeLabo }, new List<DialogBox> { b4 });
+                    //npc.SetDialogTree(tree);
+                    
                     break;
                 case 0:
                     npcs = new List<NPC>
@@ -328,9 +332,25 @@ namespace ParapluieBulgare
 
             switch (floor)
             {
-                case 0:
+                case 2:
+                    furnitures = new List<Furniture>
+                    {
+                        new Furniture(GetAnimation("transparent"), facebook["face02"], 900),
+                        new Furniture(GetAnimation("transparent"), facebook["face02"], 3420)
+                    };
                     break;
-                case 1:
+                case 3:
+                    furnitures = new List<Furniture>
+                    {
+                        new Furniture(GetAnimation("transparent"), facebook["face02"], 2800),
+                        new Furniture(GetAnimation("transparent"), facebook["face02"], 3500)
+                    };
+                    break;
+                case 4:
+                    furnitures = new List<Furniture>
+                    {
+                        new Furniture(GetAnimation("transparent"), facebook["face02"], 3350)
+                    };
                     break;
                 default:
                     break;
