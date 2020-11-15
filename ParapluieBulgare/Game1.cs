@@ -627,8 +627,8 @@ namespace ParapluieBulgare
 
                     b1 = new DialogBox("...  nan  j'avais  pas  mon  mot  a  dire  !  Ca  venait  carrement  de  la-haut.", npcs[0]);
                     b2 = new DialogBox("Mais  c'est  n'importe  quoi...  Une  'happiness  manager'.  Ce  qu'on  n'invente  pas  aujourd'hui  franchement...  ", npcs[1]);
-                    b3 = new DialogBox("Et  comme  par  hasard,  c'est  la  p'tite  Alicia  qui  est  'promue'.  Moi,  je  te  dis  que  ça  passe  sous  le  bu...", npcs[0]);
-                    b4 = new DialogBox("Eh  oh  t'y  vas  un  peu  fort  la,  en  plus  d'etre  carrement  sexiste  !  Va  falloir  changer  de  mentalite  Arnaud  !  Eh  puis  tout  compte  fait,  c'est  peut-être  pas  si  mal,  ça  reduira  peut-etre  notre  turnover.", npcs[1]);
+                    b3 = new DialogBox("Et  comme  par  hasard,  c'est  la  p'tite  Alicia  qui  est  'promue'.  Moi,  je  te  dis  que  ca  passe  sous  le  bu...", npcs[0]);
+                    b4 = new DialogBox("Eh  oh  t'y  vas  un  peu  fort  la,  en  plus  d'etre  carrement  sexiste  !  Va  falloir  changer  de  mentalite  Arnaud  !  Eh  puis  tout  compte  fait,  c'est  peut-etre  pas  si  mal,  ca  reduira  peut-etre  notre  turnover.", npcs[1]);
                     b5 = new DialogBox("Mouais  pas  faux...  Enfin  moi,  j'vois  deja  Gabrielle  faire  des  yeux  comme  ca  lorsqu'elle  verra  le  budget  de  ces  activites  '100%  happy  avec  Marpha  Biotech'", npcs[0], false, HintsEnum.HappinessManager);
                     tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5 });
                     npcs[1].SetDialogTree(tree);
