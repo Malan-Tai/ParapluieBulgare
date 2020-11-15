@@ -93,6 +93,16 @@ namespace ParapluieBulgare.Code
                         break;
                     }
                 }
+
+                int ratio = 2 * Game1.HEIGHT / (3 * 47);
+                int bigMaxX = 467 * ratio;
+                int smallMaxX = (467 - 54) * ratio;
+
+                if (x + width / 4 < 0) x = prevX;
+                else if (x + 3 * width / 4 > bigMaxX || ((floor == -1 || floor == 4) && x + 3 * width / 4 > smallMaxX))
+                {
+                    x = prevX;
+                }
             }
 
             base.Update(keyState, prevKeyState);
