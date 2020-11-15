@@ -30,19 +30,52 @@ namespace ParapluieBulgare
             "background",
             "ascenseur",
             "carnet",
+            "transparent",
+            "TitleScreen",
 
-            "player_walk",
-            "costard_idle",
-            "costard_idle2",
-            "costard_fem_idle",
-            "costard_fem_idle2",
-            "cuistot_idle",
-            "cuistot_idle2",
-            "directeur_idle",
-            "journaliste_idle",
-            "vigile_walk",
+            "persos/Cadres/Cadre1",
+            "persos/Cadres/Cadre2",
+            "persos/Cadres/Cadre3",
+            "persos/Cadres/Cadre4",
+            "persos/Cadres/Secretaire",
+            "persos/Cadres/Secretaire_Walk",
 
-            "TitleScreen"
+            "persos/Chercheuses/Chercheur1",
+            "persos/Chercheuses/Chercheur2",
+            "persos/Chercheuses/Chercheuse1",
+            "persos/Chercheuses/Chercheuse2",
+
+            "persos/Cuisinier/Cuistot1",
+            "persos/Cuisinier/Cuistot2",
+            "persos/Cuisinier/Cuistot3",
+
+            "persos/Direction/Directeur1",
+            "persos/Direction/Directeur2",
+            "persos/Direction/Directeur3",
+            "persos/Direction/Directeur4",
+
+            "persos/Employees/Employe1",
+            "persos/Employees/Employe2",
+            "persos/Employees/Employe3",
+            "persos/Employees/Employe4",
+            "persos/Employees/Employe5",
+            "persos/Employees/Employe6",
+            "persos/Employees/Employe7",
+            "persos/Employees/Employe8",
+
+            "persos/Joueur/JoueurIdle",
+            "persos/Joueur/JoueurWalk",
+
+            "persos/Journalistes/Journaliste_IDLE",
+
+            "persos/Techniciens/Techos1",
+            "persos/Techniciens/Techos2",
+            "persos/Techniciens/Techos3",
+            "persos/Techniciens/Techos4",
+
+            "persos/Vigiles/VigileIdle",
+            "persos/Vigiles/VigileWalk",
+
         };
         List<string> allSounds = new List<string>
         {
@@ -53,9 +86,43 @@ namespace ParapluieBulgare
 
         List<string> allFaces = new List<string>
         {
-            "face01",
-            "face02",
-            "faceVigile"
+            "persos/Cadres/Cadre1Tronche",
+            "persos/Cadres/Cadre2Tronche",
+            "persos/Cadres/Cadre3Tronche",
+            "persos/Cadres/Cadre4Tronche",
+            "persos/Cadres/SecretaireTronche",
+
+            "persos/Chercheuses/Chercheur1Tronche",
+            "persos/Chercheuses/Chercheur2Tronche",
+            "persos/Chercheuses/Chercheuse1Tronche",
+            "persos/Chercheuses/Chercheuse2Tronche",
+
+            "persos/Cuisinier/Cuistot1Tronche",
+            "persos/Cuisinier/Cuistot2Tronche",
+
+            "persos/Direction/Directeur1Tronche",
+            "persos/Direction/Directeur2Tronche",
+            "persos/Direction/Directeur4Tronche",
+
+            "persos/Employees/Employe1Tronche",
+            "persos/Employees/Employe2Tronche",
+            "persos/Employees/Employe3Tronche",
+            "persos/Employees/Employe4Tronche",
+            "persos/Employees/Employe5Tronche",
+            "persos/Employees/Employe6Tronche",
+            "persos/Employees/Employe7Tronche",
+            "persos/Employees/Employe8Tronche",
+
+            "persos/Joueur/JoueurTronche",
+
+            "persos/Journalistes/JournalisteTronche",
+
+            "persos/Techniciens/Techos1Tronche",
+            "persos/Techniciens/Techos2Tronche",
+            "persos/Techniciens/Techos3Tronche",
+            "persos/Techniciens/Techos4Tronche",
+
+            "persos/Vigiles/VigileTronche",
         };
         Dictionary<string, Texture2D> facebook;
 
@@ -187,30 +254,173 @@ namespace ParapluieBulgare
             white = textureDict["white"];
         }
 
+        public Texture2D GetTronche(string spritesheet)
+        {
+            switch (spritesheet)
+            {
+                case "cadre1":
+                    return textureDict["persos/Cadres/Cadre1Tronche"];
+                case "cadre2":
+                    return textureDict["persos/Cadres/Cadre2Tronche"];
+                case "cadre3":
+                    return textureDict["persos/Cadres/Cadre3Tronche"];
+                case "cadre4":
+                    return textureDict["persos/Cadres/Cadre4Tronche"];
+                case "secretaire":
+                    return textureDict["persos/Cadres/SecretaireTronche"];
+
+                case "chercheur1":
+                    return textureDict["persos/Chercheuses/Chercheur1Tronche"];
+                case "chercheuse1":
+                    return textureDict["persos/Chercheuses/Chercheuse1Tronche"];
+                case "chercheur2":
+                    return textureDict["persos/Chercheuses/Chercheur2Tronche"];
+                case "chercheuse2":
+                    return textureDict["persos/Chercheuses/Chercheuse2Tronche"];
+
+                case "cuistot1":
+                    return textureDict["persos/Cuisinier/Cuistot1Tronche"];
+                case "cuistot2":
+                    return textureDict["persos/Cuisinier/Cuistot2Tronche"];
+
+                case "directeur1":
+                    return textureDict["persos/Direction/Directeur1Tronche"];
+                case "directeur2":
+                    return textureDict["persos/Direction/Directeur2Tronche"];
+                case "directeur4":
+                    return textureDict["persos/Direction/Directeur4Tronche"];
+
+                case "employe1":
+                    return textureDict["persos/Employees/Employe1Tronche"];
+                case "employe2":
+                    return textureDict["persos/Employees/Employe2Tronche"];
+                case "employe3":
+                    return textureDict["persos/Employees/Employe3Tronche"];
+                case "employe4":
+                    return textureDict["persos/Employees/Employe4Tronche"];
+                case "employe5":
+                    return textureDict["persos/Employees/Employe5Tronche"];
+                case "employe6":
+                    return textureDict["persos/Employees/Employe6Tronche"];
+                case "employe7":
+                    return textureDict["persos/Employees/Employe7Tronche"];
+                case "employe8":
+                    return textureDict["persos/Employees/Employe8Tronche"];
+
+                case "joueur":
+                    return textureDict["persos/Joueur/JoueurTronche"];
+
+                case "journaliste":
+                    return textureDict["persos/Journalistes/JournalisteTronche"];
+
+                case "techos1":
+                    return textureDict["persos/Techniciens/Techos1Tronche"];
+                case "techos2":
+                    return textureDict["persos/Techniciens/Techos2Tronche"];
+                case "techos3":
+                    return textureDict["persos/Techniciens/Techos3Tronche"];
+                case "techos4":
+                    return textureDict["persos/Techniciens/Techos4Tronche"];
+
+                case "vigile":
+                    return textureDict["persos/Vigiles/VigileTronche"];
+
+                default:
+                    return null;
+            }
+        }
         private Animation GetAnimation(string spritesheet)
         {
             switch (spritesheet)
             {
-                case "player_walk":
-                    return new Animation(textureDict["player_walk"], 32, 32, 6, 10);
+                case "transparent":
+                    return new Animation(textureDict["transparent"], 32, 32, 1, 60);
+              
+                case "cadre1":
+                    return new Animation(textureDict["persos/Cadres/Cadre1"], 32, 32, 2, 60);
+                case "cadre2":
+                    return new Animation(textureDict["persos/Cadres/Cadre2"], 32, 32, 2, 60);
+                case "cadre3":
+                    return new Animation(textureDict["persos/Cadres/Cadre3"], 32, 32, 2, 60);
+                case "cadre4":
+                    return new Animation(textureDict["persos/Cadres/Cadre4"], 32, 32, 2, 60);
+                case "secretaire":
+                    return new Animation(textureDict["persos/Cadres/Secretaire"], 32, 32, 2, 60);
+                case "secretaire_walk":
+                    return new Animation(textureDict["persos/Cadres/Secretaire_Walk"], 32, 32, 7, 10);
+
+
+                case "chercheur1":
+                    return new Animation(textureDict["persos/Chercheuses/Chercheur1"], 32, 32, 2, 60);
+                case "chercheur2":
+                    return new Animation(textureDict["persos/Chercheuses/Chercheur2"], 32, 32, 2, 60);
+                case "chercheuse1":
+                    return new Animation(textureDict["persos/Chercheuses/Chercheuse1"], 32, 32, 2, 60);
+                case "chercheuse2":
+                    return new Animation(textureDict["persos/Chercheuses/Chercheuse2"], 32, 32, 2, 60);
+
+
+                case "cuistot1":
+                    return new Animation(textureDict["persos/Cuisinier/Cuistot1"], 32, 32, 2, 60);
+                case "cuistot2":
+                    return new Animation(textureDict["persos/Cuisinier/Cuistot2"], 32, 32, 2, 60);
+                case "cuistot3":
+                    return new Animation(textureDict["persos/Cuisinier/Cuistot1"], 32, 32, 2, 60);
+
+
+                case "directeur1":
+                    return new Animation(textureDict["persos/Direction/Directeur1"], 32, 32, 2, 60);
+                case "directeur_walk":
+                    return new Animation(textureDict["persos/Direction/Directeur2"], 32, 32, 7, 10);
+                case "directeur3":
+                    return new Animation(textureDict["persos/Direction/Directeur3"], 32, 32, 2, 60);
+                case "directeur4":
+                    return new Animation(textureDict["persos/Direction/Directeur4"], 32, 32, 2, 60);
+
+
+                case "employe1":
+                    return new Animation(textureDict["persos/Employees/Employe1"], 32, 32, 2, 60);
+                case "employe2":
+                    return new Animation(textureDict["persos/Employees/Employe2"], 32, 32, 2, 60);
+                case "employe3":
+                    return new Animation(textureDict["persos/Employees/Employe3"], 32, 32, 2, 60);
+                case "employe4":
+                    return new Animation(textureDict["persos/Employees/Employe4"], 32, 32, 2, 60);
+                case "employe5":
+                    return new Animation(textureDict["persos/Employees/Employe5"], 32, 32, 2, 60);
+                case "employe6":
+                    return new Animation(textureDict["persos/Employees/Employe6"], 32, 32, 2, 60);
+                case "employe7":
+                    return new Animation(textureDict["persos/Employees/Employe7"], 32, 32, 2, 60);
+                case "employe8":
+                    return new Animation(textureDict["persos/Employees/Employe8"], 32, 32, 2, 60);
+
+
+                case "joueur_idle":
+                    return new Animation(textureDict["persos/Joueur/JoueurIdle"], 32, 32, 2, 60);
+                case "joueur_walk":
+                    return new Animation(textureDict["persos/Joueur/JoueurWalk"], 32, 32, 7, 10);
+
+
+                case "journaliste":
+                    return new Animation(textureDict["persos/Journalistes/Journaliste_IDLE"], 32, 32, 2, 60);
+
+
+                case "techos1":
+                    return new Animation(textureDict["persos/Techniciens/Techos1"], 32, 32, 2, 60);
+                case "techos2":
+                    return new Animation(textureDict["persos/Techniciens/Techos2"], 32, 32, 2, 60);
+                case "techos3":
+                    return new Animation(textureDict["persos/Techniciens/Techos3"], 32, 32, 2, 60);
+                case "techos4":
+                    return new Animation(textureDict["persos/Techniciens/Techos4"], 32, 32, 2, 60);
+
+
+                case "vigile_idle":
+                    return new Animation(textureDict["persos/Vigiles/VigileIdle"], 32, 32, 2, 60);
                 case "vigile_walk":
-                    return new Animation(textureDict["vigile_walk"], 32, 32, 6, 10);
-                case "costard_fem_idle":
-                    return new Animation(textureDict["costard_fem_idle"], 32, 32, 2, 60);
-                case "costard_fem_idle2":
-                    return new Animation(textureDict["costard_fem_idle2"], 32, 32, 2, 60);
-                case "costard_idle":
-                    return new Animation(textureDict["costard_idle"], 32, 32, 2, 60);
-                case "costard_idle2":
-                    return new Animation(textureDict["costard_idle2"], 32, 32, 2, 60);
-                case "cuistot_idle":
-                    return new Animation(textureDict["cuistot_idle"], 32, 32, 2, 60);
-                case "cuistot_idle2":
-                    return new Animation(textureDict["cuistot_idle2"], 32, 32, 2, 60);
-                case "directeur_idle":
-                    return new Animation(textureDict["directeur_idle"], 32, 32, 7, 60);
-                case "journaliste_idle":
-                    return new Animation(textureDict["journaliste_idle"], 32, 32, 2, 60);
+                    return new Animation(textureDict["persos/Vigiles/VigileWalk"], 32, 32, 8, 10);
+
                 default:
                     return null;
             }
@@ -232,20 +442,21 @@ namespace ParapluieBulgare
                     npcs[0].Target = true;
                     npcs[0].Flip = true;
 
-                    NPC npc = npcs[0];
-                    DialogBox b1 = new DialogBox("coucou", npc);
-                    DialogBox b2 = new DialogBox("wesh frr", player);
-                    DialogBox b3 = new DialogBox("vazy kass toa", npc, false, HintsEnum.BadgeLabo);
+                    //NPC npc = npcs[0];
+                    //DialogBox b1 = new DialogBox("coucou", npc);
+                    //DialogBox b2 = new DialogBox("wesh frr", player);
+                    //DialogBox b3 = new DialogBox("vazy kass toa", npc, false, HintsEnum.BadgeLabo);
 
-                    DialogBox b4 = new DialogBox("Alors poto le labo ?", npc);
+                    //DialogBox b4 = new DialogBox("Alors poto le labo ?", npc);
 
-                    DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3 }, new List<HintsEnum> { HintsEnum.BadgeLabo }, new List<DialogBox> { b4 });
-                    npc.SetDialogTree(tree);
+                    //DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3 }, new List<HintsEnum> { HintsEnum.BadgeLabo }, new List<DialogBox> { b4 });
+                    //npc.SetDialogTree(tree);
+                    
                     break;
                 case 0:
                     npcs = new List<NPC>
                     {
-                        new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 600),
+                        new NPC(GetAnimation("Employe1"), GetAnimation("Employe1"), facebook["face02"], 600),
                         new NPC(GetAnimation("journaliste_idle"), GetAnimation("journaliste_idle"), facebook["face02"], 1300),
 
                         new NPC(GetAnimation("costard_fem_idle"), GetAnimation("costard_fem_idle"), facebook["face02"], 2400),
@@ -330,9 +541,25 @@ namespace ParapluieBulgare
 
             switch (floor)
             {
-                case 0:
+                case 2:
+                    furnitures = new List<Furniture>
+                    {
+                        new Furniture(GetAnimation("transparent"), facebook["face02"], 900),
+                        new Furniture(GetAnimation("transparent"), facebook["face02"], 3420)
+                    };
                     break;
-                case 1:
+                case 3:
+                    furnitures = new List<Furniture>
+                    {
+                        new Furniture(GetAnimation("transparent"), facebook["face02"], 2800),
+                        new Furniture(GetAnimation("transparent"), facebook["face02"], 3500)
+                    };
+                    break;
+                case 4:
+                    furnitures = new List<Furniture>
+                    {
+                        new Furniture(GetAnimation("transparent"), facebook["face02"], 3350)
+                    };
                     break;
                 default:
                     break;
