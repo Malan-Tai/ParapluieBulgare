@@ -65,7 +65,7 @@ namespace ParapluieBulgare.Code
                     foreach (string line in lines)
                     {
                         spriteBatch.DrawString(font, line, new Vector2(curRect.X, y), Color.Black);
-                        y += h;
+                        y += 2 * h;
                         if (y > curRect.Y + curRect.Height)
                         {
                             curRect = textRect2;
