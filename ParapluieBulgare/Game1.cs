@@ -250,65 +250,68 @@ namespace ParapluieBulgare
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (sniper == null && ThreatLevel == 1)
-            {
-                sniper = new Sniper(white);
-            }
-
-            timer.update(gameTime.ElapsedGameTime.TotalSeconds);
-
-            if (timer.isOver())
-                Exit();
-
             KeyboardState state = Keyboard.GetState();
-            
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            int oldFloor = currentFloor.Number;
-            if (!elevator)
+            if (!Win && !Lose)
             {
-                string switchFloor = currentFloor.Update(state, prevKeyState, guards);
-                if (sniper != null) sniper.Update(player);
+                if (sniper == null && ThreatLevel == 1)
+                {
+                    sniper = new Sniper(white);
+                }
 
-                if (switchFloor == "stairs up")
-                {
-                    int n = currentFloor.Number;
-                    if (n < floors[floors.Length-1].Number - 1)
-                    {
-                        currentFloor = floors[n + 2];
-                    }
-                    Console.Out.WriteLine("floor up : " + (n + 1));
-                }
-                else if (switchFloor == "stairs down")
-                {
-                    int n = currentFloor.Number;
-                    if (n > 0)
-                    {
-                        currentFloor = floors[n];
-                    }
-                    Console.Out.WriteLine("floor down : " + (n - 1));
-                }
-                else if (switchFloor == "elevator")
-                {
-                    elevator = true;
-                    elevatorGUI = new ElevatorGUI(floors.Length, currentFloor.Number, white);
-                }
-            }
-            else
-            {
-                int switchFloor = elevatorGUI.Update(state, prevKeyState);
-                if (switchFloor != -1)
-                {
-                    currentFloor = floors[switchFloor];
-                    elevator = false;
-                    elevatorGUI = null;
-                    Console.Out.WriteLine("elevator : " + (switchFloor - 1));
-                }
-            }
-            if (sniper != null) sniper.SwitchFloor(oldFloor, currentFloor.Number);
+                timer.update(gameTime.ElapsedGameTime.TotalSeconds);
 
-            prevKeyState = state;
+                if (timer.isOver())
+                    Exit();
+
+                int oldFloor = currentFloor.Number;
+                if (!elevator)
+                {
+                    string switchFloor = currentFloor.Update(state, prevKeyState, guards);
+                    if (sniper != null) sniper.Update(player);
+
+                    if (switchFloor == "stairs up")
+                    {
+                        int n = currentFloor.Number;
+                        if (n < floors[floors.Length - 1].Number - 1)
+                        {
+                            currentFloor = floors[n + 2];
+                        }
+                        Console.Out.WriteLine("floor up : " + (n + 1));
+                    }
+                    else if (switchFloor == "stairs down")
+                    {
+                        int n = currentFloor.Number;
+                        if (n > 0)
+                        {
+                            currentFloor = floors[n];
+                        }
+                        Console.Out.WriteLine("floor down : " + (n - 1));
+                    }
+                    else if (switchFloor == "elevator")
+                    {
+                        elevator = true;
+                        elevatorGUI = new ElevatorGUI(floors.Length, currentFloor.Number, white);
+                    }
+                }
+                else
+                {
+                    int switchFloor = elevatorGUI.Update(state, prevKeyState);
+                    if (switchFloor != -1)
+                    {
+                        currentFloor = floors[switchFloor];
+                        elevator = false;
+                        elevatorGUI = null;
+                        Console.Out.WriteLine("elevator : " + (switchFloor - 1));
+                    }
+                }
+                if (sniper != null) sniper.SwitchFloor(oldFloor, currentFloor.Number);
+
+                prevKeyState = state;
+            }
             base.Update(gameTime);
         }
 

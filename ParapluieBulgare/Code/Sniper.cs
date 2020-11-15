@@ -46,7 +46,7 @@ namespace ParapluieBulgare.Code
             x += (int)Math.Ceiling(velocity.X);
             y += (int)Math.Ceiling(velocity.Y);
 
-            if (BoxCollider.Intersects(player.BoxCollider))
+            if (BoxCollider.Contains(player.Coords.X + headOffset, player.Coords.Y + 10)) //if (BoxCollider.Intersects(player.BoxCollider))
             {
                 Game1.Lose = true;
             }
