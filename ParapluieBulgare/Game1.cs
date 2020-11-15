@@ -92,12 +92,12 @@ namespace ParapluieBulgare
             player = new Player(GetAnimation("MC_Walk_SpriteSheet"), GetAnimation("MC_Walk_SpriteSheet"), white);
             floors = new Floor[]
             {
-                new Floor(player, -1, textureDict["Background"], GetFloorNPCs(-1)),
-                new Floor(player, 0, textureDict["Background"], GetFloorNPCs(0)),
-                new Floor(player, 1, textureDict["Background"], GetFloorNPCs(1)),
-                new Floor(player, 2, textureDict["Background"], GetFloorNPCs(2)),
-                new Floor(player, 3, textureDict["Background"], GetFloorNPCs(3)),
-                new Floor(player, 4, textureDict["Background"], GetFloorNPCs(4))
+                new Floor(player, -1, textureDict["Background"], GetFloorNPCs(-1), GetFloorFurnitures(-1)),
+                new Floor(player, 0, textureDict["Background"], GetFloorNPCs(0), GetFloorFurnitures(0)),
+                new Floor(player, 1, textureDict["Background"], GetFloorNPCs(1), GetFloorFurnitures(1)),
+                new Floor(player, 2, textureDict["Background"], GetFloorNPCs(2), GetFloorFurnitures(2)),
+                new Floor(player, 3, textureDict["Background"], GetFloorNPCs(3), GetFloorFurnitures(3)),
+                new Floor(player, 4, textureDict["Background"], GetFloorNPCs(4), GetFloorFurnitures(4))
             };
 
             guards = new List<Guard>
@@ -192,6 +192,23 @@ namespace ParapluieBulgare
             }
 
             return npcs;
+        }
+
+        private List<Furniture> GetFloorFurnitures(int floor)
+        {
+            List<Furniture> furnitures = new List<Furniture>();
+
+            switch (floor)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                default:
+                    break;
+            }
+
+            return furnitures;
         }
 
         /// <summary>

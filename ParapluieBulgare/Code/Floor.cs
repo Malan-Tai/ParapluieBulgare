@@ -19,18 +19,20 @@ namespace ParapluieBulgare.Code
         public int Number { get; set; }
 
         private List<NPC> npcs;
+        private List<Furniture> furnitures;
         private Player player;
 
         private List<Rectangle> elevators;
         private List<Rectangle> stairs;
 
-        public Floor(Player p, int n, Texture2D t, List<NPC> npcList)
+        public Floor(Player p, int n, Texture2D t, List<NPC> npcList, List<Furniture> furn)
         {
             player = p;
             texture = t;
             Number = n;
           
             npcs = npcList;
+            furnitures = furn;
 
             stairs = new List<Rectangle>
             {
@@ -42,6 +44,10 @@ namespace ParapluieBulgare.Code
 
         public string Update(KeyboardState keyState, KeyboardState prevKeyState)
         {
+            foreach (Furniture furniture in furnitures)
+            {
+                furniture.Update(keyState, prevKeyState);
+            }
             foreach (NPC npc in npcs)
             {
                 npc.Update(keyState, prevKeyState);
@@ -90,6 +96,10 @@ namespace ParapluieBulgare.Code
             //    spriteBatch.Draw(texture, new Rectangle(rect.X - cameraX, rect.Y, rect.Width, rect.Height), Color.DarkBlue);
             //}
 
+            foreach (Furniture furniture in furnitures)
+            {
+                furniture.Draw(spriteBatch, cameraX);
+            }
             foreach (NPC npc in npcs)
             {
                 npc.Draw(spriteBatch, cameraX);
