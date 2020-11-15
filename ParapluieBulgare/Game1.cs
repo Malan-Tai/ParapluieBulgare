@@ -472,11 +472,11 @@ namespace ParapluieBulgare
 
                     npcs[0].Flip = true;
 
-                    DialogBox b1 = new DialogBox("... devrait pas avoir le droit de nous faire travailler autant !", npcs[0]);
-                    DialogBox b2 = new DialogBox("C'est vrai, mais le syndicat a reussi a obtenir plus de budget pour organiser des activites bien-etre. C'est un premier pas.", npcs[1]);
-                    DialogBox b3 = new DialogBox("De la poudre aux yeux moi je te dis !", npcs[0]);
-                    DialogBox b4 = new DialogBox("Peut-etre mais c'est un premier pas. Tu devrais assister a l'atelier cuisine, c'est assez cool comme ambiance. Meme les chefs de projet semblent plus '.sympathiques' !", npcs[1], false, HintsEnum.AtelierCuisine);
-                    DialogBox b5 = new DialogBox("Mouais... J'irai y jeter un oeil... Mais le combat n'est pas fini !", npcs[0]);
+                    DialogBox b1 = new DialogBox("Alors, Philippe, t'a gagne cette fois ?", npcs[0]);
+                    DialogBox b2 = new DialogBox("Nan, j'ai encore perdu, foutu canassons.., jamais le bon qui gagne !", npcs[1]);
+                    DialogBox b3 = new DialogBox("Et t'a perdu combien ce coup ci ?", npcs[0]);
+                    DialogBox b4 = new DialogBox("200 balles !", npcs[1]);
+                    DialogBox b5 = new DialogBox("Mais t'es con ou quoi Pillipe ? On gagne deja rien et tu claques tout au PMU, elle en pense quoi Marie ?", npcs[0]);
                     DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5 });
                     npcs[1].SetDialogTree(tree);
 
@@ -523,7 +523,7 @@ namespace ParapluieBulgare
                         new NPC(GetAnimation("chercheuse1"), GetAnimation("chercheuse1"), GetTronche("chercheuse1"), 400),
                         new NPC(GetAnimation("employe4"), GetAnimation("employe4"), GetTronche("employe4"), 600),
                         new NPC(GetAnimation("cadre2"), GetAnimation("cadre2"), GetTronche("cadre2"), 1100),
-                        new NPC(GetAnimation("employe5"), GetAnimation("employe5"), GetTronche("employe2"), 1300),
+                        new NPC(GetAnimation("employe5"), GetAnimation("employe5"), GetTronche("employe5"), 1300),
                         new NPC(GetAnimation("directeur2"), GetAnimation("directeur2"), GetTronche("directeur2"), 2380),
 
                         new NPC(GetAnimation("techos1"), GetAnimation("techos1"), GetTronche("techos1"), 2800),
@@ -564,6 +564,14 @@ namespace ParapluieBulgare
 
                     npcs[1].Flip = true;
                     npcs[3].Flip = true;
+
+                    b1 = new DialogBox("On devrait pas avoir le droit de nous faire travailler autant !", npcs[4]);
+                    b2 = new DialogBox("C'est vrai, mais le syndicat a reussi a obtenir plus de budget pour organiser des activites bien-etre. C'est un premier pas.", player);
+                    b3 = new DialogBox("L'atelier cuisine du happiness manager'? De la poudre aux yeux moi je te dis !", npcs[4]);
+                    b4 = new DialogBox("Peut-etre mais c'est un premier pas. Tu devrais essayer d'y assister.", player, false, HintsEnum.AtelierCuisine);
+                    b5 = new DialogBox("Mouais... J'irai y jeter un oeil... Mais le combat n'est pas fini !", npcs[4]);
+                    tree = new DialogTree(new List<DialogBox> { b1 }, new List<HintsEnum> { HintsEnum.HappinessManager }, new List<DialogBox> { b1, b2, b3, b4, b5 });
+                    npcs[1].SetDialogTree(tree);
 
                     break;
                 case 3:
