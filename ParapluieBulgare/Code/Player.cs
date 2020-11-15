@@ -37,7 +37,7 @@ namespace ParapluieBulgare.Code
             return x - (windowWidth - width) / 2;
         }
 
-        public string Update(KeyboardState keyState, KeyboardState prevKeyState, List<NPC> npcs, List<Guard> guards, int floor)
+        public string Update(KeyboardState keyState, KeyboardState prevKeyState, List<NPC> npcs, List<Furniture> furns, List<Guard> guards, int floor)
         {
             string returned = "";
             if (interactingWith == null && !leftConversation)
@@ -54,6 +54,8 @@ namespace ParapluieBulgare.Code
                 if (keyState.IsKeyDown(Keys.E) && !prevKeyState.IsKeyDown(Keys.E))
                 {
                     Interaction(npcs);
+                    Interaction(furns);
+
                 }
                 if (keyState.IsKeyDown(Keys.J) && !prevKeyState.IsKeyDown(Keys.J))
                 {
@@ -123,6 +125,19 @@ namespace ParapluieBulgare.Code
             }
         }
 
+        public void Interaction(List<Furniture> furns)
+        {
+            Console.Out.WriteLine("trying interaction");
+            foreach (Furniture furn in furns)
+            {
+                if (BoxCollider.Intersects(furn.BoxCollider))
+                {
+                    interactingWith = furn;
+                    furn.StartInteraction(this);
+                    break;
+                }
+            }
+        }
 
         public void Kill(List<NPC> npcs)
         {

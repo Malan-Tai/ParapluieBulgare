@@ -68,7 +68,7 @@ namespace ParapluieBulgare.Code
             {
                 guard.Update(keyState, prevKeyState, player, Number);
             }
-            string key = player.Update(keyState, prevKeyState, npcs, guards, Number);
+            string key = player.Update(keyState, prevKeyState, npcs, furnitures, guards, Number);
 
             if (key != "")
             {

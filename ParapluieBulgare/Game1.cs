@@ -344,6 +344,15 @@ namespace ParapluieBulgare
                 case "vigile":
                     return facebook["persos/Vigiles/VigileTronche"];
 
+                case "Badge":
+                    return facebook["Badge"];
+                case "Docu_Vaccin":
+                    return facebook["Docu_Vaccin"];
+                case "Serveur":
+                    return facebook["Serveur"];
+                case "PC_Boss":
+                    return facebook["PC_Boss"];
+
                 default:
                     return null;
             }
@@ -619,7 +628,7 @@ namespace ParapluieBulgare
                     b1 = new DialogBox("...  nan  j'avais  pas  mon  mot  a  dire  !  Ca  venait  carrement  de  la-haut.", npcs[0]);
                     b2 = new DialogBox("Mais  c'est  n'importe  quoi...  Une  'happiness  manager'.  Ce  qu'on  n'invente  pas  aujourd'hui  franchement...  ", npcs[1]);
                     b3 = new DialogBox("Et  comme  par  hasard,  c'est  la  p'tite  Alicia  qui  est  'promue'.  Moi,  je  te  dis  que  ça  passe  sous  le  bu...", npcs[0]);
-                    b4 = new DialogBox("Eh  oh  t'y  vas  un  peu  fort  la,  en  plus  d'être  carrement  sexiste  !  Va  falloir  changer  de  mentalite  Arnaud  !  Eh  puis  tout  compte  fait,  c'est  peut-être  pas  si  mal,  ça  reduira  peut-etre  notre  turnover.", npcs[1]);
+                    b4 = new DialogBox("Eh  oh  t'y  vas  un  peu  fort  la,  en  plus  d'etre  carrement  sexiste  !  Va  falloir  changer  de  mentalite  Arnaud  !  Eh  puis  tout  compte  fait,  c'est  peut-être  pas  si  mal,  ça  reduira  peut-etre  notre  turnover.", npcs[1]);
                     b5 = new DialogBox("Mouais  pas  faux...  Enfin  moi,  j'vois  deja  Gabrielle  faire  des  yeux  comme  ca  lorsqu'elle  verra  le  budget  de  ces  activites  '100%  happy  avec  Marpha  Biotech'", npcs[0], false, HintsEnum.HappinessManager);
                     tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5 });
                     npcs[1].SetDialogTree(tree);
@@ -680,9 +689,10 @@ namespace ParapluieBulgare
                         new Furniture(GetAnimation("transparent"), GetTronche("Badge"), 2800)
                     };
 
+                    DialogBox b0 = new DialogBox("Il est beau le lavabo.", furnitures[0]);
                     b1 = new DialogBox("Un badge de chercheur...", furnitures[0]);
                     b2 = new DialogBox("Il devrait me permettre d'acceder au labo", player, false, HintsEnum.BadgeLabo);
-                    tree = new DialogTree(new List<DialogBox>(), new List<HintsEnum> { HintsEnum.JournalisteToilettes } , new List<DialogBox> { b1, b2 });
+                    tree = new DialogTree(new List<DialogBox> {b0} , new List<HintsEnum> { HintsEnum.JournalisteToilettes } , new List<DialogBox> { b1, b2 });
                     furnitures[0].SetDialogTree(tree);
             break;
                 case 4:
@@ -709,6 +719,7 @@ namespace ParapluieBulgare
                      b16 = new DialogBox("Chercheur-Chef de projet : Laurent GARENTI", furnitures[0]);
                      b17 = new DialogBox("Developpement du projet :", furnitures[0]);
                     tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17 });
+                    furnitures[0].SetDialogTree(tree);
                     break;
                 default:
                     break;
