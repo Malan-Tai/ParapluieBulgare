@@ -17,6 +17,7 @@ namespace ParapluieBulgare
         public static int WIDTH = 1280;
         public static int HEIGHT = 720;
 
+        Song music;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -260,6 +261,8 @@ namespace ParapluieBulgare
                 soundDict.Add(text, Content.Load<SoundEffect>(text));
             }
             white = textureDict["white"];
+
+            music = Content.Load<Song>("Title");
         }
 
         public Texture2D GetTronche(string spritesheet)
@@ -608,6 +611,8 @@ namespace ParapluieBulgare
                     isPlayingIntro = false;
                     audioIntroInstance.Stop();
                     audioIntroInstance.Dispose();
+                    MediaPlayer.Play(music);
+                    MediaPlayer.IsRepeating = true;
                 }
                 else
                 {

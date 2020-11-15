@@ -907,6 +907,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Serveur.png
+#begin Title.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Title.ogg
 
 #begin TitleScreen.png
 /importer:TextureImporter
