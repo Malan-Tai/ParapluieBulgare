@@ -33,6 +33,7 @@ namespace ParapluieBulgare
             "carnet",
             "transparent",
             "TitleScreen",
+            "EndScreen",
             "Viseur",
 
             "persos/Cadres/Cadre1",
@@ -78,7 +79,8 @@ namespace ParapluieBulgare
             "persos/Vigiles/VigileIdle",
             "persos/Vigiles/VigileWalk",
 
-            "Monitor"
+            "props/Monitor",
+            "props/Imprimante"
 
         };
         List<string> allSounds = new List<string>
@@ -161,6 +163,8 @@ namespace ParapluieBulgare
 
 
         public static int ThreatLevel = 0;
+        public static bool End = false;
+        public static double endTime = 0;
         public static bool Win = false;
         public static bool Lose = false;
 
@@ -450,7 +454,9 @@ namespace ParapluieBulgare
                     return new Animation(textureDict["persos/Vigiles/VigileWalk"], 32, 32, 8, 10);
 
                 case "moniteur":
-                    return new Animation(textureDict["Monitor"], 32, 32, 8, 10);
+                    return new Animation(textureDict["props/Monitor"], 32, 32, 8, 10);
+                case "imprimante":
+                    return new Animation(textureDict["props/Imprimante"], 32, 32, 6, 20);
 
                 default:
                     return null;
@@ -471,13 +477,35 @@ namespace ParapluieBulgare
                     };
 
                     npcs[0].Flip = true;
-
-                    DialogBox b1 = new DialogBox("Alors, Philippe, t'a gagne cette fois ?", npcs[0]);
-                    DialogBox b2 = new DialogBox("Nan, j'ai encore perdu, foutu canassons.., jamais le bon qui gagne !", npcs[1]);
-                    DialogBox b3 = new DialogBox("Et t'a perdu combien ce coup ci ?", npcs[0]);
-                    DialogBox b4 = new DialogBox("200 balles !", npcs[1]);
-                    DialogBox b5 = new DialogBox("Mais t'es con ou quoi Pillipe ? On gagne deja rien et tu claques tout au PMU, elle en pense quoi Marie ?", npcs[0]);
-                    DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5 });
+                    DialogBox b1 = new DialogBox("Alors  Philippe,  t'as  gagne  cette  fois  ?", npcs[1]);
+                    DialogBox b2 = new DialogBox("Nan,  j'ai  encore  perdu,  foutu  canassons,  jamais  le  bon  qui  gagne...", npcs[0]);
+                    DialogBox b3 = new DialogBox("(rire)  Et  combien  t'as  perdu  ce  coup  ci  ?", npcs[1]);
+                    DialogBox b4 = new DialogBox("200  balles  !", npcs[0]);
+                    DialogBox b5 = new DialogBox("Mais  t'es  con  ou  quoi  Philippe  ?  On  gagne  deja  rien  et  tu  claques  tout  au  PMU,  elle  en  pense quoi  Marie  ?", npcs[1]);
+                    DialogBox b6 = new DialogBox("Bah  j'lui  ai  rien  dit,  et  puis  tu  peux  te  la  ramener  Franck  on  a  le  meme  job  couillon  !", npcs[0]);
+                    DialogBox b7 = new DialogBox("Ouais  mais  moi  au  moins  j'suis  moins  con,  regarde  toi  tu  bosses  et  moi  je  fais  rien,  je  suis  donc  paye  a  te  regarder  faire.", npcs[1]);
+                    DialogBox b8 = new DialogBox("Ouais  bah  passe  moi  la  cle  de  12,  petit  con.", npcs[0]);
+                    DialogBox b9 = new DialogBox("Uniquement  si  on  prend  une  pause  apres.", npcs[1]);
+                    DialogBox b10 = new DialogBox("Pause  binouze  ?  Pause  clope  ?", npcs[0]);
+                    DialogBox b11 = new DialogBox("T'as  tout  compris  mon  cochon  !", npcs[1]);
+                    DialogBox b12 = new DialogBox("Salle  de  pause  ?  Et  si  on  croise  les  collegues  ?  ", npcs[0]);
+                    DialogBox b13 = new DialogBox("Que  dalle  je  partage  pas  ma  bibine,  elles  sont  dans  la  caisse  a  outil  j'ai  tout  prevu.", npcs[1]);
+                    DialogBox b14 = new DialogBox("T'es  vraiment  un  branleur  Franck,  mais  t'es  un  branleur  sympa.", npcs[0]);
+                    DialogBox b15 = new DialogBox("Et  toi  t'es  con  comme  tes  pieds,  arrete  de  faire  ta  gonzesse    et  viens  boire  un  coup.", npcs[1]);
+                    DialogBox b16 = new DialogBox("Euh,  Philippe  tu  le  connais  ce  mec  qui  nous  fixe  ?", npcs[1]);
+                    DialogBox b17 = new DialogBox("Nan,  tu  crois  qu'il  veut  piquer  la  mousseuse  ?", npcs[0]);
+                    DialogBox b18 = new DialogBox("Affirmatif  cher  collegue,  mais  personne  vole  la  binouze  au  Francky,  parole  de  bonhomme.", npcs[1]);
+                    DialogBox b19 = new DialogBox("Ah  au  fait,  tu  sais  que  Patrick  du  3eme,  la  le  con  qui  a  failli  nous  choper...", npcs[0]);
+                    DialogBox b20 = new DialogBox("Ouais  et  bah  quoi  ?", npcs[1]);
+                    DialogBox b21 = new DialogBox("Il  s'est  fait  gauler  en  train  de  se  palucher  sur  son  ordi  pro  !", npcs[0]);
+                    DialogBox b22 = new DialogBox("Roooh  naaaaaan  sans  deconner  !  Tous  des  hypocrites  ces  bureaucrates.  'Ah  gneuh  gneuh  gneuh  c'est  pas  bien  de  boire  sur  son  lieu  de  travail,  prochaine  fois  avertissement  aux  RH'.  ", npcs[1]);
+                    DialogBox b23 = new DialogBox("Il  a  pas  eu  b'soin  de  nous  pour  filer  droit  aux  RH  ce  con  !  HAHAHAHA", npcs[0]);
+                    DialogBox b24 = new DialogBox("HAHAHAHA", npcs[1]);
+                    DialogBox b25 = new DialogBox("...", npcs[0]);
+                    DialogBox b26 = new DialogBox("...", npcs[1]);
+                    DialogBox b27 = new DialogBox("Bordel,  mais  si  ca  se  trouve,  c'est  un  inspecteur  de  l'URSAFF  ce  type  ?", npcs[0]);
+                    DialogBox b28 = new DialogBox("Oh  merde  !  Fais  semblant  de  taffer  !  ", npcs[1]);
+                    DialogTree tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22, b23, b24, b25, b26, b27, b28 });
                     npcs[1].SetDialogTree(tree);
 
                     break;
@@ -501,7 +529,7 @@ namespace ParapluieBulgare
                     b3 = new DialogBox("Oui oui c'est ca, c'est ca. Partez ou je serai contraint d'appeler la police.", guards[0]);
                     b4 = new DialogBox("Ouais c'est ca allez-y, appelez les flics ! Histoire qu'ils decouvrent vos petites manigances. On sait ce que vous cachez sur vos serveurs !", npcs[1]);
                     b5 = new DialogBox("Bien sur, et moi je suis reptilien...", guards[0]);
-                    DialogBox b6 = new DialogBox("Moquez-vous !", npcs[1]);
+                    b6 = new DialogBox("Moquez-vous !", npcs[1]);
                     tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5, b6 });
                     npcs[1].SetDialogTree(tree);
 
@@ -511,8 +539,8 @@ namespace ParapluieBulgare
                     b4 = new DialogBox("Serieux  ??  Je  ne  le  voyais  pas  aussi... 'connecte'.", npcs[3]);
                     b5 = new DialogBox("Ouais  enfin  mate  le  nom  du  chat  :  Berlioz...  C'est  pas  le  blaze  le  plus  tendance  non  plus...  ", npcs[4], false, HintsEnum.ChatBerlioz);
                     b6 = new DialogBox("Eh  !  Ca  reste  un  vieux  schnock  multimillionnaire  apres  tout...", npcs[3]);
-                    DialogBox b7 = new DialogBox("Chuuuuut  parle  moins  fort,  y  a  un  type  chelou  qui  nous  observe  !", npcs[4]);
-                    DialogBox b8 = new DialogBox("  ...", npcs[3]);
+                    b7 = new DialogBox("Chuuuuut  parle  moins  fort,  y  a  un  type  chelou  qui  nous  observe  !", npcs[4]);
+                    b8 = new DialogBox("  ...", npcs[3]);
                     tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5, b6, b7, b8 });
                     npcs[4].SetDialogTree(tree);
 
@@ -598,12 +626,12 @@ namespace ParapluieBulgare
                     b6 = new DialogBox("Tu  n'as  toujours  pas  teste  les  nouvelles  activites  proposees  par  le  CE  pour  'avoir  le  smile'  ?", npcs[2]);
                     b7 = new DialogBox("Nan  j'ai  pas  vraiment  regarde.", npcs[1]);
                     b8 = new DialogBox("Ca  devrait  t'interesser  pourtant,  c'est  Alicia  qui  s'en  charge.", npcs[2]);
-                    DialogBox b9 = new DialogBox("A...  Arrete  !  Tu  sais  tres  bien  que  je  suis  trop  genee  quand  elle  est  la...", npcs[1]);
-                    DialogBox b10 = new DialogBox("Fais  gaffe,  tu  vas  te  faire  devancer  par  Camille  hahaha", npcs[2]);
-                    DialogBox b11 = new DialogBox("Par...  Camille,  celle  dont  tout  le  monde  parle  !?", npcs[1]);
-                    DialogBox b12 = new DialogBox("Oui,  qui  travaille  sur  le  projet  de  super-vaccin,  celle-la  meme.", npcs[2]);
-                    DialogBox b13 = new DialogBox("Eh  qu'est-ce  qui  te  fait  croire  qu'elle  est  aussi...  ", npcs[1]);
-                    DialogBox b14 = new DialogBox("J'ai  mes  sources  eheheh.  Et  puis,  elle  reserve  toujours  les  creneaux  entiers  ou  Alicia  participe  egalement...  C'est  tellement  crame  !  Encore  aujourd'hui,  elle  a  bloque  sa  journee  pour  faire  l'atelier  cuisine  !", npcs[2], false, HintsEnum.AtelierCuisine);
+                    b9 = new DialogBox("A...  Arrete  !  Tu  sais  tres  bien  que  je  suis  trop  genee  quand  elle  est  la...", npcs[1]);
+                    b10 = new DialogBox("Fais  gaffe,  tu  vas  te  faire  devancer  par  Sophie  hahaha", npcs[2]);
+                    b11 = new DialogBox("Par...  Sophie,  celle  dont  tout  le  monde  parle  !?", npcs[1]);
+                    b12 = new DialogBox("Oui,  qui  travaille  sur  le  projet  de  super-vaccin,  celle-la  meme.", npcs[2]);
+                    b13 = new DialogBox("Eh  qu'est-ce  qui  te  fait  croire  qu'elle  est  aussi...  ", npcs[1]);
+                    b14 = new DialogBox("J'ai  mes  sources  eheheh.  Et  puis,  elle  reserve  toujours  les  creneaux  entiers  ou  Alicia  participe  egalement...  C'est  tellement  crame  !  Encore  aujourd'hui,  elle  a  bloque  sa  journee  pour  faire  l'atelier  cuisine  !", npcs[2], false, HintsEnum.AtelierCuisine);
 
                     tree = new DialogTree(new List<DialogBox> { b1, b2, b3, b4, b5 }, new List<HintsEnum> { HintsEnum.HappinessManager }, new List<DialogBox> { b6, b7, b8, b8, b9, b10, b11, b12, b13, b14 });
                     npcs[2].SetDialogTree(tree);
@@ -706,8 +734,10 @@ namespace ParapluieBulgare
                 case 4:
                     furnitures = new List<Furniture>
                     {
-                        new Furniture(GetAnimation("transparent"), GetTronche("PC_Boss"), 3350)
+                        new Furniture(GetAnimation("transparent"), GetTronche("PC_Boss"), 3350),
+                        //new Furniture(GetAnimation("imprimante"),null,900),
                     };
+                    //furnitures[1].SetDialogTree(null);
 
                     b18 = new DialogBox("Mot de passe ?", furnitures[0]);
                     b19 = new DialogBox("Berlioz", player);
@@ -876,6 +906,9 @@ namespace ParapluieBulgare
 
                 prevKeyState = state;
             }
+            else { 
+                
+            }
             base.Update(gameTime);
         }
 
@@ -919,8 +952,30 @@ namespace ParapluieBulgare
             spriteBatch.Draw(white, new Rectangle((WIDTH - len) / 2 - 20, 0, len + 40, h + 20), Color.Black);
             spriteBatch.DrawString(font, time, new Vector2((WIDTH - len) / 2, 10), Color.Red);
 
-            if (Win) spriteBatch.DrawString(font, "YOU WIN", new Vector2(300, 150), Color.Red);
-            if (Lose) spriteBatch.DrawString(font, "YOU LOSE", new Vector2(300, 150), Color.Red);
+            
+            if (Win)
+            {
+                spriteBatch.DrawString(font, "YOU WIN", new Vector2(300, 150), Color.Red);
+                if (!End)
+                {
+                    endTime = gameTime.TotalGameTime.TotalSeconds;
+                    End = true;
+                }
+            }
+            if (Lose)
+            {
+                spriteBatch.DrawString(font, "YOU LOSE", new Vector2(300, 150), Color.Red);
+                if (!End)
+                {
+                    endTime = gameTime.TotalGameTime.TotalSeconds;
+                    End = true;
+                }
+            }
+            if(End && gameTime.TotalGameTime.TotalSeconds - endTime >= 4)
+            {
+                spriteBatch.Draw(textureDict["EndScreen"], new Rectangle(0, 0, WIDTH, HEIGHT), Color.White);
+            }
+            
 
             if (isPlayingIntro)
             {

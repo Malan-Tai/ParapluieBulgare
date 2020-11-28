@@ -17,7 +17,7 @@ namespace ParapluieBulgare.Code
         public Furniture(Animation idle, Texture2D face, int x = 500) : base(idle, null, face)
         {
             this.x = x;
-            y = 2 * Game1.HEIGHT / 3 - width - 20;
+            this.y = 2 * Game1.HEIGHT / 3 - width - 20;
         }
 
         public override void Update(KeyboardState keyState, KeyboardState prevKeyState)
