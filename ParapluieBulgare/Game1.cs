@@ -735,10 +735,9 @@ namespace ParapluieBulgare
                     furnitures = new List<Furniture>
                     {
                         new Furniture(GetAnimation("transparent"), GetTronche("PC_Boss"), 3350),
-                        //new Furniture(GetAnimation("imprimante"),null,900),
+                        //new Furniture(GetAnimation("imprimante"),null,900),                    };
+                        //furnitures[1].SetDialogTree(null);
                     };
-                    //furnitures[1].SetDialogTree(null);
-
                     b18 = new DialogBox("Mot de passe ?", furnitures[0]);
                     b19 = new DialogBox("Berlioz", player);
                     b1 = new DialogBox("Nom du dossier : JM0-T4", furnitures[0]);
